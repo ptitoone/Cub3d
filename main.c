@@ -1,13 +1,8 @@
-#include "mlx.h"
-#include <stdio.h>
+#include "incls/cub.h"
+#include "incls/ft_map.h"
 
-typedef struct 	s_params
-{
-
-	void *mlx;
-	void *win;
-
-}				t_params;
+int posx = 0;
+int posy = 0;
 
 int mouse(int button, int x, int y, void *pr)
 {
@@ -24,7 +19,7 @@ int mouse(int button, int x, int y, void *pr)
 	z = x;
 	w = y;
 	p = (t_params *)pr;
-	if (button == 1)
+	if (button == M_l)
 	{
 		while (pix-- > 0)
 		{
@@ -37,7 +32,7 @@ int mouse(int button, int x, int y, void *pr)
 			z = x;
 		}
 	}
-	if (button == 2)
+	if (button == M_r)
 	{
 		while (pix-- > 0)
 		{
@@ -50,7 +45,7 @@ int mouse(int button, int x, int y, void *pr)
 			z = x;
 		}
 	}
-	if (button == 5)
+	if (button == M_u)
 	{
 		while (pix-- > 0)
 		{
@@ -66,60 +61,51 @@ int mouse(int button, int x, int y, void *pr)
 	return (0);
 }
 
-int	draw_down(int keycode, void *pr)
+int	move(int keycode, void *pr)
 {
-	static int x;
-	static int y;
 	int pix;
 
 	pix = 17;
 	t_params *p;
 
 	p = (t_params *)pr;
-	if (keycode == 1)
+	if (keycode == K_s)
 		while (pix-- > 0)
-			mlx_pixel_put(p->mlx, p->win, x, y++, 0150150150);
-	if (keycode == 13)
+			mlx_pixel_put(p->mlx, p->win, posx, posy++, 0150150150);
+	if (keycode == K_z)
 		while (pix-- > 0)
-			mlx_pixel_put(p->mlx, p->win, x, y--, 0150150150);
-	if (keycode == 0)
+			mlx_pixel_put(p->mlx, p->win, posx, posy--, 0150150150);
+	if (keycode == K_q)
 		while (pix-- > 0)
-			mlx_pixel_put(p->mlx, p->win, x--, y, 0150150150);
-	if (keycode == 2)
+			mlx_pixel_put(p->mlx, p->win, posx--, posy, 0150150150);
+	if (keycode == K_d)
 		while (pix-- > 0)
-			mlx_pixel_put(p->mlx, p->win, x++, y, 0150150150);
+			mlx_pixel_put(p->mlx, p->win, posx++, posy, 0150150150);
+	if (keycode == K_esc)
+	{
+		mlx_destroy_window(p->mlx, p->win);
+		exit(EXIT_SUCCESS);
+	}
 	return (0);
 }
 
 int main()
 {
+	int			(*k)(int keycode, void *);
+	int			(*m)(int button, int x, int y, void *);
+	int 		map_file;
 	t_params	p;
-	int 		x;
-	int			y;
-	int			(*fnc)(int keycode, void *);
-	int			(*fnc2)(int button, int x, int y, void *);
-
+	
+	k = &move;
+	m = &mouse;
+	ft_parse_map("map.cub", &p);
 	p.mlx = mlx_init();
-	x = 0;
-	y = 0;
-	fnc = &draw_down;
-	fnc2 = &mouse;
 	if (p.mlx == NULL)
 		puts("error");
-	p.win = mlx_new_window(p.mlx, 640, 640, "My Window");
-	mlx_clear_window(p.mlx, p.win);
-	while (x < 640)
-	{
-		while (y < 640)
-		{
-			mlx_pixel_put(p.mlx, p.win, y, x, 0100100100);
-			y++;
-		}
-		y = 0;
-		x += 16;
-	}
-	mlx_mouse_hook(p.win, fnc2, (void *)&p);
-	mlx_key_hook(p.win, fnc, (void *)&p);
+	p.win = mlx_new_window(p.mlx, p.win_w, p.win_h, "My Window");
+	mlx_mouse_hook(p.win, m, (void *)&p);
+//	mlx_hook(p.win, 2, 1L<<0, k, (void *)&p);
+	mlx_hook(p.win, 4, 1L<<2, m, (void *)&p);
 	mlx_loop(p.mlx);
  	return (0);
 }
