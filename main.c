@@ -104,8 +104,8 @@ int main()
 		puts("error");
 	p.win = mlx_new_window(p.mlx, p.win_w, p.win_h, "My Window");
 	mlx_mouse_hook(p.win, m, (void *)&p);
-//	mlx_hook(p.win, 2, 1L<<0, k, (void *)&p);
-	mlx_hook(p.win, 4, 1L<<2, m, (void *)&p);
+	mlx_hook(p.win, 2, 1L<<0, k, (void *)&p);
+//	mlx_hook(p.win, 4, 1L<<2, m, (void *)&p);
 	mlx_loop(p.mlx);
  	return (0);
 }

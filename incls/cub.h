@@ -8,6 +8,8 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
+# ifdef  __unix__
+
 # define K_z	122
 # define K_s	115
 # define K_d	100
@@ -25,19 +27,40 @@
 # define M_u 	4
 # define M_d 	5
 
+# elif defined __APPLE__
+
+# define K_z	13
+# define K_s	1
+# define K_d	2
+# define K_q	0
+# define K_sp	49
+# define K_a_u	126
+# define K_a_d	125
+# define K_a_r	124
+# define K_a_l	123
+# define K_esc	53
+
+# define M_l	1
+# define M_m	3
+# define M_r 	2
+# define M_u 	5
+# define M_d 	4
+
+# endif
+
 # define BLK_H	5	
 # define BLK_W	5
+
+enum			e_dir
+{NO, SO, WE, EA};
 
 typedef struct	s_tex
 {
 
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
+	char	dir[4];
 	char	*sp;
-	int		cl;
-	int		fl;
+	int		f;
+	int		c;
 
 }				t_tex;
 
