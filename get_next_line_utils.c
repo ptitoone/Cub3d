@@ -6,7 +6,7 @@
 /*   By: akotzky <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 15:54:23 by akotzky           #+#    #+#             */
-/*   Updated: 2021/02/11 15:56:21 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/10 08:02:41 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-char	*ft_strdup(const char *str, int len)
+char	*ft_strdup_len(const char *str, int len)
 {
 	char	*sdup;
 	int		i;
@@ -74,9 +74,9 @@ int	ft_append_buff(int fd, char **line, t_data *logs)
 	if (!logs->buffer[0])
 		if ((logs->rd = read(fd, logs->buffer, BUFFER_SIZE)) == 0)
 			return (0);
-	tmp = ft_strdup(*line, 0);
+	tmp = ft_strdup_len(*line, 0);
 	free(*line);
-	*line = ft_strdup(tmp, logs->rd);
+	*line = ft_strdup_len(tmp, logs->rd);
 	while (logs->pos < logs->rd)
 	{
 		if (logs->buffer[logs->pos] == '\n')

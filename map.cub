@@ -1,8 +1,8 @@
 R 1280 720
 NO ./texture_no
-SO ./texture_no
-WE ./texture_no
-EA ./texture_no
+SO ./texture_so
+WE ./texture_we
+EA ./texture_ea
 
 S ./sprite
 F 220,100,0

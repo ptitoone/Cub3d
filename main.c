@@ -96,16 +96,18 @@ int main()
 	int 		map_file;
 	t_params	p;
 	
+	ft_init_params(&p);
 	k = &move;
 	m = &mouse;
 	ft_parse_map("map.cub", &p);
+	printf("win_w = %i\n", p.win_w);
+	printf("win_h = %i\n", p.win_h);
 	p.mlx = mlx_init();
 	if (p.mlx == NULL)
 		puts("error");
 	p.win = mlx_new_window(p.mlx, p.win_w, p.win_h, "My Window");
 	mlx_mouse_hook(p.win, m, (void *)&p);
 	mlx_hook(p.win, 2, 1L<<0, k, (void *)&p);
-//	mlx_hook(p.win, 4, 1L<<2, m, (void *)&p);
 	mlx_loop(p.mlx);
  	return (0);
 }

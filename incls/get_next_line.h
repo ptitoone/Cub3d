@@ -6,7 +6,7 @@
 /*   By: akotzky <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 15:52:00 by akotzky           #+#    #+#             */
-/*   Updated: 2021/02/11 15:55:52 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/10 08:01:04 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		ft_set_null_buff(char *buffer, int len);
 int			get_next_line(int fd, char **line);
 size_t		ft_strlen(const char *s);
 int			ft_append_buff(int fd, char **line, t_data *logs);
-char		*ft_strdup(const char *str, int line);
+char		*ft_strdup_len(const char *str, int len);
 int			ft_empty_line(char **line);
 
 #endif

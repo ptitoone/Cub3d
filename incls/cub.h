@@ -2,6 +2,7 @@
 #define CUB_H
 
 # include "mlx.h"
+# include "libft.h"
 # include <stdio.h>
 # include <math.h>
 # include <unistd.h>
@@ -57,10 +58,10 @@ enum			e_dir
 typedef struct	s_tex
 {
 
-	char	dir[4];
+	char	*dir[4];
 	char	*sp;
-	int		f;
-	int		c;
+	char	*f;
+	char	*c;
 
 }				t_tex;
 
@@ -78,7 +79,7 @@ typedef struct	s_map
 
 	int		map_w;
 	int		map_h;
-	void	*map;
+	void	**map;
 
 }				t_map;
 
@@ -94,5 +95,7 @@ typedef struct	s_params
 	t_map	map;
 
 }				t_params;
+
+void	ft_init_params(t_params *p);
 
 #endif
