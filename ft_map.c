@@ -45,15 +45,15 @@ static int	ft_add_info(char *line, t_params *p)
 
 int	ft_parse_map(char *map_file, t_params *p)
 {
-	int		map;
+	int		map_fd;
 	int 	i;
 	char	*line;
 
-	map = open(map_file, O_RDONLY);
+	map_fd = open(map_file, O_RDONLY);
 	i = 0;
-	while (get_next_line(map, &line) == 1 && i < 8)
+	while (get_next_line(map_fd, &line) == 1)
 	{
-		if (line[0] == '\n')
+		if (line[0] == '\0')
 		{
 			free(line);
 			line = NULL;
@@ -61,8 +61,14 @@ int	ft_parse_map(char *map_file, t_params *p)
 		}
 		if (ft_add_info(line, p))
 			i++;
+		else
+			return (0);
 		free(line);
 		line = NULL;
+		if (i == 8)
+			break ;
 	}
+	if (ft_parse_map_size(map_fd, p))
+		return (1);
 	return (0);
 }

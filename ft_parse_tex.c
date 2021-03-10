@@ -21,12 +21,10 @@ static int	ft_add_tex(char *l, char **dst)
 	i = 0;
 	j = 0;
 	while (l[i] == ' ')
-	{
-		if (!l[i])
-			return (0);
 		i++;
-	}
-	while (l[i + j] != ' ' || !l[i + j])
+	if (!l[i])
+		return (0);
+	while (l[i + j] != ' ' && l[i + j] != 0)
 		j++;
 	*dst = ft_substr(l, i, j);
 	if (*dst)

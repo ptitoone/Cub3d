@@ -100,8 +100,8 @@ int main()
 	k = &move;
 	m = &mouse;
 	ft_parse_map("map.cub", &p);
-	printf("win_w = %i\n", p.win_w);
-	printf("win_h = %i\n", p.win_h);
+	printf("map_h = %i\n", p.map.map_h);
+	printf("map_w = %i\n", p.map.map_w);
 	p.mlx = mlx_init();
 	if (p.mlx == NULL)
 		puts("error");
