@@ -79,9 +79,20 @@ typedef struct	s_map
 
 	int		map_w;
 	int		map_h;
-	void	**map;
+	char	**map;
 
 }				t_map;
+
+typedef struct	s_img
+{
+
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+
+}				t_img;
 
 typedef struct	s_params
 {
@@ -93,9 +104,11 @@ typedef struct	s_params
 	t_tex	tex;
 	t_play	player;
 	t_map	map;
+	t_img	img;
 
 }				t_params;
 
 void	ft_init_params(t_params *p);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 #endif

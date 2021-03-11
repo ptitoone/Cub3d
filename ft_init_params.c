@@ -20,4 +20,9 @@ void	ft_init_params(t_params *p)
 	p->map.map_w = 0;
 	p->map.map_h = 0;
 	p->map.map = NULL;
+	p->img.img = NULL;
+	p->img.addr = NULL;
+	p->img.bpp = 0;
+	p->img.line_len = 0;
+	p->img.endian = 0;
 }

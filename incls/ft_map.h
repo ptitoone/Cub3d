@@ -8,5 +8,7 @@ int		ft_parse_res(char *line, t_params *p);
 int		ft_parse_tex(char *line, t_tex *t);
 int		ft_parse_map_size(int map_fd, t_params *p);
 int		ft_build_map(char *line, t_params *p);
+int		ft_lay_map(char *map_file, t_map *m);
+int		ft_draw_map(t_params *p);
 
 #endif

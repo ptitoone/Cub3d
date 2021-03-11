@@ -69,6 +69,7 @@ int	ft_parse_map(char *map_file, t_params *p)
 			break ;
 	}
 	if (ft_parse_map_size(map_fd, p))
-		return (1);
+		if (ft_lay_map(map_file, &p->map))
+			return (1);
 	return (0);
 }
