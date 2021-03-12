@@ -94,9 +94,9 @@ static void	print_map(char **map)
 	int h = 0;
 	int w = 0;
 
-	while (h < 15)
+	while (h < 16)
 	{
-		while (w < 15)
+		while (w < 16)
 		{	
 			printf("%c", map[h][w]);
 			w++;

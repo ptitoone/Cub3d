@@ -15,7 +15,9 @@ static int	ft_add_res(char *l, t_params *p)
 		j = 0;
 		while (l[i] == ' ')
 			i++;
-		while (l[i + j] >= '1' && l[i + j] <= '9')
+		if (l[i + j] >= '1' && l[i + j] <= '9')
+			j++;
+		while (l[i + j] >= '0' && l[i + j] <= '9')
 			j++;
 		tmp = ft_substr(l, i ,j + 1);
 		if (!(x % 2))
