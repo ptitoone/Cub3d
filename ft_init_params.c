@@ -19,6 +19,9 @@ void	ft_init_params(t_params *p)
 	p->player.orient = 0;
 	p->map.map_w = 0;
 	p->map.map_h = 0;
+	p->map.block_w = 0;
+	p->map.block_h = 0;
+	p->map.map_h = 0;
 	p->map.map = NULL;
 	p->img.img = NULL;
 	p->img.addr = NULL;

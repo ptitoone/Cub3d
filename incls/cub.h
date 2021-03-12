@@ -68,8 +68,8 @@ typedef struct	s_tex
 typedef struct	s_play
 {
 
-	float	pos_x;
-	float	pos_y;
+	int		pos_x;
+	int		pos_y;
 	float	orient;
 
 }				t_play;
@@ -79,6 +79,8 @@ typedef struct	s_map
 
 	int		map_w;
 	int		map_h;
+	int		block_h;
+	int		block_w;
 	char	**map;
 
 }				t_map;
@@ -110,5 +112,6 @@ typedef struct	s_params
 
 void	ft_init_params(t_params *p);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	ft_draw_player(int x, int y, t_params *p);
 
 #endif

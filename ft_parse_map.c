@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 17:37:11 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/10 11:23:58 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/12 13:18:14 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,13 @@ int	ft_parse_map(char *map_file, t_params *p)
 			break ;
 	}
 	if (ft_parse_map_size(map_fd, p))
+	{
 		if (ft_lay_map(map_file, &p->map))
+		{
+			p->map.block_w = floor(p->win_w / p->map.map_w);
+			p->map.block_h = floor(p->win_h / p->map.map_h);
 			return (1);
+		}
+	}
 	return (0);
 }

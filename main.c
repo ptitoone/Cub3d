@@ -65,22 +65,38 @@ int	move(int keycode, void *pr)
 {
 	int pix;
 
-	pix = 17;
+	pix = 5;
 	t_params *p;
 
 	p = (t_params *)pr;
 	if (keycode == K_s)
 		while (pix-- > 0)
-			mlx_pixel_put(p->mlx, p->win, posx, posy++, 0150150150);
+		{
+			ft_draw_map(p);
+			ft_draw_player(p->player.pos_x, ++p->player.pos_y, p);
+			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
+		}
 	if (keycode == K_z)
 		while (pix-- > 0)
-			mlx_pixel_put(p->mlx, p->win, posx, posy--, 0150150150);
+		{
+			ft_draw_map(p);
+			ft_draw_player(p->player.pos_x, --p->player.pos_y, p);
+			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
+		}
 	if (keycode == K_q)
 		while (pix-- > 0)
-			mlx_pixel_put(p->mlx, p->win, posx--, posy, 0150150150);
+		{
+			ft_draw_map(p);
+			ft_draw_player(--p->player.pos_x, p->player.pos_y, p);
+			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
+		}
 	if (keycode == K_d)
 		while (pix-- > 0)
-			mlx_pixel_put(p->mlx, p->win, posx++, posy, 0150150150);
+		{
+			ft_draw_map(p);
+			ft_draw_player(++p->player.pos_x, p->player.pos_y, p);
+			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
+		}
 	if (keycode == K_esc)
 	{
 		mlx_destroy_window(p->mlx, p->win);
@@ -131,7 +147,7 @@ int main()
 	if (p.mlx == NULL)
 		puts("error");
 	p.win = mlx_new_window(p.mlx, p.win_w, p.win_h, "My Window");
-	p.img.img = mlx_new_image(p.mlx, p.win_w, p.win_h);
+	p.img.img = mlx_new_image(p.mlx, (p.map.block_w * p.map.map_w), (p.map.block_h * p.map.map_h));
 	p.img.addr = mlx_get_data_addr(p.img.img, &p.img.bpp, &p.img.line_len, &p.img.endian);
 	ft_draw_map(&p);
 	mlx_put_image_to_window(p.mlx, p.win, p.img.img, 0, 0);
