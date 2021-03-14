@@ -1,8 +1,6 @@
 #include "incls/cub.h"
 #include "incls/ft_map.h"
 
-int posx = 0;
-int posy = 0;
 
 int mouse(int button, int x, int y, void *pr)
 {
@@ -70,33 +68,41 @@ int	move(int keycode, void *pr)
 
 	p = (t_params *)pr;
 	if (keycode == K_s)
+	{
 		while (pix-- > 0)
 		{
 			ft_draw_map(p);
 			ft_draw_player(p->player.pos_x, ++p->player.pos_y, p);
 			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 		}
+	}
 	if (keycode == K_z)
+	{
 		while (pix-- > 0)
 		{
 			ft_draw_map(p);
 			ft_draw_player(p->player.pos_x, --p->player.pos_y, p);
 			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 		}
+	}
 	if (keycode == K_q)
+	{
 		while (pix-- > 0)
 		{
 			ft_draw_map(p);
 			ft_draw_player(--p->player.pos_x, p->player.pos_y, p);
 			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 		}
+	}
 	if (keycode == K_d)
+	{
 		while (pix-- > 0)
 		{
 			ft_draw_map(p);
 			ft_draw_player(++p->player.pos_x, p->player.pos_y, p);
 			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 		}
+	}
 	if (keycode == K_esc)
 	{
 		mlx_destroy_window(p->mlx, p->win);

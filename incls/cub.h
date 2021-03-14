@@ -49,8 +49,7 @@
 
 # endif
 
-# define BLK_H	5	
-# define BLK_W	5
+# define PI		3.141592653	
 
 enum			e_dir
 {NO, SO, WE, EA};
@@ -113,5 +112,6 @@ typedef struct	s_params
 void	ft_init_params(t_params *p);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	ft_draw_player(int x, int y, t_params *p);
+void	ft_draw_player_ori(t_params *p);
 
 #endif
