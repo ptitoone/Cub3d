@@ -128,6 +128,7 @@ int	move(int keycode, void *pr)
 		mlx_destroy_window(p->mlx, p->win);
 		exit(EXIT_SUCCESS);
 	}
+	printf("orient = %f\n", p->player.orient);
 	return (0);
 }
 
