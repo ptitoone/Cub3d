@@ -50,7 +50,11 @@
 # endif
 
 # define PI		3.141592653	
+<<<<<<< HEAD
 # define C_H	64	
+=======
+# define C_H	64
+>>>>>>> afb8211a0547dea28f03bf05942ffe5f65332df3
 
 enum			e_dir
 {NO, SO, WE, EA};

@@ -19,7 +19,7 @@ static int ft_draw_cell(int w, int h, t_params *p)
 	int		i;
 	int		j;
 
-	x = C_H;
+	x = 64;
 	y = x;
 	i = 0;
 	j = 0;
@@ -45,7 +45,7 @@ static int ft_draw_cell2(int w, int h, t_params *p)
 	int		i;
 	int		j;
 
-	x = C_H;
+	x = 64;
 	y = x;
 	i = 0;
 	j = 0;

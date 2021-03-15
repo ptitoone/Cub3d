@@ -6,7 +6,7 @@
 /*   By: ptito <akotzky@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:33:22 by ptito             #+#    #+#             */
-/*   Updated: 2021/03/11 11:12:43 by ptito            ###   ########.fr       */
+/*   Updated: 2021/03/15 07:56:00 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ static int	ft_lay_map_line(char *l, int i, t_map *m)
 	if (m->map[i] == NULL)
 		return (0);
 	while (l[j])
-		m->map[i][j++] = l[j];
+	{
+		m->map[i][j] = l[j];
+		j++;
+	}
 	m->map[i][j] = 0;
 	return (1);
 }

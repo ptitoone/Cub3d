@@ -50,7 +50,6 @@ int	ft_parse_map(char *map_file, t_params *p)
 	char	*line;
 
 	map_fd = open(map_file, O_RDONLY);
-	line = NULL;
 	i = 0;
 	while (get_next_line(map_fd, &line) == 1)
 	{
