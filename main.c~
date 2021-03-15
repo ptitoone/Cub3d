@@ -158,7 +158,7 @@ int main()
 	p.img.addr = mlx_get_data_addr(p.img.img, &p.img.bpp, &p.img.line_len, &p.img.endian);
 	ft_draw_map(&p);
 	ft_draw_player(p.player.pos_x, p.player.pos_y, &p);
-	mlx_put_image_to_window(p.mlx, p.win, p.img.img, 0, 0);
+//	mlx_put_image_to_window(p.mlx, p.win, p.img.img, 0, 0);
 	mlx_mouse_hook(p.win, m, (void *)&p);
 	mlx_hook(p.win, 2, 1L<<0, k, (void *)&p);
 	mlx_loop(p.mlx);
