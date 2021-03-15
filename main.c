@@ -173,11 +173,7 @@ int main()
 	p.mlx = mlx_init();
 	if (p.mlx == NULL)
 		puts("error");
-<<<<<<< HEAD
-	p.win = mlx_new_window(p.mlx, C_H * p.map.map_w, C_H * p.map.map_h, "My Window");
-=======
 	p.win = mlx_new_window(p.mlx, (C_H * p.map.map_w), (C_H * p.map.map_h), "My Window");
->>>>>>> afb8211a0547dea28f03bf05942ffe5f65332df3
 	p.img.img = mlx_new_image(p.mlx, (C_H * p.map.map_w), (C_H * p.map.map_h));
 	p.img.addr = mlx_get_data_addr(p.img.img, &p.img.bpp, &p.img.line_len, &p.img.endian);
 	ft_draw_map(&p);

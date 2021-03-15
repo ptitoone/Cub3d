@@ -31,14 +31,6 @@ void	ft_draw_player_ori(t_params *p)
 {
 	int x1 = cos(p->player.orient) * (C_H / 2);
 	int y1 = sin(p->player.orient) * (C_H / 2);
-	plot_line(p->player.pos_x, p->player.pos_y, p->player.pos_x + x1, p->player.pos_y + y1, p);
 
-<<<<<<< HEAD
-=======
-	while (b < C_H / 2)
-	{
-		my_mlx_pixel_put(&p->img, x++, y++, 0x00FF0000);
-		b++;
-	}
->>>>>>> afb8211a0547dea28f03bf05942ffe5f65332df3
+	plot_line(p->player.pos_x, p->player.pos_y, p->player.pos_x + x1, p->player.pos_y + y1, p);
 }
