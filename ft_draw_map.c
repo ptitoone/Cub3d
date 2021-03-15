@@ -19,8 +19,8 @@ static int ft_draw_cell(int w, int h, t_params *p)
 	int		i;
 	int		j;
 
-	x = p->map.block_w;
-	y = p->map.block_h;
+	x = C_H;
+	y = x;
 	i = 0;
 	j = 0;
 	while (i < y)
@@ -45,8 +45,8 @@ static int ft_draw_cell2(int w, int h, t_params *p)
 	int		i;
 	int		j;
 
-	x = p->map.block_w;
-	y = p->map.block_h;
+	x = C_H;
+	y = x;
 	i = 0;
 	j = 0;
 	while (i < y)
