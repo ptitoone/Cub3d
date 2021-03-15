@@ -14,8 +14,8 @@ void	ft_init_params(t_params *p)
 	p->tex.sp = NULL;
 	p->tex.f = NULL;
 	p->tex.c = NULL;
-	p->player.pos_x = 400;
-	p->player.pos_y = 400;
+	p->player.pos_x = 544;
+	p->player.pos_y = 544;
 	p->player.orient = 0;
 	p->map.map_w = 0;
 	p->map.map_h = 0;

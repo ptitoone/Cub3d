@@ -6,7 +6,7 @@
 /*   By: ptito <akotzky@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 13:39:41 by ptito             #+#    #+#             */
-/*   Updated: 2021/03/12 13:28:59 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/15 10:02:49 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int ft_draw_cell(int w, int h, t_params *p)
 	int		i;
 	int		j;
 
-	x = p->map.block_w;
-	y = p->map.block_h;
+	x = C_H;
+	y = x;
 	i = 0;
 	j = 0;
 	while (i < y)
@@ -45,8 +45,8 @@ static int ft_draw_cell2(int w, int h, t_params *p)
 	int		i;
 	int		j;
 
-	x = p->map.block_w;
-	y = p->map.block_h;
+	x = C_H;
+	y = x;
 	i = 0;
 	j = 0;
 	while (i < y)
@@ -84,4 +84,5 @@ int	ft_draw_map(t_params *p)
 		w = 0;
 		h++;
 	}
+	return (0);
 }

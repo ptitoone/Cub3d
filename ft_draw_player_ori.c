@@ -6,7 +6,7 @@
 /*   By: ptito <akotzky@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 19:01:06 by ptito             #+#    #+#             */
-/*   Updated: 2021/03/14 19:07:45 by ptito            ###   ########.fr       */
+/*   Updated: 2021/03/15 10:25:34 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,9 @@ void	ft_draw_player_ori(t_params *p)
 	x = p->player.pos_x;
 	y = p->player.pos_y;
 
-	while (i++ < 5)
+	while (b < C_H / 2)
 	{
-		while (b++ <= 4)
-		{
-			while (a++ <= 1)
-				my_mlx_pixel_put(&p->img, x, y--, 0x00FF0000);
-			a = 0;
-			x++;
-		}
-		b = 0;
+		my_mlx_pixel_put(&p->img, x++, y++, 0x00FF0000);
+		b++;
 	}
 }

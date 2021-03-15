@@ -3,7 +3,7 @@
 
 static int	ft_is_pos(char c)
 {
-	if (c == ('N' || 'S' || 'E' || 'W'))
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
 	return (0);
 }

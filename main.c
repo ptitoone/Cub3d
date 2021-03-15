@@ -63,7 +63,7 @@ int	move(int keycode, void *pr)
 {
 	int pix;
 
-	pix = 5;
+	pix = 1;
 	t_params *p;
 
 	p = (t_params *)pr;
@@ -148,14 +148,18 @@ int main()
 	k = &move;
 	m = &mouse;
 	ft_parse_map("map.cub", &p);
+
+	printf("block h = %i\n", p.map.block_h);
+
 	print_map(p.map.map);
 	p.mlx = mlx_init();
 	if (p.mlx == NULL)
 		puts("error");
-	p.win = mlx_new_window(p.mlx, p.win_w, p.win_h, "My Window");
-	p.img.img = mlx_new_image(p.mlx, (p.map.block_w * p.map.map_w), (p.map.block_h * p.map.map_h));
+	p.win = mlx_new_window(p.mlx, (C_H * p.map.map_w), (C_H * p.map.map_h), "My Window");
+	p.img.img = mlx_new_image(p.mlx, (C_H * p.map.map_w), (C_H * p.map.map_h));
 	p.img.addr = mlx_get_data_addr(p.img.img, &p.img.bpp, &p.img.line_len, &p.img.endian);
 	ft_draw_map(&p);
+	ft_draw_player(p.player.pos_x, p.player.pos_y, &p);
 	mlx_put_image_to_window(p.mlx, p.win, p.img.img, 0, 0);
 	mlx_mouse_hook(p.win, m, (void *)&p);
 	mlx_hook(p.win, 2, 1L<<0, k, (void *)&p);
