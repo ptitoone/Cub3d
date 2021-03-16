@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:25:01 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/16 11:26:50 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/16 14:32:21 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	ft_init_params(t_params *p)
 	p->tex.sp = NULL;
 	p->tex.f = NULL;
 	p->tex.c = NULL;
-	p->player.pos_x = 544;
-	p->player.pos_y = 544;
+	p->player.pos_x = 0;
+	p->player.pos_y = 0;
 	p->player.orient = 0;
 	p->map.map_w = 0;
 	p->map.map_h = 0;

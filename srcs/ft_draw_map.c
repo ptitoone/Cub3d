@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:25:39 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/16 11:26:50 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/16 13:22:08 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,7 @@ static int ft_draw_cell(int w, int h, t_params *p)
 	while (i < y)
 	{
 		while (j < x)
-		{
-			if (i == 0 || i == y - 1 || j == 0 || j == x - 1)
-				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0x00595959);
-			else
-				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0150150150);
-		}
+			my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0150150150);
 		j = 0;
 		i++;
 	}
@@ -52,12 +47,7 @@ static int ft_draw_cell2(int w, int h, t_params *p)
 	while (i < y)
 	{
 		while (j < x)
-		{
-			if (i == 0 || i == y - 1 || j == 0 || j == x - 1)
-				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0x00595959);
-			else
-				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0200200200);
-		}
+			my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0200200200);
 		j = 0;
 		i++;
 	}

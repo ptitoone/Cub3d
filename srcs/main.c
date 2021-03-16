@@ -6,143 +6,12 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:23:59 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/16 11:26:50 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/16 16:02:45 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 #include "ft_map.h"
-
-
-int mouse(int button, int x, int y, void *pr)
-{
-	t_params *p;
-	int pix;
-	int pix2;
-	int z;
-	int w;
-
-	pix  = 10;
-	pix2 = 10;
-	x = x - 5;
-	y = y - 5;
-	z = x;
-	w = y;
-	p = (t_params *)pr;
-	if (button == M_l)
-	{
-		while (pix-- > 0)
-		{
-			while (pix2-- > 0)
-			{
-				mlx_pixel_put(p->mlx, p->win, z++, w , 0050050050);
-			}
-			w++;
-			pix2 = 10;
-			z = x;
-		}
-	}
-	if (button == M_r)
-	{
-		while (pix-- > 0)
-		{
-			while (pix2-- > 0)
-			{
-				mlx_pixel_put(p->mlx, p->win, z++, w , 0150150150);
-			}
-			w++;
-			pix2 = 10;
-			z = x;
-		}
-	}
-	if (button == M_u)
-	{
-		while (pix-- > 0)
-		{
-			while (pix2-- > 0)
-			{
-				mlx_pixel_put(p->mlx, p->win, z++, w , 0070010070);
-			}
-			w++;
-			pix2 = 10;
-			z = x;
-		}
-	}
-	return (0);
-}
-
-int	move(int keycode, void *pr)
-{
-	int pix;
-
-	pix = 1;
-	t_params *p;
-
-	p = (t_params *)pr;
-	if (keycode == K_s)
-	{
-		while (pix-- > 0)
-		{
-			ft_draw_map(p);
-			ft_draw_player(p->player.pos_x, ++p->player.pos_y, p);
-			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
-		}
-	}
-	if (keycode == K_z)
-	{
-		while (pix-- > 0)
-		{
-			ft_draw_map(p);
-			ft_draw_player(p->player.pos_x, --p->player.pos_y, p);
-			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
-		}
-	}
-	if (keycode == K_q)
-	{
-		while (pix-- > 0)
-		{
-			ft_draw_map(p);
-			ft_draw_player(--p->player.pos_x, p->player.pos_y, p);
-			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
-		}
-	}
-	if (keycode == K_d)
-	{
-		while (pix-- > 0)
-		{
-			ft_draw_map(p);
-			ft_draw_player(++p->player.pos_x, p->player.pos_y, p);
-			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
-		}
-	}
-	if (keycode == K_a_r)
-	{
-		while (pix-- > 0)
-		{
-			p->player.orient += 0.1;
-			ft_draw_map(p);
-			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
-			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
-		}
-	}
-	if (keycode == K_a_l)
-	{
-		while (pix-- > 0)
-		{
-			p->player.orient -= 0.1;
-			ft_draw_map(p);
-			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
-			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
-		}
-	}
-	if (keycode == K_esc)
-	{
-		mlx_destroy_window(p->mlx, p->win);
-		exit(EXIT_SUCCESS);
-	}
-	printf("orient = %f\n", p->player.orient);
-	return (0);
-}
 
 static void	print_map(char **map)
 {
@@ -167,7 +36,15 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	char	*dst;
 
 	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
+}
+
+unsigned int	my_mlx_pixel_get(t_img *img, int x, int y)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	return (*(unsigned int *)dst);
 }
 
 int main()
@@ -177,11 +54,12 @@ int main()
 	t_params	p;
 	
 	ft_init_params(&p);
-	k = &move;
-	m = &mouse;
+	k = &ft_keys;
+	m = &ft_mouse;
 	ft_parse_map("map.cub", &p);
 
-	print_map(p.map.map);
+//	print_map(p.map.map);
+
 	p.mlx = mlx_init();
 	if (p.mlx == NULL)
 		puts("error");

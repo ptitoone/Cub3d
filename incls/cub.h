@@ -1,8 +1,9 @@
 #ifndef CUB_H
 #define CUB_H
-
-# include "mlx.h"
 # include "libft.h"
+# include "ft_map.h"
+# include "mlx.h"
+# include "get_next_line.h"
 # include <stdio.h>
 # include <math.h>
 # include <unistd.h>
@@ -110,9 +111,12 @@ typedef struct	s_params
 
 }				t_params;
 
-void	ft_init_params(t_params *p);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	ft_draw_player(int x, int y, t_params *p);
-void	ft_draw_player_ori(t_params *p);
+void			ft_init_params(t_params *p);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
+unsigned int 	my_mlx_pixel_get(t_img *img, int x, int y);
+void			ft_draw_player(int x, int y, t_params *p);
+void			ft_draw_player_ori(t_params *p);
+int				ft_keys(int keycode, void *pr);
+int				ft_mouse(int keycode, int x, int y, void *pr);
 
 #endif
