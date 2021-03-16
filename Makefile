@@ -1,27 +1,38 @@
-NAME	=	a.out
+NAME		=	a.out
 
-CC		=	gcc
+CC			=	gcc
 
-CFLAGS	=	-Wall -Werror -Wextra -lft -lmlx -framework OpenGl -framework AppKit
+LIBFT		=	libft.a
 
-SRCS	=	*.c
+CFLAGS		=	-Wall -Werror -Wextra -L . -lft -lmlx -framework OpenGl -framework AppKit
 
-OBJS	=	$(SRCS:.c=.o)
+SRCS		:=	$(shell echo srcs/*.c)
 
-INCLS	=	.incls/
+LIBFTOBJS 	:=	$(wildcard libft/*.o)
+
+OBJS		=	$(SRCS:.c=.o)
+
+INCLS		=	incls
 
 .PHONY : all clean fclean
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
-	$(CC) $(SRCS) $(CFLAGS) -o $(NAME)
+$(NAME) : $(OBJS) $(LIBFT)
+	$(CC) $(OBJS) $(CFLAGS) -I$(INCLS) -o $(NAME)
+
+$(LIBFT) :
+	@cd libft \
+	&& make \
+	&& mv libft.a ../ \
+	&& cp libft.h ../incls \
+	&& cd ..
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -I$(INCLS) -c $< -o $@
 
 clean :
-	rm -rf $(OBJS)
+	rm -rf $(OBJS) $(LIBFT) $(LIBFTOBJS)
 
 fclean : clean
 	rm -rf $(NAME)

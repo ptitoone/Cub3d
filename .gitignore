@@ -1,3 +1,7 @@
-libft.a
-libmlx.a
+*.a
+
+*.swp
+
 a.out
+
+*.o
