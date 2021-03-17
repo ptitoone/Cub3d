@@ -67,8 +67,10 @@ typedef struct	s_tex
 typedef struct	s_play
 {
 
-	int		pos_x;
-	int		pos_y;
+	float	pos_x;
+	float	pos_y;
+	float	del_x;
+	float	del_y;
 	float	orient;
 
 }				t_play;

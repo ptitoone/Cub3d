@@ -25,8 +25,8 @@ int	ft_keys(int keycode, void *pr)
 	{
 		while (pix-- > 0)
 		{
-			p->player.pos_x -= cos(p->player.orient) * 5;
-			p->player.pos_y -= sin(p->player.orient) * 5;
+			p->player.pos_x -= p->player.del_x;
+			p->player.pos_y -= p->player.del_y;
 			ft_draw_map(p);
 			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
 			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
@@ -38,8 +38,8 @@ int	ft_keys(int keycode, void *pr)
 	{
 		while (pix-- > 0)
 		{
-			p->player.pos_x += (cos(p->player.orient) * 5)+0.5;
-			p->player.pos_y += (sin(p->player.orient) * 5)+0.5;
+			p->player.pos_x += p->player.del_x;
+			p->player.pos_y += p->player.del_y;
 			ft_draw_map(p);
 			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
 			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
@@ -54,6 +54,8 @@ int	ft_keys(int keycode, void *pr)
 			p->player.orient -= 0.1;
 			if (p->player.orient < 0)
 				p->player.orient += (2 * PI);
+			p->player.del_x = cos(p->player.orient) * 5;
+			p->player.del_y = sin(p->player.orient) * 5;
 			ft_draw_map(p);
 			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
 			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
@@ -69,6 +71,8 @@ int	ft_keys(int keycode, void *pr)
 			p->player.orient += 0.1;
 			if (p->player.orient > (2 * PI))
 				p->player.orient -= (2 * PI);
+			p->player.del_x = cos(p->player.orient) * 5;
+			p->player.del_y = sin(p->player.orient) * 5;
 			ft_draw_map(p);
 			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
 			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
