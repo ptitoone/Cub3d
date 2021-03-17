@@ -1,41 +1,61 @@
 NAME		=	a.out
 
+NAMEL		=	linux_a.out
+
 CC			=	gcc
 
 LIBFT		=	libft.a
 
-CFLAGS		=	-Wall -Werror -Wextra -L . -lft -lmlx -framework OpenGl -framework AppKit
+LIBMLX		=	libmlx.a
+
+LIBMLXL		=	libmlx_linux.a
+
+CFLAGS		=	-g -Wall -Werror -Wextra -L . -lft -lmlx -framework OpenGl -framework AppKit
+
+CFLAGSL		=	-g -Wall -Werror -Wextra -L . -lft -lmlx_linux -lXext -lX11 -lm
 
 SRCS		:=	$(shell echo srcs/*.c)
 
-LIBFTOBJS 	:=	$(wildcard libft/*.o)
-
 OBJS		=	$(SRCS:.c=.o)
+
+LIBFTOBJS	:=	$(wildcard libft/*.o)
+
+LIBMLXOBJSL	:=	$(wildcard minilibx-linux/*.o)
 
 INCLS		=	incls
 
-.PHONY : all clean fclean
+.PHONY : all clean fclean re rel
 
 all : $(NAME)
+
+alll : $(NAMEL)
 
 $(NAME) : $(OBJS) $(LIBFT)
 	$(CC) $(OBJS) $(CFLAGS) -I$(INCLS) -o $(NAME)
 
+$(NAMEL) : $(OBJS) $(LIBFT) $(LIBMLXL)
+	$(CC) $(OBJS) $(CFLAGSL) -I$(INCLS) -o $(NAME)
+
 $(LIBFT) :
-	@cd libft \
-	&& make \
-	&& mv libft.a ../ \
-	&& cp libft.h ../incls \
-	&& cd ..
+	@make -C libft \
+	&& mv libft/libft.a . \
+	&& cp libft/libft.h ./incls \
+
+$(LIBMLXL) :
+	@make -C minilibx-linux \
+	&& mv minilibx-linux/libmlx.a ./$(LIBMLXL) \
+	&& cp minilibx-linux/mlx.h ../incls 
 
 %.o : %.c
 	$(CC) -I$(INCLS) -c $< -o $@
 
 clean :
-	rm -rf $(OBJS) $(LIBFT) $(LIBFTOBJS)
+	rm -rf $(OBJS) $(LIBFT) $(LIBFTOBJS) $(LIBMLXL) $(LIBMLXOBJSL)
 
 fclean : clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(NAMEL)
 
 re : fclean all
+
+rel : fclean alll
 
