@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:23:59 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/16 16:02:45 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/17 11:31:03 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-unsigned int	my_mlx_pixel_get(t_img *img, int x, int y)
+unsigned int	ft_get_pixel_color(t_img *img, int x, int y)
 {
 	char	*dst;
 

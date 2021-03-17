@@ -6,11 +6,12 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:34:06 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/16 15:58:11 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/17 15:24:54 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "ft_map.h"
 
 int	ft_keys(int keycode, void *pr)
 {
@@ -24,9 +25,12 @@ int	ft_keys(int keycode, void *pr)
 	{
 		while (pix-- > 0)
 		{
+			p->player.pos_x -= cos(p->player.orient) * 5;
+			p->player.pos_y -= sin(p->player.orient) * 5;
 			ft_draw_map(p);
-			ft_draw_player(p->player.pos_x, ++p->player.pos_y, p);
 			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
+			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
+			ft_find_wall(p);
 			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 		}
 	}
@@ -34,8 +38,12 @@ int	ft_keys(int keycode, void *pr)
 	{
 		while (pix-- > 0)
 		{
+			p->player.pos_x += (cos(p->player.orient) * 5)+0.5;
+			p->player.pos_y += (sin(p->player.orient) * 5)+0.5;
 			ft_draw_map(p);
-			ft_draw_player(p->player.pos_x, --p->player.pos_y, p);
+			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
+			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
+			ft_find_wall(p);
 			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 		}
 	}
@@ -43,8 +51,13 @@ int	ft_keys(int keycode, void *pr)
 	{
 		while (pix-- > 0)
 		{
+			p->player.orient -= 0.1;
+			if (p->player.orient < 0)
+				p->player.orient += (2 * PI);
 			ft_draw_map(p);
-			ft_draw_player(--p->player.pos_x, p->player.pos_y, p);
+			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
+			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
+			ft_find_wall(p);
 			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 		}
 	}
@@ -52,28 +65,14 @@ int	ft_keys(int keycode, void *pr)
 	{
 		while (pix-- > 0)
 		{
-			ft_draw_map(p);
-			ft_draw_player(++p->player.pos_x, p->player.pos_y, p);
-			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
-		}
-	}
-	if (keycode == K_a_r)
-	{
-		while (pix-- > 0)
-		{
+
 			p->player.orient += 0.1;
+			if (p->player.orient > (2 * PI))
+				p->player.orient -= (2 * PI);
 			ft_draw_map(p);
+			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
 			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
-			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
-		}
-	}
-	if (keycode == K_a_l)
-	{
-		while (pix-- > 0)
-		{
-			p->player.orient -= 0.1;
-			ft_draw_map(p);
-			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
+			ft_find_wall(p);
 			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 		}
 	}

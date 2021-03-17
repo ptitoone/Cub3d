@@ -1,9 +1,7 @@
 #ifndef CUB_H
 #define CUB_H
 # include "libft.h"
-# include "ft_map.h"
 # include "mlx.h"
-# include "get_next_line.h"
 # include <stdio.h>
 # include <math.h>
 # include <unistd.h>
@@ -50,7 +48,7 @@
 
 # endif
 
-# define PI		3.141592653	
+# define PI		3.14159	
 # define C_H	64
 
 enum			e_dir
@@ -113,10 +111,11 @@ typedef struct	s_params
 
 void			ft_init_params(t_params *p);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
-unsigned int 	my_mlx_pixel_get(t_img *img, int x, int y);
+unsigned int 	ft_get_pixel_color(t_img *img, int x, int y);
 void			ft_draw_player(int x, int y, t_params *p);
 void			ft_draw_player_ori(t_params *p);
 int				ft_keys(int keycode, void *pr);
 int				ft_mouse(int keycode, int x, int y, void *pr);
-
+void    		ft_plot_line(int x0, int y0, int x1, int y1, int color, t_params *p);
+int				 ft_find_wall(t_params *p);
 #endif
