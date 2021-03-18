@@ -28,7 +28,7 @@ int	ft_keys(int keycode, void *pr)
 			p->player.pos_x -= p->player.del_x;
 			p->player.pos_y -= p->player.del_y;
 			ft_draw_map(p);
-			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
+//			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
 			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
 			ft_find_wall(p);
 			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
@@ -41,7 +41,7 @@ int	ft_keys(int keycode, void *pr)
 			p->player.pos_x += p->player.del_x;
 			p->player.pos_y += p->player.del_y;
 			ft_draw_map(p);
-			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
+//			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
 			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
 			ft_find_wall(p);
 			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
@@ -57,7 +57,7 @@ int	ft_keys(int keycode, void *pr)
 			p->player.del_x = cos(p->player.orient) * 5;
 			p->player.del_y = sin(p->player.orient) * 5;
 			ft_draw_map(p);
-			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
+//			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
 			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
 			ft_find_wall(p);
 			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
@@ -74,7 +74,7 @@ int	ft_keys(int keycode, void *pr)
 			p->player.del_x = cos(p->player.orient) * 5;
 			p->player.del_y = sin(p->player.orient) * 5;
 			ft_draw_map(p);
-			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
+//			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
 			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
 			ft_find_wall(p);
 			mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
@@ -85,6 +85,6 @@ int	ft_keys(int keycode, void *pr)
 		mlx_destroy_window(p->mlx, p->win);
 		exit(EXIT_SUCCESS);
 	}
-	printf("orient = %f\n", p->player.orient);
+//	printf("orient = %f\n", p->player.orient);
 	return (0);
 }

@@ -28,7 +28,7 @@ static int ft_draw_cell(int w, int h, t_params *p)
 		while (j < x)
 		{
 			if (j == 0 || j == x || i == 0 || i == y)
-				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), /*0x00FFFFFF*/0150150150);
+				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0x00FFFFFF/*0150150150*/);
 			else
 				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0150150150);
 		}
@@ -54,7 +54,7 @@ static int ft_draw_cell2(int w, int h, t_params *p)
 		while (j < x)
 		{
 			if (j == 0 || j == x || i == 0 || i == y)
-				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), /*0x00FFFFFF*/0200200200);
+				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0x00FFFFFF/*0200200200*/);
 			else
 				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0200200200);
 		}
