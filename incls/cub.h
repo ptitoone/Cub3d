@@ -49,7 +49,7 @@
 # endif
 
 # define PI		3.14159	
-# define C_H	64
+# define C_H	64	
 
 enum			e_dir
 {NO, SO, WE, EA};
@@ -102,12 +102,14 @@ typedef struct	s_params
 
 	void	*mlx;
 	void	*win;
+	void	*win2;
 	int		win_w;
 	int		win_h;
 	t_tex	tex;
 	t_play	player;
 	t_map	map;
 	t_img	img;
+	t_img	imgv;
 
 }				t_params;
 
