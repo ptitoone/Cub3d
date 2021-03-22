@@ -48,7 +48,7 @@
 
 # endif
 
-# define PI		3.14159	
+# define PI		M_PI	
 # define C_H	64	
 
 enum			e_dir
@@ -83,6 +83,7 @@ typedef struct	s_map
 	int		block_h;
 	int		block_w;
 	char	**map;
+	int		*mapi;
 
 }				t_map;
 
@@ -96,6 +97,14 @@ typedef struct	s_img
 	int		endian;
 
 }				t_img;
+
+typedef struct	s_coords
+{
+
+	float	x;
+	float	y;
+
+}				t_coords;
 
 typedef struct	s_params
 {
@@ -121,5 +130,5 @@ void			ft_draw_player_ori(t_params *p);
 int				ft_keys(int keycode, void *pr);
 int				ft_mouse(int keycode, int x, int y, void *pr);
 void    		ft_plot_line(int x0, int y0, int x1, int y1, int color, t_params *p);
-int				 ft_find_wall(t_params *p);
+int				ft_find_wall(t_params *p);
 #endif

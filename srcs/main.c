@@ -13,24 +13,6 @@
 #include "cub.h"
 #include "ft_map.h"
 
-static void	print_map(char **map)
-{
-	int h = 0;
-	int w = 0;
-
-	while (h < 16)
-	{
-		while (w < 16)
-		{	
-			printf("%c", map[h][w]);
-			w++;
-		}
-		puts("");
-		w = 0;
-		h++;
-	}
-}
-
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
@@ -52,25 +34,26 @@ int main()
 	int			(*k)(int keycode, void *);
 	int			(*m)(int button, int x, int y, void *);
 	t_params	p;
-	
+	int test_w;
+	int test_h;
+
+
 	ft_init_params(&p);
 	k = &ft_keys;
 	m = &ft_mouse;
 	ft_parse_map("map.cub", &p);
-
-//	print_map(p.map.map);
 
 	p.mlx = mlx_init();
 	if (p.mlx == NULL)
 		puts("error");
 	printf("Map w = %i Map h = %i", p.map.map_w, p.map.map_h);
 	p.win = mlx_new_window(p.mlx, (C_H * p.map.map_w), (C_H * p.map.map_h), "Map");
-//	p.win2 = mlx_new_window(p.mlx, (C_H * p.map.map_w), (C_H * p.map.map_h), "FPV");
+	p.win2 = mlx_new_window(p.mlx, (C_H * p.map.map_w), (C_H * p.map.map_h), "FPV");
 	p.img.img = mlx_new_image(p.mlx, (C_H * p.map.map_w), (C_H * p.map.map_h));
 	p.img.addr = mlx_get_data_addr(p.img.img, &p.img.bpp, &p.img.line_len, &p.img.endian);
 
-//	p.imgv.img = mlx_new_image(p.mlx, (C_H * p.map.map_w), (C_H * p.map.map_h));
-//	p.imgv.addr = mlx_get_data_addr(p.imgv.img, &p.imgv.bpp, &p.imgv.line_len, &p.imgv.endian);
+	p.imgv.img = mlx_new_image(p.mlx, (C_H * p.map.map_w), (C_H * p.map.map_h));
+	p.imgv.addr = mlx_get_data_addr(p.imgv.img, &p.imgv.bpp, &p.imgv.line_len, &p.imgv.endian);
 	ft_draw_map(&p);
 	ft_draw_player(p.player.pos_x, p.player.pos_y, &p);
 	mlx_put_image_to_window(p.mlx, p.win, p.img.img, 0, 0);
