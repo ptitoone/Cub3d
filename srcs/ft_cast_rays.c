@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:57:28 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/17 16:24:32 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/23 15:49:29 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@ static void	ft_draw_line(int rc, float ra, float x, float y, t_params *p, int co
 	float dist;
 	int wall_h;
 	float tmp;
+
 	i = -1;
 	j = 0;
 	tmp = ((p->player.pos_x - x) * (p->player.pos_x - x)) + ((p->player.pos_y - y) * (p->player.pos_y - y));
 	dist = sqrtf(tmp);
 	dist = dist * (cos(p->player.orient - ra));
-	wall_h = (int)floor((C_H * p->win_h) / dist);
+	wall_h = (int)floor(((p->map.block_w  * p->win_h) / dist) / p->ratio);
 	if (wall_h * 2 > p->win_h)
 		wall_h = p->win_h / 2;
-	while (i++ < ((C_H / 2) * p->map.map_h - wall_h))
+	while (i++ < (p->win_h / 2) - wall_h)
 		my_mlx_pixel_put(&p->imgv, rc, j++, 0x002E4172);
 	i = -1;
 	while (i++ < wall_h)
@@ -36,7 +37,7 @@ static void	ft_draw_line(int rc, float ra, float x, float y, t_params *p, int co
 	while (i++ < wall_h)
 		my_mlx_pixel_put(&p->imgv, rc, j++, color);
 	i = -1;
-	while (i++ < ((C_H / 2) * p->map.map_h - wall_h))
+	while (i++ < (p->win_h / 2) - wall_h)
 		my_mlx_pixel_put(&p->imgv, rc, j++, 0x00353D4E);
 }
 
@@ -66,16 +67,16 @@ static int ft_check_hori_lines(t_params *p, float ra, t_coords *point)
 	itan  = -1 / tan(ra);
 	if (ra > PI)
 	{
-		point->y = floor(p->player.pos_y / C_H) * (C_H) - 0.0001;
+		point->y = floor(p->player.pos_y / p->map.block_w ) * (p->map.block_w ) - 0.0001;
 		point->x = (p->player.pos_y - point->y) * itan + p->player.pos_x ;
-		yo = -C_H;
+		yo = -p->map.block_w ;
 		xo = -yo * itan;
 	}
 	if (ra < PI)
 	{
-		point->y = floor(p->player.pos_y / C_H) * (C_H) + C_H;
+		point->y = floor(p->player.pos_y / p->map.block_w ) * (p->map.block_w ) + p->map.block_w ;
 		point->x = (p->player.pos_y - point->y) * itan + p->player.pos_x ;
-		yo = C_H;
+		yo = p->map.block_w ;
 		xo = -yo * itan;
 	}
 	if (ra == 0 || ra == PI)
@@ -86,11 +87,11 @@ static int ft_check_hori_lines(t_params *p, float ra, t_coords *point)
 	}
 	while (dof < 100)
 	{
-		if (point->x >= 0 && point->x <= p->map.map_w*C_H && point->y >= 0 && point->y <= p->map.map_h*C_H)
+		if (point->x >= 0 && point->x <= p->map.map_w*p->map.block_w  && point->y >= 0 && point->y <= p->map.map_h*p->map.block_w )
 		{
-			if (p->map.map[(int)point->y/C_H][(int)point->x/C_H] == '1')
+			if (p->map.map[(int)point->y/p->map.block_w ][(int)point->x/p->map.block_w ] == '1')
 			{
-				ft_plot_line(p->player.pos_x, p->player.pos_y, point->x, point->y, 0x00000000, p);
+			//	ft_plot_line(p->player.pos_x, p->player.pos_y, point->x, point->y, 0x00000000, p);
 				dof = 100;
 				return (1);
 			}
@@ -112,16 +113,16 @@ static int	ft_check_vert_lines(t_params *p, float ra, t_coords *point)
 	ntan  = -tan(ra);
 	if (ra > (PI / 2) && ra < (3 * PI / 2))
 	{
-		point->x = floor(p->player.pos_x / C_H) * (C_H) - 0.0001;
+		point->x = floor(p->player.pos_x / p->map.block_w ) * (p->map.block_w ) - 0.0001;
 		point->y = (p->player.pos_x - point->x) * ntan + p->player.pos_y ;
-		xo = -C_H;
+		xo = -p->map.block_w ;
 		yo = -xo * ntan;
 	}
 	if (ra < (PI / 2) || ra > (3 * PI / 2))
 	{
-		point->x = floor(p->player.pos_x / C_H) * (C_H) + C_H;
+		point->x = floor(p->player.pos_x / p->map.block_w ) * (p->map.block_w ) + p->map.block_w ;
 		point->y = (p->player.pos_x - point->x) * ntan + p->player.pos_y ;
-		xo = C_H;
+		xo = p->map.block_w ;
 		yo = -xo * ntan;
 	}
 	if (ra == 0 || ra == PI)
@@ -132,11 +133,11 @@ static int	ft_check_vert_lines(t_params *p, float ra, t_coords *point)
 	}
 	while (dof < 100)
 	{
-		if (point->x >= 0 && point->x <= p->map.map_w*C_H && point->y >= 0 && point->y <= p->map.map_h*C_H)
+		if (point->x >= 0 && point->x <= p->map.map_w*p->map.block_w  && point->y >= 0 && point->y <= p->map.map_h*p->map.block_w )
 		{
-			if (p->map.map[(int)point->y/C_H][(int)point->x/C_H] == '1')
+			if (p->map.map[(int)point->y/p->map.block_w ][(int)point->x/p->map.block_w ] == '1')
 			{
- 				ft_plot_line(p->player.pos_x, p->player.pos_y, point->x, point->y, 0x0000FF00, p);
+ 			//	ft_plot_line(p->player.pos_x, p->player.pos_y, point->x, point->y, 0x0000FF00, p);
 				dof = 100;
 				return (1);
 			}
@@ -161,7 +162,7 @@ int ft_find_wall(t_params *p)
 	i = -1;
 	ra = p->player.orient - (30 * PI / 180);
 	ft_clear_img(p);
-	while(i++ < C_H*p->map.map_w)
+	while(i++ < p->map.block_w *p->map.map_w)
 	{
 		if (ra < 0)
 			ra +=2*PI;

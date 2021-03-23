@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:26:12 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/17 15:16:56 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/23 11:28:22 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	ft_plot_line(int x0, int y0, int x1, int y1, int color, t_params *p)
 
 void	ft_draw_player_ori(t_params *p)
 {
-	int x1 = cos(p->player.orient) * (C_H / 2);
-	int y1 = sin(p->player.orient) * (C_H / 2);
+	int x1 = cos(p->player.orient) * (p->map.block_w  / 2);
+	int y1 = sin(p->player.orient) * (p->map.block_w  / 2);
 
 	ft_plot_line(p->player.pos_x, p->player.pos_y, p->player.pos_x + x1, p->player.pos_y + y1, 0x00FF0000, p);
 }

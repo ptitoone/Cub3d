@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:25:01 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/17 14:27:42 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/23 15:47:45 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_init_params(t_params *p)
 	p->win = NULL;
 	p->win_w = 0;
 	p->win_h = 0;
+	p->ratio = 0;
 
 	while (i++ < 4)
 		p->tex.dir[i] = NULL;

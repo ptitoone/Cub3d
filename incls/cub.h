@@ -80,8 +80,8 @@ typedef struct	s_map
 
 	int		map_w;
 	int		map_h;
-	int		block_h;
 	int		block_w;
+	int		block_h;
 	char	**map;
 	int		*mapi;
 
@@ -114,6 +114,7 @@ typedef struct	s_params
 	void	*win2;
 	int		win_w;
 	int		win_h;
+	float	ratio;
 	t_tex	tex;
 	t_play	player;
 	t_map	map;
