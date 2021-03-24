@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:57:28 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/23 15:49:29 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/24 11:00:55 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int ft_check_hori_lines(t_params *p, float ra, t_coords *point)
 	itan  = -1 / tan(ra);
 	if (ra > PI)
 	{
-		point->y = floor(p->player.pos_y / p->map.block_w ) * (p->map.block_w ) - 0.0001;
+		point->y = floor(p->player.pos_y / p->map.block_w ) * (p->map.block_w ) - 0.0005;
 		point->x = (p->player.pos_y - point->y) * itan + p->player.pos_x ;
 		yo = -p->map.block_w ;
 		xo = -yo * itan;
@@ -113,7 +113,7 @@ static int	ft_check_vert_lines(t_params *p, float ra, t_coords *point)
 	ntan  = -tan(ra);
 	if (ra > (PI / 2) && ra < (3 * PI / 2))
 	{
-		point->x = floor(p->player.pos_x / p->map.block_w ) * (p->map.block_w ) - 0.0001;
+		point->x = floor(p->player.pos_x / p->map.block_w ) * (p->map.block_w ) - 0.0005;
 		point->y = (p->player.pos_x - point->x) * ntan + p->player.pos_y ;
 		xo = -p->map.block_w ;
 		yo = -xo * ntan;
@@ -162,7 +162,7 @@ int ft_find_wall(t_params *p)
 	i = -1;
 	ra = p->player.orient - (30 * PI / 180);
 	ft_clear_img(p);
-	while(i++ < p->map.block_w *p->map.map_w)
+	while(i++ < p->win_w)
 	{
 		if (ra < 0)
 			ra +=2*PI;

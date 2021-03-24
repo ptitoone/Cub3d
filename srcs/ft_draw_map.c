@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:25:39 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/23 16:00:44 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/24 10:40:17 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int ft_draw_cell(int w, int h, t_params *p)
 		while (j < x)
 		{
 			if (j == 0 || j == x || i == 0 || i == y)
-				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0x00FFFFFF/*0150150150*/);
+				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0x00FFFFFF);
 			else
 				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0150150150);
 		}
@@ -45,8 +45,8 @@ static int ft_draw_cell2(int w, int h, t_params *p)
 	int		i;
 	int		j;
 
-	x = p->win_w / p->map.map_w;
-	y = p->win_h / p->map.map_h;
+	x = floor(p->win_w / p->map.map_w);
+	y = floor(p->win_h / p->map.map_h);
 	i = 0;
 	j = 0;
 	while (i < y)
@@ -54,7 +54,7 @@ static int ft_draw_cell2(int w, int h, t_params *p)
 		while (j < x)
 		{
 			if (j == 0 || j == x || i == 0 || i == y)
-				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0x00FFFFFF/*0200200200*/);
+				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0x00FFFFFF);
 			else
 				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0200200200);
 		}

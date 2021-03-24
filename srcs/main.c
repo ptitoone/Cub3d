@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:23:59 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/23 16:03:49 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/24 10:44:38 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,18 @@ int main()
 	p.mlx = mlx_init();
 	if (p.mlx == NULL)
 		puts("error");
-	p.win = mlx_new_window(p.mlx, (p.win_w), (p.win_h), "Map");
+//	p.win = mlx_new_window(p.mlx, (p.win_w), (p.win_h), "Map");
 	p.win2 = mlx_new_window(p.mlx, (p.win_w), (p.win_h), "FPV");
-	p.img.img = mlx_new_image(p.mlx, (p.win_w), (p.win_h));
-	p.img.addr = mlx_get_data_addr(p.img.img, &p.img.bpp, &p.img.line_len, &p.img.endian);
+//	p.img.img = mlx_new_image(p.mlx, (p.win_w), (p.win_h));
+//	p.img.addr = mlx_get_data_addr(p.img.img, &p.img.bpp, &p.img.line_len, &p.img.endian);
 	p.imgv.img = mlx_new_image(p.mlx, (p.win_w), (p.win_h));
 	p.imgv.addr = mlx_get_data_addr(p.imgv.img, &p.imgv.bpp, &p.imgv.line_len, &p.imgv.endian);
 	/////////////////////
-	ft_draw_map(&p);
-	ft_draw_player(p.player.pos_x, p.player.pos_y, &p);
-	mlx_put_image_to_window(p.mlx, p.win, p.img.img, 0, 0);
-	mlx_mouse_hook(p.win, m, (void *)&p);
-	mlx_hook(p.win, 2, 1L<<0, k, (void *)&p);
+//	ft_draw_map(&p);
+//	ft_draw_player(p.player.pos_x, p.player.pos_y, &p);
+//	mlx_put_image_to_window(p.mlx, p.win, p.img.img, 0, 0);
+//	mlx_mouse_hook(p.win, m, (void *)&p);
+	mlx_hook(p.win2, 2, 1L<<0, k, (void *)&p);
 	mlx_loop(p.mlx);
  	return (0);
 }
