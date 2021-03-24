@@ -132,4 +132,5 @@ int				ft_keys(int keycode, void *pr);
 int				ft_mouse(int keycode, int x, int y, void *pr);
 void    		ft_plot_line(int x0, int y0, int x1, int y1, int color, t_params *p);
 int				ft_find_wall(t_params *p);
+void			*ft_upscale_img(int w, int h, int scale, void *img);
 #endif

@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:57:28 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/24 11:00:55 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/24 15:31:46 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,11 @@ int ft_find_wall(t_params *p)
 	t_coords h;
 	t_coords v;
 
+	int img_w;
+	int img_h;
+	void *img = mlx_xpm_file_to_image(p->mlx, "./sprite.xpm", &img_w, &img_h);
+	void *upscale = ft_upscale_img(img_w, img_h, 2, img);
+
 	h.x = 0; h.y = 0;
 	v.x = 0; v.y = 0;
 
@@ -178,6 +183,7 @@ int ft_find_wall(t_params *p)
 		ra += ((60 * PI / 180) / p->win_w);
 	}
 	mlx_put_image_to_window(p->mlx, p->win2, p->imgv.img, 0, 0);
+	mlx_put_image_to_window(p->mlx, p->win2, upscale, 0, 0);
 	return (0);
 }
 
