@@ -12,40 +12,43 @@
 
 #include "cub.h"
 
-void	*ft_upscale_img(int w, int h, int scale, void *img)
+void	ft_upscale_img(int w, int h, int scale, char *img, char *img2)
 {
 	int		x;
 	int		y;
 	int		i;
-	int 	new_pix_count;
-	void	*new_img;
-	char *pix;
+	int		j;
+	char 	*pix;
+	char 	*new_pix;
 
 	x = 0;
 	y = 0;
+	j = 0;
 	i = -1;
-	new_pix_count = ((h * x) * scale); 
-	new_img = (void *)malloc(new_pix_count * sizeof(int));
-	if (img == NULL)
-		return (NULL);
-	while (i++ < w * h)
+	pix = img;
+	new_pix = img2;
+	while (i++ < h * w)
 	{
-		while (x < scale)
+		while (j < scale)
 		{
-			while (y < scale)
+			while (x < w)
 			{
-				*new_img = (int)img;
-				new_img += sizeof(int);
-				y++;
+				while (y < scale)
+				{
+					*(unsigned int *)new_pix = *(unsigned int *)pix;
+					new_pix += 4;
+					y++;
+				}
+				pix += 4;
+				y = 0;
+				x++;
 			}
-			img += sizeof(int);
-			y  = 0;
-			x++;
+			pix -= w * 4;
+			j++;
 		}
-		img -= (x * w);
+		j = 0;
 		x = 0;
 		i++;
-		img += sizeof(int);
+		pix += (w + 1) * 4;
 	}
-	return (new_img);
 }

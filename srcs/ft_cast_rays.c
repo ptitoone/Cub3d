@@ -158,8 +158,13 @@ int ft_find_wall(t_params *p)
 
 	int img_w;
 	int img_h;
-	void *img = mlx_xpm_file_to_image(p->mlx, "./sprite.xpm", &img_w, &img_h);
-	void *upscale = ft_upscale_img(img_w, img_h, 2, img);
+	t_img img1;
+	t_img img2;
+	img1.img = mlx_xpm_file_to_image(p->mlx, "./sprite.xpm", &img_w, &img_h);
+	img1.addr = mlx_get_data_addr(img1.img, &img1.bpp, &img1.line_len, &img1.endian);
+	img2.img= mlx_new_image(p->mlx, (img_w * 2), (img_h * 2));  
+	img2.addr = mlx_get_data_addr(img2.img, &img2.bpp, &img2.line_len, &img2.endian);
+	ft_upscale_img(img_w, img_h, 2, img1.addr, img2.addr);
 
 	h.x = 0; h.y = 0;
 	v.x = 0; v.y = 0;
@@ -183,7 +188,7 @@ int ft_find_wall(t_params *p)
 		ra += ((60 * PI / 180) / p->win_w);
 	}
 	mlx_put_image_to_window(p->mlx, p->win2, p->imgv.img, 0, 0);
-	mlx_put_image_to_window(p->mlx, p->win2, upscale, 0, 0);
+	mlx_put_image_to_window(p->mlx, p->win2, img2.img, 0, 0);
 	return (0);
 }
 
