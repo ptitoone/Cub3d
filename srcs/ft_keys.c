@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:34:06 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/24 10:43:35 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/24 11:30:04 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,24 @@
 int	ft_keys(int keycode, void *pr)
 {
 	int pix;
-
-	pix = 1;
+	int pos_x_offset;
+	int pos_y_offset;
 	t_params *p;
 
+	pix = 1;
+	pos_x_offset = 0;
+	pos_y_offset = 0;
 	p = (t_params *)pr;
 	if (keycode == K_s)
 	{
+		pos_x_offset = p->player.pos_x - p->player.del_x;
+		pos_y_offset = p->player.pos_y - p->player.del_y;
 		while (pix-- > 0)
 		{
-			p->player.pos_x -= p->player.del_x;
-			p->player.pos_y -= p->player.del_y;
+			{
+				p->player.pos_x -= p->player.del_x;
+				p->player.pos_y -= p->player.del_y;
+			}
 //			ft_draw_map(p);
 //			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
 //			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
@@ -36,10 +43,15 @@ int	ft_keys(int keycode, void *pr)
 	}
 	if (keycode == K_z)
 	{
+		pos_x_offset = p->player.pos_x + p->player.del_x;
+		pos_y_offset = p->player.pos_y + p->player.del_y;
 		while (pix-- > 0)
 		{
-			p->player.pos_x += p->player.del_x;
-			p->player.pos_y += p->player.del_y;
+			if (p->map.map[pos_y_offset/p->map.block_w][pos_x_offset/p->map.block_w] != '1')
+			{
+				p->player.pos_x += p->player.del_x;
+				p->player.pos_y += p->player.del_y;
+			}
 //			ft_draw_map(p);
 //			printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
 //			ft_draw_player(p->player.pos_x, p->player.pos_y, p);
