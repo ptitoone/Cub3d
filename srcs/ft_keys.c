@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:34:06 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/24 11:30:04 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/25 12:50:20 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	ft_keys(int keycode, void *pr)
 		{
 			if (p->map.map[pos_y_offset/p->map.block_w][pos_x_offset/p->map.block_w] != '1')
 			{
+				
 				p->player.pos_x += p->player.del_x;
 				p->player.pos_y += p->player.del_y;
 			}
