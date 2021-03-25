@@ -24,6 +24,7 @@ static void	ft_draw_line(int rc, float ra, float x, float y, t_params *p, int co
 	dist = sqrtf((pow(p->player.pos_x - x, 2)) + pow(p->player.pos_y - y, 2));
 	dist *= cos(p->player.orient - ra);
 	wall_h = (int)floor(((p->map.block_w  * p->win_h) / dist) / p->ratio);
+//	printf("wall_h = %i\n", wall_h);
 	if (wall_h * 2 > p->win_h)
 		wall_h = p->win_h / 2;
 	while (i++ < (p->win_h / 2) - wall_h)

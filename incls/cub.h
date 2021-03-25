@@ -7,13 +7,14 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <time.h>
 
 # ifdef  __unix__
 
-# define K_z	122
+# define K_w	122
 # define K_s	115
 # define K_d	100
-# define K_q	113
+# define K_a	113
 # define K_sp	32
 # define K_a_u	65362
 # define K_a_d	65364
@@ -29,10 +30,10 @@
 
 # elif defined __APPLE__
 
-# define K_z	13
+# define K_w	13
 # define K_s	1
 # define K_d	2
-# define K_q	0
+# define K_a	0
 # define K_sp	49
 # define K_a_u	126
 # define K_a_d	125
@@ -106,6 +107,18 @@ typedef struct	s_coords
 
 }				t_coords;
 
+typedef struct	s_keys
+{
+
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	l;
+	int	r;
+
+}				t_keys;
+
 typedef struct	s_params
 {
 
@@ -124,6 +137,7 @@ typedef struct	s_params
 }				t_params;
 
 void			ft_init_params(t_params *p);
+void			ft_init_keys(t_keys *k);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 unsigned int 	ft_get_pixel_color(t_img *img, int x, int y);
 void			ft_draw_player(int x, int y, t_params *p);

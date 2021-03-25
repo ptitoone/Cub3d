@@ -1,4 +1,4 @@
-R 1280 720 
+R 800 600 
 NO ./texture_no
 SO ./texture_so
 WE ./texture_we
