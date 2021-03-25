@@ -18,13 +18,11 @@ static void	ft_draw_line(int rc, float ra, float x, float y, t_params *p, int co
 	int j;
 	float dist;
 	int wall_h;
-	float tmp;
 
 	i = -1;
 	j = 0;
-	tmp = ((p->player.pos_x - x) * (p->player.pos_x - x)) + ((p->player.pos_y - y) * (p->player.pos_y - y));
-	dist = sqrtf(tmp);
-	dist = dist * (cos(p->player.orient - ra));
+	dist = sqrtf((pow(p->player.pos_x - x, 2)) + pow(p->player.pos_y - y, 2));
+	dist *= cos(p->player.orient - ra);
 	wall_h = (int)floor(((p->map.block_w  * p->win_h) / dist) / p->ratio);
 	if (wall_h * 2 > p->win_h)
 		wall_h = p->win_h / 2;
@@ -62,41 +60,34 @@ static int ft_check_hori_lines(t_params *p, float ra, t_coords *point)
 	float 	xo;
 	float 	yo;
 	float 	itan;
-	int dof = 0;
+	int		dof;
 
+	dof = 100;
 	itan  = -1 / tan(ra);
+	point->x = p->player.pos_x;
+	point->y = p->player.pos_y;
 	if (ra > PI)
 	{
 		point->y = floor(p->player.pos_y / p->map.block_w ) * (p->map.block_w ) - 0.0005;
 		point->x = (p->player.pos_y - point->y) * itan + p->player.pos_x ;
 		yo = -p->map.block_w ;
 		xo = -yo * itan;
+		dof = 0;
 	}
 	if (ra < PI)
 	{
-		point->y = floor(p->player.pos_y / p->map.block_w ) * (p->map.block_w ) + p->map.block_w ;
+		point->y = floor(p->player.pos_y / p->map.block_w ) * (p->map.block_w ) + p->map.block_w;
 		point->x = (p->player.pos_y - point->y) * itan + p->player.pos_x ;
 		yo = p->map.block_w ;
 		xo = -yo * itan;
+		dof = 0;
 	}
-	if (ra == 0 || ra == PI)
-	{
-		point->x = p->player.pos_x;
-		point->y = p->player.pos_y;
-		dof = 100;
-	}
-	while (dof < 100)
+	while (dof++ < 100)
 	{
 		if (point->x >= 0 && point->x <= p->map.map_w*p->map.block_w  && point->y >= 0 && point->y <= p->map.map_h*p->map.block_w )
-		{
 			if (p->map.map[(int)point->y/p->map.block_w ][(int)point->x/p->map.block_w ] == '1')
-			{
 			//	ft_plot_line(p->player.pos_x, p->player.pos_y, point->x, point->y, 0x00000000, p);
-				dof = 100;
 				return (1);
-			}
-		}
-		dof++;
 		point->x+=xo;
 		point->y+=yo;
 	}
@@ -108,41 +99,34 @@ static int	ft_check_vert_lines(t_params *p, float ra, t_coords *point)
 	float 	xo;
 	float 	yo;
 	float 	ntan;
-	int dof = 0;
+	int		dof;
 
-	ntan  = -tan(ra);
+	dof = 100;
+	ntan = -tan(ra);
+	point->x = p->player.pos_x;
+	point->y = p->player.pos_y;
 	if (ra > (PI / 2) && ra < (3 * PI / 2))
 	{
 		point->x = floor(p->player.pos_x / p->map.block_w ) * (p->map.block_w ) - 0.0005;
 		point->y = (p->player.pos_x - point->x) * ntan + p->player.pos_y ;
 		xo = -p->map.block_w ;
 		yo = -xo * ntan;
+		dof = 0;
 	}
 	if (ra < (PI / 2) || ra > (3 * PI / 2))
 	{
-		point->x = floor(p->player.pos_x / p->map.block_w ) * (p->map.block_w ) + p->map.block_w ;
+		point->x = floor(p->player.pos_x / p->map.block_w ) * (p->map.block_w ) + p->map.block_w;
 		point->y = (p->player.pos_x - point->x) * ntan + p->player.pos_y ;
 		xo = p->map.block_w ;
 		yo = -xo * ntan;
+		dof = 0;
 	}
-	if (ra == 0 || ra == PI)
-	{
-		point->x = p->player.pos_x;
-		point->y = p->player.pos_y;
-		dof = 100;
-	}
-	while (dof < 100)
+	while (dof++ < 100)
 	{
 		if (point->x >= 0 && point->x <= p->map.map_w*p->map.block_w  && point->y >= 0 && point->y <= p->map.map_h*p->map.block_w )
-		{
 			if (p->map.map[(int)point->y/p->map.block_w ][(int)point->x/p->map.block_w ] == '1')
-			{
  			//	ft_plot_line(p->player.pos_x, p->player.pos_y, point->x, point->y, 0x0000FF00, p);
-				dof = 100;
 				return (1);
-			}
-		}
-		dof++;
 		point->x+=xo;
 		point->y+=yo;
 	}

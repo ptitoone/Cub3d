@@ -40,16 +40,16 @@ void	ft_upscale_img(int w, int h, int scale, char *img, char *img2)
 					y++;
 					r++;
 				}
-				pix += sizeof(int);
-				y = 0;
 				x++;
+				if (x != w)
+					pix += sizeof(int);
+				y = 0;
 			}
-			pix -= (w + 1) * sizeof(int);
+			pix -= (x-1) * sizeof(int);
 			j++;
 			x = 0;
 		}
 		j = 0;
-		i++;
-		pix += (w + 1) * sizeof(int);
+		pix += (w) * sizeof(int);
 	}
 }

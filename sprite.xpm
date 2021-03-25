@@ -1,5 +1,5 @@
 /* XPM */
-static char *_a5b4a374ab54ab29c40ee643bf4eae05UclKddvQAs2OUeR[] = {
+static char *sprite[] = {
 /* columns rows colors chars-per-pixel */
 "3 3 2 1 ",
 "  c None",
