@@ -24,7 +24,7 @@ LIBMLXOBJSL	:=	$(wildcard minilibx-linux/*.o)
 
 INCLS		=	incls
 
-.PHONY : all clean fclean re rel
+.PHONY : all  alll clean fclean re rel
 
 all : $(NAME)
 
