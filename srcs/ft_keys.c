@@ -40,8 +40,8 @@ static int	ft_key_s(t_params *p)
 	y_offset = p->player.pos_y + p->player.del_y;
 	if (p->map.map[y_offset/p->map.block_w][x_offset/p->map.block_w] != '1')
 	{
-		p->player.pos_x -= (2 * p->player.del_x);
-		p->player.pos_y -= (2 * p->player.del_y);
+		p->player.pos_x -= p->player.del_x;
+		p->player.pos_y -= p->player.del_y;
 	}
 	ft_find_wall(p);
 //	ft_draw_map(p);
