@@ -32,7 +32,7 @@ unsigned int	ft_get_pixel_color(t_img *img, int x, int y)
 int main()
 {
 	int			(*keys)(int keycode, void *);
-	int			(*mouse)(int button, int x, int y, void *);
+	int			(*mouse)(int x, int y, void *pr);
 	t_params	p;
 	t_keys		k;
 
@@ -89,11 +89,12 @@ int main()
 //	ft_draw_map(&p);
 //	ft_draw_player(p.player.pos_x, p.player.pos_y, &p);
 //	mlx_put_image_to_window(p.mlx, p.win, p.img.img, 0, 0);
-//	mlx_mouse_hook(p.win, mouse, (void *)&p);
+//	mlx_mouse_hook(p.win2, mouse, (void *)&p);
 
 ///////// HOOKS AND LOOP //////////////////////////////////////////////////////
 
 	mlx_hook(p.win2, 2, 1L<<0, keys, (void *)&p);
+	mlx_hook(p.win2, 6, 1L<<6, mouse, (void *)&p);
 	mlx_loop(p.mlx);
  	return (0);
 }

@@ -11,60 +11,42 @@
 /* ************************************************************************** */
 
 #include "cub.h"
-
-int ft_mouse(int button, int x, int y, void *pr)
+static int	ft_mouse_a(t_params *p)
 {
-	t_params *p;
-	int pix;
-	int pix2;
-	int z;
-	int w;
+	p->player.orient -= 0.05;
+	if (p->player.orient < 0)
+		p->player.orient += (2 * PI);
+	p->player.del_x = cos(p->player.orient) * 5;
+	p->player.del_y = sin(p->player.orient) * 5;
+	ft_find_wall(p);
+//	ft_draw_map(p);
+//	ft_draw_player(p->player.pos_x, p->player.pos_y, p);
+//	mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
+}
 
-	pix  = 10;
-	pix2 = 10;
-	x = x - 5;
-	y = y - 5;
-	z = x;
-	w = y;
+static int	ft_mouse_d(t_params *p)
+{
+	p->player.orient += 0.05;
+	if (p->player.orient > (2 * PI))
+		p->player.orient -= (2 * PI);
+	p->player.del_x = cos(p->player.orient) * 5;
+	p->player.del_y = sin(p->player.orient) * 5;
+	ft_find_wall(p);
+//	ft_draw_map(p);
+//	printf("color = %u\n", ft_get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
+//	ft_draw_player(p->player.pos_x, p->player.pos_y, p);
+//	mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
+}
+
+int ft_mouse(int x, int y, void *pr)
+{
+	static int	xpos;
+	t_params *p;
 	p = (t_params *)pr;
-	if (button == M_l)
-	{
-		while (pix-- > 0)
-		{
-			while (pix2-- > 0)
-			{
-				mlx_pixel_put(p->mlx, p->win, z++, w , 0050050050);
-			}
-			w++;
-			pix2 = 10;
-			z = x;
-		}
-	}
-	if (button == M_r)
-	{
-		while (pix-- > 0)
-		{
-			while (pix2-- > 0)
-			{
-				mlx_pixel_put(p->mlx, p->win, z++, w , 0150150150);
-			}
-			w++;
-			pix2 = 10;
-			z = x;
-		}
-	}
-	if (button == M_u)
-	{
-		while (pix-- > 0)
-		{
-			while (pix2-- > 0)
-			{
-				mlx_pixel_put(p->mlx, p->win, z++, w , 0070010070);
-			}
-			w++;
-			pix2 = 10;
-			z = x;
-		}
-	}
+	if (x < xpos)
+		ft_mouse_a(p);
+	if (x > xpos)
+		ft_mouse_d(p);
+	xpos = x;
 	return (0);
 }

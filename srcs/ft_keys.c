@@ -22,8 +22,8 @@ static int	ft_key_w(t_params *p)
 	y_offset = p->player.pos_y + p->player.del_y;
 	if (p->map.map[y_offset/p->map.block_w][x_offset/p->map.block_w] != '1')
 	{
-		p->player.pos_x += p->player.del_x;
-		p->player.pos_y += p->player.del_y;
+		p->player.pos_x += (2 * p->player.del_x);
+		p->player.pos_y += (2 * p->player.del_y);
 	}
 	ft_find_wall(p);
 //	ft_draw_map(p);
@@ -40,8 +40,8 @@ static int	ft_key_s(t_params *p)
 	y_offset = p->player.pos_y + p->player.del_y;
 	if (p->map.map[y_offset/p->map.block_w][x_offset/p->map.block_w] != '1')
 	{
-		p->player.pos_x -= p->player.del_x;
-		p->player.pos_y -= p->player.del_y;
+		p->player.pos_x -= (2 * p->player.del_x);
+		p->player.pos_y -= (2 * p->player.del_y);
 	}
 	ft_find_wall(p);
 //	ft_draw_map(p);
@@ -79,41 +79,32 @@ static int	ft_key_d(t_params *p)
 int	ft_keys(int keycode, void *pr)
 {
 	t_params	*p;
-	clock_t		start_t, end_t;
-	double		total_t;
 
 	p = (t_params *)pr;
-	start_t = clock();
-	
 	while (1)
 	{
-		end_t += clock();
-		total_t = difftime(end_t, start_t);
-		if (total_t > 100000000000)
+		if (keycode == K_w)
 		{
-			if (keycode == K_w)
-			{
-				ft_key_w(p);
-			}
-			if (keycode == K_a)
-			{
-				ft_key_a(p);
-			}
-			if (keycode == K_s)
-			{
-				ft_key_s(p);
-			}
-			if (keycode == K_d)
-			{
-				ft_key_d(p);
-			}
-			if (keycode == K_esc)
-			{
-				mlx_destroy_window(p->mlx, p->win2);
-				exit(EXIT_SUCCESS);
-			}
-			break ;
+			ft_key_w(p);
 		}
+		if (keycode == K_a)
+		{
+			ft_key_a(p);
+		}
+		if (keycode == K_s)
+		{
+			ft_key_s(p);
+		}
+		if (keycode == K_d)
+		{
+			ft_key_d(p);
+		}
+		if (keycode == K_esc)
+		{
+			mlx_destroy_window(p->mlx, p->win2);
+			exit(EXIT_SUCCESS);
+		}
+		break ;
 	}
 	return (0);
 }

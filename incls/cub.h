@@ -133,6 +133,7 @@ typedef struct	s_params
 	t_map	map;
 	t_img	img;
 	t_img	imgv;
+	t_keys	keys;
 
 }				t_params;
 
@@ -143,7 +144,7 @@ unsigned int 	ft_get_pixel_color(t_img *img, int x, int y);
 void			ft_draw_player(int x, int y, t_params *p);
 void			ft_draw_player_ori(t_params *p);
 int				ft_keys(int keycode, void *pr);
-int				ft_mouse(int keycode, int x, int y, void *pr);
+int				ft_mouse(int x, int y, void *pr);
 void    		ft_plot_line(int x0, int y0, int x1, int y1, int color, t_params *p);
 int				ft_find_wall(t_params *p);
 void			ft_upscale_img(int w, int h, int scale, char *img, char *img2);

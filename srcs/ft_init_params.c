@@ -68,4 +68,5 @@ void	ft_init_params(t_params *p)
 	ft_init_player(p);
 	ft_init_map(p);
 	ft_init_imgs(p);
+	ft_init_keys(&p->keys);
 }
