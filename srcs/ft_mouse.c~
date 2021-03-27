@@ -13,7 +13,7 @@
 #include "cub.h"
 static int	ft_mouse_a(t_params *p)
 {
-	p->player.orient -= 0.08;
+	p->player.orient -= 0.05;
 	if (p->player.orient < 0)
 		p->player.orient += (2 * PI);
 	p->player.del_x = cos(p->player.orient) * 5;
@@ -26,7 +26,7 @@ static int	ft_mouse_a(t_params *p)
 
 static int	ft_mouse_d(t_params *p)
 {
-	p->player.orient += 0.08;
+	p->player.orient += 0.05;
 	if (p->player.orient > (2 * PI))
 		p->player.orient -= (2 * PI);
 	p->player.del_x = cos(p->player.orient) * 5;

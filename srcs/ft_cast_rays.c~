@@ -146,8 +146,8 @@ int ft_find_wall(t_params *p)
 
 	i = -1;
 	ra = p->player.orient - (30 * PI / 180);
+	mlx_sync(1, p->imgv.img);
 	//ft_clear_img(p);
-	mlx_clear_window(p->mlx, p->win2);
 	while(i++ < p->win_w)
 	{
 		if (ra < 0)
@@ -163,6 +163,7 @@ int ft_find_wall(t_params *p)
 			ft_draw_line(i, ra, v.x, v.y, p, 0x00954900);
 		ra += ((60 * PI / 180) / p->win_w);
 	}
+	mlx_sync(2, p->win2);
 	mlx_put_image_to_window(p->mlx, p->win2, p->imgv.img, 0, 0);
 	return (0);
 }

@@ -82,17 +82,25 @@ int	ft_keys(int keycode, void *pr)
 
 	p = (t_params *)pr;
 	if (keycode == K_w)
+	{
 		p->keys.w = 1;
+	//	ft_key_w(p);
+	}
 	if (keycode == K_a)
+	{
 		p->keys.a = 1;
+	//	ft_key_a(p);
+	}
 	if (keycode == K_s)
+	{
 		p->keys.s = 1;
+	//	ft_key_s(p);
+	}
 	if (keycode == K_d)
+	{
 		p->keys.d = 1;
-	if (keycode == K_a_l)
-		p->keys.l = 1;
-	if (keycode == K_a_r)
-		p->keys.r = 1;
+	//	ft_key_d(p);
+	}
 	if (keycode == K_esc)
 	{
 		mlx_destroy_window(p->mlx, p->win2);

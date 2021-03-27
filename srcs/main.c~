@@ -88,7 +88,7 @@ static int	ft_key_a_r(t_params *p)
 
 static int	ft_key_a(t_params *p)
 {
-	if (p->player.orient > 0 && p->player.orient < PI)
+	if (p->player.orient > 0 && p->player.orient < PI / 2)
 	{
 		p->player.pos_x += p->player.del_x;
 		p->player.pos_y -= p->player.del_y;
