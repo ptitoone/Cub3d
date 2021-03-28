@@ -64,8 +64,8 @@ static int	ft_key_s(t_params *p)
 
 static int	ft_key_a_l(t_params *p)
 {
-	p->player.orient -= 0.1;
-	p->player.strafe_orient -= 0.1;
+	p->player.orient -= 0.05;
+	p->player.strafe_orient -= 0.05;
 	if (p->player.orient < 0)
 		p->player.orient += (2 * PI);
 	if (p->player.strafe_orient < 0)
@@ -81,8 +81,8 @@ static int	ft_key_a_l(t_params *p)
 
 static int	ft_key_a_r(t_params *p)
 {
-	p->player.orient += 0.1;
-	p->player.strafe_orient += 0.1;
+	p->player.orient += 0.05;
+	p->player.strafe_orient += 0.05;
 	if (p->player.orient > (2 * PI))
 		p->player.orient -= (2 * PI);
 	if (p->player.strafe_orient > (2 * PI))
@@ -217,8 +217,8 @@ int main()
 ///////// HOOKS AND LOOP //////////////////////////////////////////////////////
 	mlx_hook(p.win2, 2, 1L<<0, keys, (void *)&p);
 	mlx_hook(p.win2, 3, 1L<<1, keysr, (void *)&p);
+	mlx_hook(p.win2, 6, 1L<<6, mouse, (void *)&p);
 	mlx_loop_hook(p.mlx, render, (void *)&p);
-//	mlx_hook(p.win2, 6, 1L<<6, mouse, (void *)&p);
 	mlx_loop(p.mlx);
  	return (0);
 }
