@@ -73,6 +73,9 @@ typedef struct	s_play
 	float	del_x;
 	float	del_y;
 	float	orient;
+	float	strafe_orient;
+	float	strafe_del_x;
+	float	strafe_del_y;
 
 }				t_play;
 

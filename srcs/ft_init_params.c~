@@ -31,9 +31,6 @@ static	int ft_init_player(t_params *p)
 	p->player.del_x = 0;
 	p->player.del_y = 0;
 	p->player.orient = PI;
-	p->player.strafe_orient = PI / 2;
-	p->player.strafe_del_x = 0;
-	p->player.strafe_del_y = 0;
 }
 
 static	int ft_init_map(t_params *p)

@@ -50,12 +50,12 @@ static int	ft_key_s(t_params *p)
 	int x_offset;
 	int y_offset;
 
-	x_offset = p->player.pos_x + p->player.del_x;
-	y_offset = p->player.pos_y + p->player.del_y;
+	x_offset = p->player.pos_x - p->player.del_x;
+	y_offset = p->player.pos_y - p->player.del_y;
 	if (p->map.map[y_offset/p->map.block_w][x_offset/p->map.block_w] != '1')
 	{
-		p->player.pos_x -= p->player.del_x;
-		p->player.pos_y -= p->player.del_y;
+		p->player.pos_x -= (2 * p->player.del_x);
+		p->player.pos_y -= (2 * p->player.del_y);
 	}
 //	ft_draw_map(p);
 //	ft_draw_player(p->player.pos_x, p->player.pos_y, p);
@@ -65,10 +65,15 @@ static int	ft_key_s(t_params *p)
 static int	ft_key_a_l(t_params *p)
 {
 	p->player.orient -= 0.1;
+	p->player.strafe_orient -= 0.1;
 	if (p->player.orient < 0)
 		p->player.orient += (2 * PI);
+	if (p->player.strafe_orient < 0)
+		p->player.strafe_orient += (2 * PI);
 	p->player.del_x = cos(p->player.orient) * 5;
 	p->player.del_y = sin(p->player.orient) * 5;
+	p->player.strafe_del_x = cos(p->player.strafe_orient) * 5;
+	p->player.strafe_del_y = sin(p->player.strafe_orient) * 5;
 //	ft_draw_map(p);
 //	ft_draw_player(p->player.pos_x, p->player.pos_y, p);
 //	mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
@@ -77,10 +82,15 @@ static int	ft_key_a_l(t_params *p)
 static int	ft_key_a_r(t_params *p)
 {
 	p->player.orient += 0.1;
+	p->player.strafe_orient += 0.1;
 	if (p->player.orient > (2 * PI))
 		p->player.orient -= (2 * PI);
+	if (p->player.strafe_orient > (2 * PI))
+		p->player.strafe_orient -= (2 * PI);
 	p->player.del_x = cos(p->player.orient) * 5;
 	p->player.del_y = sin(p->player.orient) * 5;
+	p->player.strafe_del_x = cos(p->player.strafe_orient) * 5;
+	p->player.strafe_del_y = sin(p->player.strafe_orient) * 5;
 //	ft_draw_map(p);
 //	ft_draw_player(p->player.pos_x, p->player.pos_y, p);
 //	mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
@@ -88,15 +98,15 @@ static int	ft_key_a_r(t_params *p)
 
 static int	ft_key_a(t_params *p)
 {
-	if (p->player.orient > 0 && p->player.orient < PI)
+	int x_offset;
+	int y_offset;
+
+	x_offset = p->player.pos_x + p->player.strafe_del_x;
+	y_offset = p->player.pos_y + p->player.strafe_del_y;
+	if (p->map.map[y_offset/p->map.block_w][x_offset/p->map.block_w] != '1')
 	{
-		p->player.pos_x += p->player.del_x;
-		p->player.pos_y -= p->player.del_y;
-	}
-	else if (p->player.orient > PI / 2 && p->player.orient < PI)
-	{
-		p->player.pos_x -= p->player.del_x;
-		p->player.pos_y += p->player.del_y;
+		p->player.pos_x += (2 * p->player.strafe_del_x);
+		p->player.pos_y += (2 * p->player.strafe_del_y);
 	}
 //	ft_draw_map(p);
 //	ft_draw_player(p->player.pos_x, p->player.pos_y, p);
@@ -105,7 +115,16 @@ static int	ft_key_a(t_params *p)
 
 static int	ft_key_d(t_params *p)
 {
-	p->player.pos_x -= p->player.del_x * 5;
+	int x_offset;
+	int y_offset;
+
+	x_offset = p->player.pos_x - p->player.strafe_del_x;
+	y_offset = p->player.pos_y - p->player.strafe_del_y;
+	if (p->map.map[y_offset/p->map.block_w][x_offset/p->map.block_w] != '1')
+	{
+		p->player.pos_x -= (2 * p->player.strafe_del_x);
+		p->player.pos_y -= (2 * p->player.strafe_del_y);
+	}
 //	ft_draw_map(p);
 //	ft_draw_player(p->player.pos_x, p->player.pos_y, p);
 //	mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
@@ -199,7 +218,7 @@ int main()
 	mlx_hook(p.win2, 2, 1L<<0, keys, (void *)&p);
 	mlx_hook(p.win2, 3, 1L<<1, keysr, (void *)&p);
 	mlx_loop_hook(p.mlx, render, (void *)&p);
+//	mlx_hook(p.win2, 6, 1L<<6, mouse, (void *)&p);
 	mlx_loop(p.mlx);
-	//	mlx_hook(p.win2, 6, 1L<<6, mouse, (void *)&p);
  	return (0);
 }
