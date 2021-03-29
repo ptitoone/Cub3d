@@ -21,6 +21,8 @@ static void	ft_draw_line(int rc, double ra, double x, double y, t_params *p, int
 
 //////// TEXTURE TEST ////////////////////////////////////////////////
 
+	static int count;
+	int k;
 	char tex[16][16] = 	{{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
 						{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
 						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
@@ -37,6 +39,14 @@ static void	ft_draw_line(int rc, double ra, double x, double y, t_params *p, int
 						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
 						{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
 						{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}};
+	k = 0;
+	if (count == p->win_w / 16)
+	{
+		count = 0;
+		k++;
+	}
+	else
+		count++;
 
 /////////////////////////////////////////////////////////////////////
 
@@ -51,7 +61,7 @@ static void	ft_draw_line(int rc, double ra, double x, double y, t_params *p, int
 		my_mlx_pixel_put(&p->imgv, rc, j++, 0x002E4172);
 	i = 0;
 	while (i++ < 16)
-		ft_draw_tex_col(tex, rc, i + 45, p->win_h / 16, &p->imgv);
+		ft_draw_tex_col(tex, k, i, (p->win_h / 16), &p->imgv);
 //	my_mlx_pixel_put(&p->imgv, rc, j++, color);
 	i = 0;
 	while (i++ < ((p->win_h / 2) - wall_h))

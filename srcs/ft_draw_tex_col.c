@@ -19,8 +19,8 @@ void	ft_draw_tex_col(char tex[16][16], int index_x, int index_y, int count, t_im
 	i = 0;
 	while (i < count)
 	{
-		if (tex[index][i] == '1')
-			my_mlx_pixel_put(img, index_x, i, 0x00FFFFFF);	
+		if (tex[index_x][index_y] == '1')
+			my_mlx_pixel_put(img, index_x, i +, 0x00FFFFFF);	
 		else
 			my_mlx_pixel_put(img, index_x, i, 0x00000000);	
 		i++;
