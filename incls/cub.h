@@ -152,4 +152,5 @@ int				ft_mouse(int x, int y, void *pr);
 void    		ft_plot_line(int x0, int y0, int x1, int y1, int color, t_params *p);
 int				ft_find_wall(t_params *p);
 void			ft_upscale_img(int w, int h, int scale, char *img, char *img2);
+void			ft_draw_tex_col(char tex[16][16], int index_x, int index_y, int count, t_img *img);
 #endif
