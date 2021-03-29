@@ -68,14 +68,14 @@ typedef struct	s_tex
 typedef struct	s_play
 {
 
-	float	pos_x;
-	float	pos_y;
-	float	del_x;
-	float	del_y;
-	float	orient;
-	float	strafe_orient;
-	float	strafe_del_x;
-	float	strafe_del_y;
+	double	pos_x;
+	double	pos_y;
+	double	del_x;
+	double	del_y;
+	double	orient;
+	double	strafe_orient;
+	double	strafe_del_x;
+	double	strafe_del_y;
 
 }				t_play;
 
@@ -105,8 +105,8 @@ typedef struct	s_img
 typedef struct	s_coords
 {
 
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 
 }				t_coords;
 
@@ -130,7 +130,7 @@ typedef struct	s_params
 	void	*win2;
 	int		win_w;
 	int		win_h;
-	float	ratio;
+	double	ratio;
 	t_tex	tex;
 	t_play	player;
 	t_map	map;

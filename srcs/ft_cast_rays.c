@@ -6,37 +6,33 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:57:28 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/25 12:14:35 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/29 15:29:57 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static void	ft_draw_line(int rc, float ra, float x, float y, t_params *p, int color)
+static void	ft_draw_line(int rc, double ra, double x, double y, t_params *p, int color)
 {
 	int i;
 	int j;
-	float dist;
+	double dist;
 	int wall_h;
 
-	i = -1;
+	i = 0;
 	j = 0;
-	dist = sqrtf((pow(p->player.pos_x - x, 2)) + pow(p->player.pos_y - y, 2));
-	dist *= cos(p->player.orient - ra);
+	dist = sqrt(((p->player.pos_x - x) * (p->player.pos_x - x)) + ((p->player.pos_y - y) * (p->player.pos_y - y)));
+	dist = dist * cos(p->player.orient - ra);
 	wall_h = (int)floor(((p->map.block_w  * p->win_h) / dist) / p->ratio);
-//	printf("wall_h = %i\n", wall_h);
 	if (wall_h * 2 > p->win_h)
 		wall_h = p->win_h / 2;
 	while (i++ < (p->win_h / 2) - wall_h)
 		my_mlx_pixel_put(&p->imgv, rc, j++, 0x002E4172);
-	i = -1;
-	while (i++ < wall_h)
+	i = 0;
+	while (i++ < wall_h * 2)
 		my_mlx_pixel_put(&p->imgv, rc, j++, color);
-	i = -1;
-	while (i++ < wall_h)
-		my_mlx_pixel_put(&p->imgv, rc, j++, color);
-	i = -1;
-	while (i++ < (p->win_h / 2) - wall_h)
+	i = 0;
+	while (i++ < ((p->win_h / 2) - wall_h))
 		my_mlx_pixel_put(&p->imgv, rc, j++, 0x00353D4E);
 }
 
@@ -56,11 +52,11 @@ static void	ft_clear_img(t_params *p)
 	}
 }
 
-static int ft_check_hori_lines(t_params *p, float ra, t_coords *point)
+static int ft_check_hori_lines(t_params *p, double ra, t_coords *point)
 {
-	float 	xo;
-	float 	yo;
-	float 	itan;
+	double 	xo;
+	double 	yo;
+	double 	itan;
 	int		dof;
 
 	dof = 100;
@@ -95,11 +91,11 @@ static int ft_check_hori_lines(t_params *p, float ra, t_coords *point)
 	return (0);
 }
 
-static int	ft_check_vert_lines(t_params *p, float ra, t_coords *point)
+static int	ft_check_vert_lines(t_params *p, double ra, t_coords *point)
 {
-	float 	xo;
-	float 	yo;
-	float 	ntan;
+	double 	xo;
+	double 	yo;
+	double 	ntan;
 	int		dof;
 
 	dof = 100;
@@ -137,7 +133,7 @@ static int	ft_check_vert_lines(t_params *p, float ra, t_coords *point)
 int ft_find_wall(t_params *p)
 {
 	int 	i;
-	float	ra;
+	double	ra;
 	t_coords h;
 	t_coords v;
 
@@ -146,9 +142,8 @@ int ft_find_wall(t_params *p)
 
 	i = -1;
 	ra = p->player.orient - (30 * PI / 180);
-	//ft_clear_img(p);
-	mlx_clear_window(p->mlx, p->win2);
-	while(i++ < p->win_w)
+	ft_clear_img(p);
+	while(i++ < p->win_w - 1)
 	{
 		if (ra < 0)
 			ra +=2*PI;

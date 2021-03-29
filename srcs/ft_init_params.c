@@ -6,13 +6,13 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:25:01 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/23 15:47:45 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/29 13:41:26 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static	int ft_init_tex(t_params *p)
+static	void ft_init_tex(t_params *p)
 {
 	int	i;
 
@@ -24,10 +24,10 @@ static	int ft_init_tex(t_params *p)
 	p->tex.c = NULL;
 }
 
-static	int ft_init_player(t_params *p)
+static	void ft_init_player(t_params *p)
 {
-	p->player.pos_x = 272;
-	p->player.pos_y = 272;
+	p->player.pos_x = 0;
+	p->player.pos_y = 0;
 	p->player.del_x = 0;
 	p->player.del_y = 0;
 	p->player.orient = PI;
@@ -36,7 +36,7 @@ static	int ft_init_player(t_params *p)
 	p->player.strafe_del_y = 0;
 }
 
-static	int ft_init_map(t_params *p)
+static	void ft_init_map(t_params *p)
 {
 	p->map.map_w = 0;
 	p->map.map_h = 0;
@@ -46,7 +46,7 @@ static	int ft_init_map(t_params *p)
 	p->map.map = NULL;
 }
 
-static	int ft_init_imgs(t_params *p)
+static	void ft_init_imgs(t_params *p)
 {
 	p->img.img = NULL;
 	p->img.addr = NULL;
