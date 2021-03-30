@@ -73,7 +73,7 @@ int	ft_parse_map(char *map_file, t_params *p)
 	{
 		if (ft_lay_map(map_file, &p->map))
 		{
-			p->map.block_w = p->win_w / 16;
+			p->map.c_s = p->win_w / 16;
 			p->map.block_h = p->win_h / 16;
 			return (1);
 		}

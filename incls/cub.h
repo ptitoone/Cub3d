@@ -84,7 +84,7 @@ typedef struct	s_map
 
 	int		map_w;
 	int		map_h;
-	int		block_w;
+	int		c_s;
 	int		block_h;
 	char	**map;
 	int		*mapi;

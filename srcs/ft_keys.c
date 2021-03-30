@@ -20,7 +20,7 @@ static int	ft_key_w(t_params *p)
 
 	x_offset = p->player.pos_x + p->player.del_x;
 	y_offset = p->player.pos_y + p->player.del_y;
-	if (p->map.map[y_offset/p->map.block_w][x_offset/p->map.block_w] != '1')
+	if (p->map.map[y_offset/p->map.c_s][x_offset/p->map.c_s] != '1')
 	{
 		p->player.pos_x += (2 * p->player.del_x);
 		p->player.pos_y += (2 * p->player.del_y);
@@ -38,7 +38,7 @@ static int	ft_key_s(t_params *p)
 
 	x_offset = p->player.pos_x + p->player.del_x;
 	y_offset = p->player.pos_y + p->player.del_y;
-	if (p->map.map[y_offset/p->map.block_w][x_offset/p->map.block_w] != '1')
+	if (p->map.map[y_offset/p->map.c_s][x_offset/p->map.c_s] != '1')
 	{
 		p->player.pos_x -= p->player.del_x;
 		p->player.pos_y -= p->player.del_y;

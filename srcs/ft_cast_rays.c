@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:57:28 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/29 17:28:06 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/30 10:41:15 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,49 +20,49 @@ static void	ft_draw_line(int rc, double ra, double x, double y, t_params *p, int
 	int wall_h;
 
 //////// TEXTURE TEST ////////////////////////////////////////////////
-
-	static int count;
-	int k;
-	char tex[16][16] = 	{{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
-						{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
-						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
-						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
-						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
-						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
-						{'1','1','0','0','0','0','0','1','1','0','0','0','0','0','1','1'},
-						{'1','1','0','0','0','0','1','1','1','1','0','0','0','0','1','1'},
-						{'1','1','0','0','0','0','0','1','1','0','0','0','0','0','1','1'},
-						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
-						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
-						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
-						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
-						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
-						{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
-						{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}};
-	k = 0;
-	if (count == p->win_w / 16)
-	{
-		count = 0;
-		k++;
-	}
-	else
-		count++;
-
+//
+//	static int count;
+//	int k;
+//	char tex[16][16] = 	{{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
+//						{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','1','1','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','1','1','1','1','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','1','1','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
+//						{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}};
+//	k = 0;
+//	if (count == p->win_w / 16)
+//	{
+//		count = 0;
+//		k++;
+//	}
+//	else
+//		count++;
+//
 /////////////////////////////////////////////////////////////////////
 
 	i = 0;
 	j = 0;
-	dist = sqrt(((p->player.pos_x - x) * (p->player.pos_x - x)) + ((p->player.pos_y - y) * (p->player.pos_y - y)));
+	dist = sqrt(pow(p->player.pos_x - x, 2) + pow(p->player.pos_y - y, 2));
 	dist = dist * cos(p->player.orient - ra);
-	wall_h = (int)floor(((p->map.block_w  * p->win_h) / dist) / p->ratio);
+	wall_h = (int)floor(((p->map.c_s  * p->win_h) / dist) / p->ratio);
 	if (wall_h * 2 > p->win_h)
 		wall_h = p->win_h / 2;
 	while (i++ < (p->win_h / 2) - wall_h)
 		my_mlx_pixel_put(&p->imgv, rc, j++, 0x002E4172);
 	i = 0;
-	while (i++ < 16)
-		ft_draw_tex_col(tex, k, i, (p->win_h / 16), &p->imgv);
-//	my_mlx_pixel_put(&p->imgv, rc, j++, color);
+	while (i++ < wall_h * 2)
+		my_mlx_pixel_put(&p->imgv, rc, j++, color);
+//		ft_draw_tex_col(tex, k, i, (p->win_h / 16), &p->imgv);
 	i = 0;
 	while (i++ < ((p->win_h / 2) - wall_h))
 		my_mlx_pixel_put(&p->imgv, rc, j++, 0x00353D4E);
@@ -84,82 +84,87 @@ static void	ft_clear_img(t_params *p)
 	}
 }
 
-static int ft_check_hori_lines(t_params *p, double ra, t_coords *point)
+static int	ft_check_wall(t_coords *c, t_params *p, double xo, double yo)
 {
-	double 	xo;
-	double 	yo;
-	double 	itan;
-	int		dof;
+	int dof;
 
-	dof = 100;
-	itan  = -1 / tan(ra);
-	point->x = p->player.pos_x;
-	point->y = p->player.pos_y;
-	if (ra > PI)
-	{
-		point->y = floor(p->player.pos_y / p->map.block_w ) * (p->map.block_w ) - 0.0005;
-		point->x = (p->player.pos_y - point->y) * itan + p->player.pos_x ;
-		yo = -p->map.block_w ;
-		xo = -yo * itan;
-		dof = 0;
-	}
-	if (ra < PI)
-	{
-		point->y = floor(p->player.pos_y / p->map.block_w ) * (p->map.block_w ) + p->map.block_w;
-		point->x = (p->player.pos_y - point->y) * itan + p->player.pos_x ;
-		yo = p->map.block_w ;
-		xo = -yo * itan;
-		dof = 0;
-	}
+	dof = 0;
 	while (dof++ < 100)
 	{
-		if (point->x >= 0 && point->x <= p->map.map_w*p->map.block_w  && point->y >= 0 && point->y <= p->map.map_h*p->map.block_w )
-			if (p->map.map[(int)point->y/p->map.block_w ][(int)point->x/p->map.block_w ] == '1')
-			//	ft_plot_line(p->player.pos_x, p->player.pos_y, point->x, point->y, 0x00000000, p);
+		if (c->x >= 0
+			&& c->x <= p->map.map_w * p->map.c_s
+			&& c->y >= 0
+			&& c->y <= p->map.map_h * p->map.c_s)
+			if (p->map.map[(int)c->y/p->map.c_s][(int)c->x/p->map.c_s] == '1')
 				return (1);
-		point->x+=xo;
-		point->y+=yo;
+		c->x+=xo;
+		c->y+=yo;
 	}
 	return (0);
 }
 
-static int	ft_check_vert_lines(t_params *p, double ra, t_coords *point)
+static int ft_check_hori_lines(t_params *p, double ra, t_coords *c)
+{
+	double 	xo;
+	double 	yo;
+	double 	itan;
+
+	itan  = -1 / tan(ra);
+	if (ra == 0 || ra == PI)
+		return (0);
+	if (ra > PI)
+	{
+		c->y = floor(p->player.pos_y / p->map.c_s ) * (p->map.c_s ) - 0.0005;
+		c->x = (p->player.pos_y - c->y) * itan + p->player.pos_x ;
+		yo = -p->map.c_s ;
+		xo = -yo * itan;
+	}
+	if (ra < PI)
+	{
+		c->y = floor(p->player.pos_y / p->map.c_s ) * (p->map.c_s ) + p->map.c_s;
+		c->x = (p->player.pos_y - c->y) * itan + p->player.pos_x ;
+		yo = p->map.c_s ;
+		xo = -yo * itan;
+	}
+	if (ft_check_wall(c, p, xo, yo))
+		return (1);
+	return (0);
+}
+
+static int	ft_check_vert_lines(t_params *p, double ra, t_coords *c)
 {
 	double 	xo;
 	double 	yo;
 	double 	ntan;
-	int		dof;
 
-	dof = 100;
 	ntan = -tan(ra);
-	point->x = p->player.pos_x;
-	point->y = p->player.pos_y;
+	if (ra == PI / 2 || ra == 3 * PI / 2)
+		return (0);
 	if (ra > (PI / 2) && ra < (3 * PI / 2))
 	{
-		point->x = floor(p->player.pos_x / p->map.block_w ) * (p->map.block_w ) - 0.0005;
-		point->y = (p->player.pos_x - point->x) * ntan + p->player.pos_y ;
-		xo = -p->map.block_w ;
+		c->x = floor(p->player.pos_x / p->map.c_s) * (p->map.c_s) - 0.0005;
+		c->y = (p->player.pos_x - c->x) * ntan + p->player.pos_y ;
+		xo = -p->map.c_s;
 		yo = -xo * ntan;
-		dof = 0;
 	}
 	if (ra < (PI / 2) || ra > (3 * PI / 2))
 	{
-		point->x = floor(p->player.pos_x / p->map.block_w ) * (p->map.block_w ) + p->map.block_w;
-		point->y = (p->player.pos_x - point->x) * ntan + p->player.pos_y ;
-		xo = p->map.block_w ;
+		c->x = floor(p->player.pos_x / p->map.c_s) * (p->map.c_s) + p->map.c_s;
+		c->y = (p->player.pos_x - c->x) * ntan + p->player.pos_y ;
+		xo = p->map.c_s;
 		yo = -xo * ntan;
-		dof = 0;
 	}
-	while (dof++ < 100)
-	{
-		if (point->x >= 0 && point->x <= p->map.map_w*p->map.block_w  && point->y >= 0 && point->y <= p->map.map_h*p->map.block_w )
-			if (p->map.map[(int)point->y/p->map.block_w ][(int)point->x/p->map.block_w ] == '1')
- 			//	ft_plot_line(p->player.pos_x, p->player.pos_y, point->x, point->y, 0x0000FF00, p);
-				return (1);
-		point->x+=xo;
-		point->y+=yo;
-	}
+	if (ft_check_wall(c, p, xo, yo))
+		return (1);
 	return (0);
+}
+
+static void	ft_init_coords(t_coords *h, t_coords *v, t_params *p)
+{
+	h->x = p->player.pos_x;
+	h->y = p->player.pos_y;
+	v->x = p->player.pos_x;
+	v->y = p->player.pos_y;
 }
 
 int ft_find_wall(t_params *p)
@@ -169,23 +174,21 @@ int ft_find_wall(t_params *p)
 	t_coords h;
 	t_coords v;
 
-	h.x = 0; h.y = 0;
-	v.x = 0; v.y = 0;
-
+	ft_init_coords(&h, &v, p);
 	i = -1;
 	ra = p->player.orient - (30 * PI / 180);
 	ft_clear_img(p);
 	while(i++ < p->win_w - 1)
 	{
 		if (ra < 0)
-			ra +=2*PI;
-		if (ra > 2*PI)
-			ra -=2*PI;
+			ra += 2 * PI;
+		if (ra > 2 * PI)
+			ra -= 2 * PI;
 		ft_check_hori_lines(p, ra, &h);
 		ft_check_vert_lines(p, ra, &v);
-		if (sqrt(pow(h.x - p->player.pos_x, 2) + pow(h.y - p->player.pos_y, 2)) <= 
-			sqrt(pow(v.x - p->player.pos_x, 2) + pow(v.y - p->player.pos_y, 2)))
-			ft_draw_line(i, ra, h.x-1, h.y-1, p, 0x00F17600);
+		if (sqrt(pow(h.x - p->player.pos_x, 2) + pow(h.y - p->player.pos_y, 2))
+			<= sqrt(pow(v.x - p->player.pos_x, 2) + pow(v.y - p->player.pos_y, 2)))
+			ft_draw_line(i, ra, h.x - 1, h.y - 1, p, 0x00F17600);
 		else
 			ft_draw_line(i, ra, v.x, v.y, p, 0x00954900);
 		ra += ((60 * PI / 180) / p->win_w);

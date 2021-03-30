@@ -35,7 +35,7 @@ static int	ft_key_w(t_params *p)
 
 	x_offset = p->player.pos_x + p->player.del_x;
 	y_offset = p->player.pos_y + p->player.del_y;
-	if (p->map.map[y_offset/p->map.block_w][x_offset/p->map.block_w] != '1')
+	if (p->map.map[y_offset/p->map.c_s][x_offset/p->map.c_s] != '1')
 	{
 		p->player.pos_x += (2 * p->player.del_x);
 		p->player.pos_y += (2 * p->player.del_y);
@@ -53,7 +53,7 @@ static int	ft_key_s(t_params *p)
 
 	x_offset = p->player.pos_x - p->player.del_x;
 	y_offset = p->player.pos_y - p->player.del_y;
-	if (p->map.map[y_offset/p->map.block_w][x_offset/p->map.block_w] != '1')
+	if (p->map.map[y_offset/p->map.c_s][x_offset/p->map.c_s] != '1')
 	{
 		p->player.pos_x -= (2 * p->player.del_x);
 		p->player.pos_y -= (2 * p->player.del_y);
@@ -110,7 +110,7 @@ static int	ft_key_a(t_params *p)
 
 	x_offset = p->player.pos_x + p->player.strafe_del_x;
 	y_offset = p->player.pos_y + p->player.strafe_del_y;
-	if (p->map.map[y_offset/p->map.block_w][x_offset/p->map.block_w] != '1')
+	if (p->map.map[y_offset/p->map.c_s][x_offset/p->map.c_s] != '1')
 	{
 		p->player.pos_x += (2 * p->player.strafe_del_x);
 		p->player.pos_y += (2 * p->player.strafe_del_y);
@@ -129,7 +129,7 @@ static int	ft_key_d(t_params *p)
 
 	x_offset = p->player.pos_x - p->player.strafe_del_x;
 	y_offset = p->player.pos_y - p->player.strafe_del_y;
-	if (p->map.map[y_offset/p->map.block_w][x_offset/p->map.block_w] != '1')
+	if (p->map.map[y_offset/p->map.c_s][x_offset/p->map.c_s] != '1')
 	{
 		p->player.pos_x -= (2 * p->player.strafe_del_x);
 		p->player.pos_y -= (2 * p->player.strafe_del_y);
@@ -179,9 +179,9 @@ int main()
 	ft_init_keys(&p.keys);
 	ft_parse_map("map.cub", &p);
 
-	p.map.block_w	=	p.win_w / 16;
-	p.player.pos_x	=	(p.map.block_w * p.map.map_w) / 2;
-	p.player.pos_y	=	(p.map.block_w * p.map.map_h) / 2;
+	p.map.c_s	=	p.win_w / 16;
+	p.player.pos_x	=	(p.map.c_s * p.map.map_w) / 2;
+	p.player.pos_y	=	(p.map.c_s * p.map.map_h) / 2;
 	p.ratio			=	p.win_w / p.win_h;
 	p.mlx			=	mlx_init();
 

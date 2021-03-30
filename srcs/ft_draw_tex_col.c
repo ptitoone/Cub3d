@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 16:40:32 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/29 17:28:02 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/30 10:00:52 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_draw_tex_col(char tex[16][16], int index_x, int index_y, int count, t_im
 	while (i < count)
 	{
 		if (tex[index_x][index_y] == '1')
-			my_mlx_pixel_put(img, index_x, i +, 0x00FFFFFF);	
+			my_mlx_pixel_put(img, index_x, i, 0x00FFFFFF);	
 		else
 			my_mlx_pixel_put(img, index_x, i, 0x00000000);	
 		i++;

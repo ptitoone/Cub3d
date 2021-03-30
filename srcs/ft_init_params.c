@@ -40,7 +40,7 @@ static	void ft_init_map(t_params *p)
 {
 	p->map.map_w = 0;
 	p->map.map_h = 0;
-	p->map.block_w = 0;
+	p->map.c_s = 0;
 	p->map.block_h = 0;
 	p->map.map_h = 0;
 	p->map.map = NULL;
