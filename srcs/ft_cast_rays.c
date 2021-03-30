@@ -6,13 +6,13 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:57:28 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/30 10:41:15 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/03/30 11:43:33 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static void	ft_draw_line(int rc, double ra, double x, double y, t_params *p, int color)
+static void	ft_draw_line_h(int rc, double ra, double x, double y, t_params *p, int color)
 {
 	int i;
 	int j;
@@ -63,6 +63,59 @@ static void	ft_draw_line(int rc, double ra, double x, double y, t_params *p, int
 	while (i++ < wall_h * 2)
 		my_mlx_pixel_put(&p->imgv, rc, j++, color);
 //		ft_draw_tex_col(tex, k, i, (p->win_h / 16), &p->imgv);
+	i = 0;
+	while (i++ < ((p->win_h / 2) - wall_h))
+		my_mlx_pixel_put(&p->imgv, rc, j++, 0x00353D4E);
+}
+
+static void	ft_draw_line_v(int rc, double ra, double x, double y, t_params *p, int color)
+{
+	int i;
+	int j;
+	double dist;
+	int wall_h;
+
+//////// TEXTURE TEST ////////////////////////////////////////////////
+//
+//	char tex[16][16] = 	{{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
+//						{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','1','1','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','1','1','1','1','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','1','1','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1'},
+//						{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
+//						{'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}};
+//	double	ratio;
+//	int		tex_x;
+//	ratio_x = floor(p->win_h / 16);
+//	tex_x = (int)floor(y / ratio);
+//	ratio_y = floor(p->win_w / 16);
+/////////////////////////////////////////////////////////////////////
+
+	i = 0;
+	j = 0;
+	dist = sqrt(pow(p->player.pos_x - x, 2) + pow(p->player.pos_y - y, 2));
+	dist = dist * cos(p->player.orient - ra);
+	wall_h = (int)floor(((p->map.c_s  * p->win_h) / dist) / p->ratio);
+	if (wall_h * 2 > p->win_h)
+		wall_h = p->win_h / 2;
+	while (i++ < (p->win_h / 2) - wall_h)
+		my_mlx_pixel_put(&p->imgv, rc, j++, 0x002E4172);
+	i = 0;
+	while (i++ < wall_h * 2)
+	{
+//		my_mlx_pixel_put(&p->imgv, rc, j++, color);
+		tex_y = (int)floor(i / ratio);
+		ft_draw_tex_col(tex, tex_x, tex_y, , &p->imgv);
+	}
 	i = 0;
 	while (i++ < ((p->win_h / 2) - wall_h))
 		my_mlx_pixel_put(&p->imgv, rc, j++, 0x00353D4E);
@@ -188,9 +241,9 @@ int ft_find_wall(t_params *p)
 		ft_check_vert_lines(p, ra, &v);
 		if (sqrt(pow(h.x - p->player.pos_x, 2) + pow(h.y - p->player.pos_y, 2))
 			<= sqrt(pow(v.x - p->player.pos_x, 2) + pow(v.y - p->player.pos_y, 2)))
-			ft_draw_line(i, ra, h.x - 1, h.y - 1, p, 0x00F17600);
+			ft_draw_line_h(i, ra, h.x - 1, h.y - 1, p, 0x00F17600);
 		else
-			ft_draw_line(i, ra, v.x, v.y, p, 0x00954900);
+			ft_draw_line_v(i, ra, v.x, v.y, p, 0x00954900);
 		ra += ((60 * PI / 180) / p->win_w);
 	}
 	mlx_put_image_to_window(p->mlx, p->win2, p->imgv.img, 0, 0);
