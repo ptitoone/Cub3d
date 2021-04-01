@@ -51,6 +51,7 @@
 
 # define PI		M_PI	
 # define C_H	64	
+# define TEX_S	128	
 
 enum			e_dir
 {NO, SO, WE, EA};

@@ -32,15 +32,15 @@ static void	ft_draw_line_h(int rc, double ra, double x, double y, t_params *p, i
 	int		tex_x;
 	double	tex_y;
 
-	ratio_tex = p->map.c_s / 16;
-	ratio_y = 1.0 * 16 / (double)(wall_h * 2);
+	ratio_tex = p->map.c_s / 64;
+	ratio_y = 1.0 * 64 / (double)(wall_h * 2);
 
 	tex_x = (int)x / p->map.c_s;
 	tex_x *= p->map.c_s;
 	tex_x = (int)x - tex_x;
 	tex_x = tex_x / ratio_tex;
-	if(tex_x == 16)
-		tex_x = 15;
+	if(tex_x == 64)
+		tex_x -= 1;
 	tex_y = 0;
 	
 /////////////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ static void	ft_draw_line_h(int rc, double ra, double x, double y, t_params *p, i
 	i = 0;
 	while (i++ < wall_h * 2)
 	{
-		ft_draw_tex_col(&p->tex.wall, (int)tex_y, tex_x, rc, j++, &p->imgv);
+		ft_draw_tex_col(&p->tex.wall, tex_x, (int)tex_y, rc, j++, &p->imgv);
 		tex_y += ratio_y;
 	}
 	i = 0;
@@ -80,15 +80,15 @@ static void	ft_draw_line_v(int rc, double ra, double x, double y, t_params *p, i
 	int		tex_x;
 	double	tex_y;
 
-	ratio_tex = p->map.c_s / 16;
-	ratio_y = 1.0 * 16 / (double)(wall_h * 2);
+	ratio_tex = p->map.c_s / 64;
+	ratio_y = 1.0 * 64 / (double)(wall_h * 2);
 
 	tex_x = (int)y / p->map.c_s;
 	tex_x *= p->map.c_s;
 	tex_x = (int)y - tex_x;
 	tex_x = tex_x / ratio_tex;
-	if(tex_x == 16)
-		tex_x = 15;
+	if(tex_x == 64)
+		tex_x -= 1;
 	tex_y = 0;
 
 /////////////////////////////////////////////////////////////////////
@@ -100,7 +100,7 @@ static void	ft_draw_line_v(int rc, double ra, double x, double y, t_params *p, i
 	i = 0;
 	while (i++ < wall_h * 2)
 	{
-		ft_draw_tex_col(&p->tex.wall, (int)tex_y, tex_x, rc, j++, &p->imgv);
+		ft_draw_tex_col(&p->tex.wall, tex_x, (int)tex_y, rc, j++, &p->imgv);
 		tex_y += ratio_y;
 	}
 	i = 0;

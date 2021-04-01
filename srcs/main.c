@@ -179,7 +179,7 @@ int main()
 	ft_init_keys(&p.keys);
 	ft_parse_map("map.cub", &p);
 
-	p.map.c_s	=	p.win_w / 16;
+	p.map.c_s		=	64;
 	p.player.pos_x	=	(p.map.c_s * p.map.map_w) / 2;
 	p.player.pos_y	=	(p.map.c_s * p.map.map_h) / 2;
 	p.ratio			=	p.win_w / p.win_h;
