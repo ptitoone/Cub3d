@@ -184,7 +184,10 @@ int main()
 	p.player.pos_y	=	(p.map.c_s * p.map.map_h) / 2;
 	p.ratio			=	p.win_w / p.win_h;
 	p.mlx			=	mlx_init();
-
+	int h;
+	int w;
+	p.tex.wall.img = mlx_xpm_file_to_image(p.mlx, "./tex.xpm", &w, &h);
+	p.tex.wall.addr = mlx_get_data_addr(p.tex.wall.img, &p.tex.wall.bpp, &p.tex.wall.line_len, &p.tex.wall.endian);
 	if (p.mlx == NULL)
 		puts("Error");
 

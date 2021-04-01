@@ -12,11 +12,11 @@
 
 #include "cub.h"
 
-void	ft_draw_tex_col(char tex[16][16], int tex_x, int tex_y, int rc, int j, t_img *img)
+void	ft_draw_tex_col(t_img *tex, int tex_x, int tex_y, int rc, int j, t_img *img)
 {
 	int i;
-	if (tex[tex_x][tex_y] == '1')
-		my_mlx_pixel_put(img, rc, j, 0x00000000);
-	else
-		my_mlx_pixel_put(img, rc, j, 0x00FFFFFF);
+	unsigned int color;
+
+	color = ft_get_pixel_color(tex, tex_x, tex_y);
+	my_mlx_pixel_put(img, rc, j, color);
 }
