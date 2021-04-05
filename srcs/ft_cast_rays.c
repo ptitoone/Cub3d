@@ -233,7 +233,9 @@ int ft_find_wall(t_params *p)
 			ft_draw_line_v(i, ra, v.x, v.y, p, 0x00954900);
 		ra += ((60 * PI / 180) / p->win_w);
 	}
+	mlx_sync(1, p->imgv.img);
 	mlx_put_image_to_window(p->mlx, p->win2, p->imgv.img, 0, 0);
+	mlx_sync(3, p->win2);
 	return (0);
 }
 
