@@ -46,7 +46,10 @@ static void	ft_draw_line_h(int rc, double ra, double x, double y, t_params *p, i
 /////////////////////////////////////////////////////////////////////
 
 	if (wall_h * 2 > p->win_h)
+	{
+		tex_y = (((wall_h * 2) - p->win_h) / 2) * ratio_y;
 		wall_h = p->win_h / 2;
+	}
 	while (i++ < (p->win_h / 2) - wall_h)
 		my_mlx_pixel_put(&p->imgv, rc, j++, 0x002E4172);
 	i = 0;
@@ -94,7 +97,10 @@ static void	ft_draw_line_v(int rc, double ra, double x, double y, t_params *p, i
 /////////////////////////////////////////////////////////////////////
 
 	if (wall_h * 2 > p->win_h)
+	{
+		tex_y = (((wall_h * 2) - p->win_h) / 2) * ratio_y;
 		wall_h = p->win_h / 2;
+	}
 	while (i++ < (p->win_h / 2) - wall_h)
 		my_mlx_pixel_put(&p->imgv, rc, j++, 0x002E4172);
 	i = 0;
@@ -233,9 +239,9 @@ int ft_find_wall(t_params *p)
 			ft_draw_line_v(i, ra, v.x, v.y, p, 0x00954900);
 		ra += ((60 * PI / 180) / p->win_w);
 	}
-	mlx_sync(1, p->imgv.img);
+//	mlx_sync(1, p->imgv.img);
 	mlx_put_image_to_window(p->mlx, p->win2, p->imgv.img, 0, 0);
-	mlx_sync(3, p->win2);
+//	mlx_sync(3, p->win2);
 	return (0);
 }
 
