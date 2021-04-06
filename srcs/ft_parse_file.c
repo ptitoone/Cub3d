@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_map.c											:+:      :+:    :+:   */
+/*   ft_parse_file.c									:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 #include "cub.h"
-#include "ft_map.h"
+#include "ft_parse.h"
 
 static int	ft_is_tex_spec(char c)
 {
@@ -30,8 +30,16 @@ static int	ft_add_info(char *line, t_params *p)
 	{
  		if (line[i] == 'R')
 		{
- 			if (ft_parse_res(line, p))
- 				return (1);
+			if (p->win_h == -1 && p->win_w == -1)
+			{
+ 				if (ft_parse_res(line, p))
+ 					return (1);
+			}
+			else
+			{
+				printf("Error : %s\n", ERR_RES_DUP);
+				break ;
+			}
 		}
 		else if (ft_is_tex_spec(line[i]))
 		{
@@ -43,7 +51,7 @@ static int	ft_add_info(char *line, t_params *p)
 	return (0);
 }
 
-int	ft_parse_map(char *map_file, t_params *p)
+int	ft_parse_file(char *map_file, t_params *p)
 {
 	int		map_fd;
 	int 	i;

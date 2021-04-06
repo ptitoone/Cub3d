@@ -69,8 +69,8 @@ void	ft_init_params(t_params *p)
 {
 	p->mlx = NULL;
 	p->win = NULL;
-	p->win_w = 0;
-	p->win_h = 0;
+	p->win_w = -1;
+	p->win_h = -1;
 	p->ratio = 0;
 	ft_init_tex(p);
 	ft_init_player(p);

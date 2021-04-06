@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "ft_map.h"
+#include "ft_parse.h"
 
 static int	ft_add_res(char *l, t_params *p)
 {
@@ -25,10 +25,9 @@ static int	ft_add_res(char *l, t_params *p)
 	while (++x < 2)
 	{
 		j = 0;
-		if (!l[i])
-			return(puts(ERR_RES_INV));
 		while (l[i] == ' ')
-			i++;
+			if (!l[i++] || !(l[i] >= '1' && l[i] <= '9'))
+				return (0);
 		if (l[i] >= '1' && l[i] <= '9')
 			j++;
 		while (l[i + j] >= '0' && l[i + j] <= '9')
@@ -42,7 +41,7 @@ static int	ft_add_res(char *l, t_params *p)
 		free(tmp);
 		i += (j + 1);
 	}
-	if (!l[i + j + 1])
+	if (!l[i])
 		return (1);
 	return (0);
 }
@@ -52,10 +51,19 @@ int	ft_parse_res(char *l, t_params *p)
 	int i;
 
 	i = 0;
+	if (p->win_h != -1 && p->win_w != -1)
+	{
+		printf("Error : %s", ERR_RES_DUP);
+		return (0);
+	}
 	while (l[i] == ' ' && l[i] != 0)
 		i++;
 	if (l[i] == 'R' && l[i + 1] == ' ')
+	{
 		if (ft_add_res(&l[i + 1], p))
 			return (1);
-	return (puts(ERR_RES_NF));
+	}
+	else
+		printf("Error : %s \"%s\"\n", ERR_RES_INV, l);
+	return (0);
 }

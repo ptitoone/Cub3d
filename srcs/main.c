@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "ft_map.h"
+#include "ft_parse.h"
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
@@ -154,7 +154,8 @@ int main()
 
 	ft_init_params(&p);
 	ft_init_keys(&p.keys);
-	ft_parse_map("map.cub", &p);
+	if(!(ft_parse_file("map.cub", &p)))
+		return (0);
 
 	p.map.c_s		=	64;
 	p.player.pos_x	=	(p.map.c_s * p.map.map_w) / 2;

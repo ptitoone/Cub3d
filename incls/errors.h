@@ -14,17 +14,16 @@
 # define ERRORS_H
 
 # define ERR_RES_INV	"Invalid resolution format"
+# define ERR_RES_DUP	"Duplicate resolution parameter"
 # define ERR_RES_NF		"Resolution not found"
 
-# define ERR_TEX_NO_NF	"North tex not found"
-# define ERR_TEX_SO_NF	"South tex not found"
-# define ERR_TEX_WE_NF	"West tex not found"
-# define ERR_TEX_EA_NF	"East tex not found"
+# define ERR_TEX_NO_NF	"North texture not found"
+# define ERR_TEX_SO_NF	"South texture not found"
+# define ERR_TEX_WE_NF	"West texture not found"
+# define ERR_TEX_EA_NF	"East texture not found"
+# define ERR_TEX_INV	"Invalid texture format"
+# define ERR_TEX_NULL	"No texture file path"
 # define ERR_TEX_S_NF	"Sprite not found"
-# define ERR_TEX_NO_INV	"Invalid north tex format"
-# define ERR_TEX_SO_INV	"Invalid south tex format"
-# define ERR_TEX_WE_INV	"Invalid west tex format"
-# define ERR_TEX_EA_INV	"Invalid east tex format"
-# define ERR_TEX_S_INV	"Invalid sprite tex format"
+# define ERR_TEX_DUP	"Duplicate texture parameter"
 
 #endif
