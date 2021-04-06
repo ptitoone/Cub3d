@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:23:59 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/29 15:30:36 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/04/06 15:52:57 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ static int	ft_key_w(t_params *p)
 		p->player.pos_y += (2 * p->player.del_y);
 	}
 	return (0);
-//	ft_draw_map(p);
-//	ft_draw_player(p->player.pos_x, p->player.pos_y, p);
-//	mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 }
 
 static int	ft_key_s(t_params *p)
@@ -59,10 +56,6 @@ static int	ft_key_s(t_params *p)
 		p->player.pos_y -= (2 * p->player.del_y);
 	}
 	return (0);
-//	ft_draw_map(p);
-//	ft_draw_map(p);
-//	ft_draw_player(p->player.pos_x, p->player.pos_y, p);
-//	mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 }
 
 static int	ft_key_a_l(t_params *p)
@@ -78,10 +71,6 @@ static int	ft_key_a_l(t_params *p)
 	p->player.strafe_del_x = cos(p->player.strafe_orient) * 5;
 	p->player.strafe_del_y = sin(p->player.strafe_orient) * 5;
 	return (0);
-//	ft_draw_map(p);
-//	ft_draw_map(p);
-//	ft_draw_player(p->player.pos_x, p->player.pos_y, p);
-//	mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 }
 
 static int	ft_key_a_r(t_params *p)
@@ -97,10 +86,6 @@ static int	ft_key_a_r(t_params *p)
 	p->player.strafe_del_x = cos(p->player.strafe_orient) * 5;
 	p->player.strafe_del_y = sin(p->player.strafe_orient) * 5;
 	return (0);
-//	ft_draw_map(p);
-//	ft_draw_map(p);
-//	ft_draw_player(p->player.pos_x, p->player.pos_y, p);
-//	mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 }
 
 static int	ft_key_a(t_params *p)
@@ -116,10 +101,6 @@ static int	ft_key_a(t_params *p)
 		p->player.pos_y += (2 * p->player.strafe_del_y);
 	}
 	return (0);
-//	ft_draw_map(p);
-//	ft_draw_map(p);
-//	ft_draw_player(p->player.pos_x, p->player.pos_y, p);
-//	mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 }
 
 static int	ft_key_d(t_params *p)
@@ -135,10 +116,6 @@ static int	ft_key_d(t_params *p)
 		p->player.pos_y -= (2 * p->player.strafe_del_y);
 	}
 	return (0);
-//	ft_draw_map(p);
-//	ft_draw_map(p);
-//	ft_draw_player(p->player.pos_x, p->player.pos_y, p);
-//	mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 }
 
 int	ft_render(void *pr)
@@ -184,10 +161,7 @@ int main()
 	p.player.pos_y	=	(p.map.c_s * p.map.map_h) / 2;
 	p.ratio			=	p.win_w / p.win_h;
 	p.mlx			=	mlx_init();
-	int h;
-	int w;
-	p.tex.wall.img = mlx_xpm_file_to_image(p.mlx, "./tex.xpm", &w, &h);
-	p.tex.wall.addr = mlx_get_data_addr(p.tex.wall.img, &p.tex.wall.bpp, &p.tex.wall.line_len, &p.tex.wall.endian);
+	ft_init_tex_img(&p);
 	if (p.mlx == NULL)
 		puts("Error");
 

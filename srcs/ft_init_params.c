@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:25:01 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/29 13:41:26 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/04/06 11:59:01 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static	void ft_init_tex(t_params *p)
 	p->tex.sp = NULL;
 	p->tex.f = NULL;
 	p->tex.c = NULL;
-	p->tex.wall.img = NULL;
-	p->tex.wall.addr = NULL;
-	p->tex.wall.bpp = 0;
-	p->tex.wall.line_len = 0;
-	p->tex.wall.endian = 0;
+//	p->tex.wall.img = NULL;
+//	p->tex.wall.addr = NULL;
+//	p->tex.wall.bpp = 0;
+//	p->tex.wall.line_len = 0;
+//	p->tex.wall.endian = 0;
 }
 
 static	void ft_init_player(t_params *p)

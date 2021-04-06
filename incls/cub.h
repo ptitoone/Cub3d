@@ -1,6 +1,7 @@
 #ifndef CUB_H
 #define CUB_H
 # include "libft.h"
+# include "errors.h"
 # include "mlx.h"
 # include <stdio.h>
 # include <math.h>
@@ -74,7 +75,10 @@ typedef struct	s_tex
 	char	*sp;
 	char	*f;
 	char	*c;
-	t_img	wall;
+	t_img	no;
+	t_img	so;
+	t_img	we;
+	t_img	ea;
 
 }				t_tex;
 
@@ -142,8 +146,21 @@ typedef struct	s_params
 
 }				t_params;
 
+typedef struct	s_draw_l
+{
+
+	int		wall_h;
+	double	dist;
+	double	ratio_y;
+	int		tex_x;
+	double	tex_y;
+	double	ra;
+
+}				t_draw_l;
+
 void			ft_init_params(t_params *p);
 void			ft_init_keys(t_keys *k);
+void			ft_init_tex_img(t_params*p);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 unsigned int 	ft_get_pixel_color(t_img *img, int x, int y);
 void			ft_draw_player(int x, int y, t_params *p);
@@ -155,4 +172,6 @@ void    		ft_plot_line(int x0, int y0, int x1, int y1, int color, t_params *p);
 int				ft_find_wall(t_params *p);
 void			ft_upscale_img(int w, int h, int scale, char *img, char *img2);
 void			ft_draw_tex_col(t_img *tex, int tex_x, int tex_y, int rc, int j, t_img *img);
+void			ft_draw_line_h(int rc, double ra, double x, double y, t_params *p, int color);
+void			ft_draw_line_v(int rc, double ra, double x, double y, t_params *p, int color);
 #endif

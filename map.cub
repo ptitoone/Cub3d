@@ -1,8 +1,8 @@
-R 1024 768
-NO ./texture_no
-SO ./texture_so
-WE ./texture_we
-EA ./texture_ea
+R 1280 720
+NO ./tex_no.xpm
+SO ./tex_so.xpm
+WE ./tex_we.xpm
+EA ./tex_ea.xpm
 
 S ./sprite
 F 220,100,0
