@@ -6,157 +6,42 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:23:59 by akotzky           #+#    #+#             */
-/*   Updated: 2021/04/06 15:52:57 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/04/07 13:21:13 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 #include "ft_parse.h"
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
-{
-	char	*dst;
+#include "controls.h"
 
-	dst = img->addr + ((y * img->line_len) + (x * (img->bpp / 8)));
-	*(unsigned int *)dst = color;
-}
-
-unsigned int	ft_get_pixel_color(t_img *img, int x, int y)
-{
-	char	*dst;
-
-	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	return (*(unsigned int *)dst);
-}
-
-static int	ft_key_w(t_params *p)
-{
-	int x_offset;
-	int y_offset;
-
-	x_offset = p->player.pos_x + p->player.del_x * 7;
-	y_offset = p->player.pos_y + p->player.del_y * 7;
-	if (p->map.map[y_offset/p->map.c_s][x_offset/p->map.c_s] != '1')
-	{
-		p->player.pos_x += (2 * p->player.del_x);
-		p->player.pos_y += (2 * p->player.del_y);
-	}
-	return (0);
-}
-
-static int	ft_key_s(t_params *p)
-{
-	int x_offset;
-	int y_offset;
-
-	x_offset = p->player.pos_x - p->player.del_x * 7;
-	y_offset = p->player.pos_y - p->player.del_y * 7;
-	if (p->map.map[y_offset/p->map.c_s][x_offset/p->map.c_s] != '1')
-	{
-		p->player.pos_x -= (2 * p->player.del_x);
-		p->player.pos_y -= (2 * p->player.del_y);
-	}
-	return (0);
-}
-
-static int	ft_key_a_l(t_params *p)
-{
-	p->player.orient -= 0.05;
-	p->player.strafe_orient -= 0.05;
-	if (p->player.orient < 0)
-		p->player.orient += (2 * PI);
-	if (p->player.strafe_orient < 0)
-		p->player.strafe_orient += (2 * PI);
-	p->player.del_x = cos(p->player.orient) * 5;
-	p->player.del_y = sin(p->player.orient) * 5;
-	p->player.strafe_del_x = cos(p->player.strafe_orient) * 5;
-	p->player.strafe_del_y = sin(p->player.strafe_orient) * 5;
-	return (0);
-}
-
-static int	ft_key_a_r(t_params *p)
-{
-	p->player.orient += 0.05;
-	p->player.strafe_orient += 0.05;
-	if (p->player.orient > (2 * PI))
-		p->player.orient -= (2 * PI);
-	if (p->player.strafe_orient > (2 * PI))
-		p->player.strafe_orient -= (2 * PI);
-	p->player.del_x = cos(p->player.orient) * 5;
-	p->player.del_y = sin(p->player.orient) * 5;
-	p->player.strafe_del_x = cos(p->player.strafe_orient) * 5;
-	p->player.strafe_del_y = sin(p->player.strafe_orient) * 5;
-	return (0);
-}
-
-static int	ft_key_a(t_params *p)
-{
-	int x_offset;
-	int y_offset;
-
-	x_offset = p->player.pos_x + p->player.strafe_del_x * 7;
-	y_offset = p->player.pos_y + p->player.strafe_del_y * 7;
-	if (p->map.map[y_offset/p->map.c_s][x_offset/p->map.c_s] != '1')
-	{
-		p->player.pos_x += (2 * p->player.strafe_del_x);
-		p->player.pos_y += (2 * p->player.strafe_del_y);
-	}
-	return (0);
-}
-
-static int	ft_key_d(t_params *p)
-{
-	int x_offset;
-	int y_offset;
-
-	x_offset = p->player.pos_x - p->player.strafe_del_x * 7;
-	y_offset = p->player.pos_y - p->player.strafe_del_y * 7;
-	if (p->map.map[y_offset/p->map.c_s][x_offset/p->map.c_s] != '1')
-	{
-		p->player.pos_x -= (2 * p->player.strafe_del_x);
-		p->player.pos_y -= (2 * p->player.strafe_del_y);
-	}
-	return (0);
-}
-
-int	ft_render(void *pr)
+static int	render(void *pr)
 {
 	t_params *p = (t_params *)pr;
 	if (p->keys.w == 1)
-		ft_key_w(p);
+		key_w(p);
 	if (p->keys.a == 1)
-		ft_key_a(p);
+		key_a(p);
 	if (p->keys.s == 1)
-		ft_key_s(p);
+		key_s(p);
 	if (p->keys.d == 1)
-		ft_key_d(p);
+		key_d(p);
 	if (p->keys.l == 1)
-		ft_key_a_l(p);
+		key_a_l(p);
 	if (p->keys.r == 1)
-		ft_key_a_r(p);
+		key_a_r(p);
 	ft_find_wall(p);
 	return (0);
 }
 
 int main()
 {
-	int			(*keys)(int keycode, void *);
-	int			(*keysr)(int keycode, void *);
-//	int			(*mouse)(int x, int y, void *pr);
-	int			(*render)(void *pr);
 	t_params	p;
-
-	keys	=	&ft_keys;
-	keysr	=	&ft_keysr;
-//	mouse	=	&ft_mouse;
-	render	=	&ft_render;
-
 //////// PARAMS SETUP /////////////////////////////////////////////////////////
 
 	ft_init_params(&p);
 	ft_init_keys(&p.keys);
 	if(!(ft_parse_file("map.cub", &p)))
 		return (0);
-
 	p.map.c_s		=	64;
 	p.player.pos_x	=	(p.map.c_s * p.map.map_w) / 2;
 	p.player.pos_y	=	(p.map.c_s * p.map.map_h) / 2;
@@ -203,10 +88,10 @@ int main()
 //	mlx_put_image_to_window(p.mlx, p.win, p.img.img, 0, 0);
 
 ///////// HOOKS AND LOOP //////////////////////////////////////////////////////
-	mlx_hook(p.win2, 2, 1L<<0, keys, (void *)&p);
-	mlx_hook(p.win2, 3, 1L<<1, keysr, (void *)&p);
+	mlx_hook(p.win2, 2, 1L<<0, &key_press, (void *)&p);
+	mlx_hook(p.win2, 3, 1L<<1, &key_release, (void *)&p);
 //	mlx_hook(p.win2, 6, 1L<<6, mouse, (void *)&p);
-	mlx_loop_hook(p.mlx, render, (void *)&p);
+	mlx_loop_hook(p.mlx, &render, (void *)&p);
 	mlx_loop(p.mlx);
  	return (0);
 }

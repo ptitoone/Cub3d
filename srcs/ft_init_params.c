@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:25:01 by akotzky           #+#    #+#             */
-/*   Updated: 2021/04/06 11:59:01 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/04/07 11:02:22 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static	void ft_init_player(t_params *p)
 	p->player.strafe_orient = PI / 2;
 	p->player.strafe_del_x = 0;
 	p->player.strafe_del_y = 0;
+	p->player.start_dir = -1;
 }
 
 static	void ft_init_map(t_params *p)

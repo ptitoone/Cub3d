@@ -6,19 +6,33 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:23:05 by akotzky           #+#    #+#             */
-/*   Updated: 2021/04/06 16:11:47 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/04/07 10:37:06 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 #include "ft_parse.h"
 
+static int	ft_push_res(char *l, int i, int j)
+{
+	char	*tmp;
+	int		res;
+
+	tmp = ft_substr(l, i, j);
+	if (tmp)
+	{
+		res = ft_atoi(tmp);
+		free(tmp);
+		return (res);
+	}
+	return (0);
+}
+
 static int	ft_add_res(char *l, t_params *p)
 {
-	int i;
-	int j;
-	int x;
-	char *tmp;
+	int	i;
+	int	j;
+	int	x;
 
 	i = 0;
 	x = -1;
@@ -32,13 +46,10 @@ static int	ft_add_res(char *l, t_params *p)
 			j++;
 		while (l[i + j] >= '0' && l[i + j] <= '9')
 			j++;
-		tmp = ft_substr(l, i ,j + 1);
 		if (!(x % 2))
-			p->win_w = ft_atoi(tmp);
+			p->win_w = ft_push_res(l, i, j + 1);
 		else
-			p->win_h = ft_atoi(tmp);
-		ft_bzero(tmp, ft_strlen(tmp));
-		free(tmp);
+			p->win_h = ft_push_res(l, i, j + 1);
 		i += (j + 1);
 	}
 	if (!l[i])
@@ -48,7 +59,7 @@ static int	ft_add_res(char *l, t_params *p)
 
 int	ft_parse_res(char *l, t_params *p)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (p->win_h != -1 && p->win_w != -1)

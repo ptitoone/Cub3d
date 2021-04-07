@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 17:37:11 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/24 10:16:06 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/04/07 10:35:12 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	ft_parse_file(char *map_file, t_params *p)
 	}
 	if (ft_parse_map_size(map_fd, p))
 	{
-		if (ft_lay_map(map_file, &p->map))
+		if (ft_lay_map(map_file, p))
 		{
 			p->map.c_s = p->win_w / 16;
 			p->map.block_h = p->win_h / 16;

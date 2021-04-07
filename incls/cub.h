@@ -93,6 +93,7 @@ typedef struct	s_play
 	double	strafe_orient;
 	double	strafe_del_x;
 	double	strafe_del_y;
+	int		start_dir;
 
 }				t_play;
 

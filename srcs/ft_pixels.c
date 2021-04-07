@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_keys.c                                          :+:      :+:    :+:   */
+/*   ft_pixels.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 14:34:06 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/25 12:50:20 by akotzky          ###   ########.fr       */
+/*   Created: 2021/04/07 10:23:01 by akotzky           #+#    #+#             */
+/*   Updated: 2021/04/07 10:24:02 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	ft_keys(int keycode, void *pr)
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
-	t_params	*p;
+	char	*dst;
 
-	p = (t_params *)pr;
-	if (keycode == K_w)
-		p->keys.w = 1;
-	if (keycode == K_a)
-		p->keys.a = 1;
-	if (keycode == K_s)
-		p->keys.s = 1;
-	if (keycode == K_d)
-		p->keys.d = 1;
-	if (keycode == K_a_l)
-		p->keys.l = 1;
-	if (keycode == K_a_r)
-		p->keys.r = 1;
-	if (keycode == K_esc)
-	{
-		mlx_destroy_window(p->mlx, p->win2);
-		exit(EXIT_SUCCESS);
-	}
-	return (0);
+	dst = img->addr + ((y * img->line_len) + (x * (img->bpp / 8)));
+	*(unsigned int *)dst = color;
+}
+
+unsigned int	ft_get_pixel_color(t_img *img, int x, int y)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	return (*(unsigned int *)dst);
 }

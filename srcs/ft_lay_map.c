@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:26:23 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/16 11:26:30 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/04/07 11:35:15 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,67 @@
 #include "get_next_line.h"
 #include "cub.h"
 
-static int	ft_lay_map_line(char *l, int i, t_map *m)
+static int	ft_is_pos(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
+
+static int	ft_set_player_pos(t_params *p, char pos)
+{
+	if (p->player.start_dir == -1)
+	{
+		if (pos == 'N')
+			p->player.start_dir = NO;
+		else if (pos == 'S')
+			p->player.start_dir = SO;
+		else if (pos == 'E')
+			p->player.start_dir = WE;
+		else if (pos == 'W')
+			p->player.start_dir = EA;
+	}
+	else
+	{
+		p->player.start_dir = -2;
+		return (0);
+	}
+	return (1);
+}
+
+static int	ft_lay_map_line(char *l, int i, t_params *p)
 {
 	int	j;
 
 	j = 0;
-	m->map[i] = (char *)malloc(sizeof(char) * (m->map_w + 1));
-	if (m->map[i] == NULL)
+	p->map.map[i] = (char *)malloc(sizeof(char) * (p->map.map_w + 1));
+	if (p->map.map[i] == NULL)
 		return (0);
-	while (l[j])
+	while (l[j] == ' ' || l[j] == '0'
+		|| l[j] == '1' || l[j] == '2'
+		|| ft_is_pos(l[j]))
 	{
-		m->map[i][j] = l[j];
+		if (l[j] == ' ')
+			p->map.map[i][j] = '0';
+		else if (ft_is_pos(l[j]))
+		{
+			if (!(ft_set_player_pos(p, l[j])))
+				return (0);
+		}
+		else
+			p->map.map[i][j] = l[j];
 		j++;
 	}
-	m->map[i][j] = 0;
+	p->map.map[i][j] = 0;
 	return (1);
 }
 
 static int	ft_is_map_top(char *l)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
-	while (l[i] ==  ' ')
+	while (l[i] == ' ')
 		i++;
 	if (l[i] != '1')
 		return (0);
@@ -50,7 +88,7 @@ static int	ft_is_map_top(char *l)
 	return (0);
 }
 
-int	ft_lay_map(char *map_file, t_map *m)
+int	ft_lay_map(char *map_file, t_params *p)
 {
 	int		i;
 	int		map_fd;
@@ -59,30 +97,26 @@ int	ft_lay_map(char *map_file, t_map *m)
 	i = 0;
 	map_fd = open(map_file, O_RDONLY);
 	line = NULL;
-	m->map = (char **)malloc(sizeof(char *) * m->map_h);
-	if (m->map == NULL)
+	p->map.map = (char **)malloc(sizeof(char *) * p->map.map_h);
+	if (p->map.map == NULL)
 		return (0);
 	while (get_next_line(map_fd, &line) == 1)
 	{
 		if (ft_is_map_top(line))
-		{
-			ft_lay_map_line(line, i++, m);
-			free(line);
-			line = NULL;
-			while (i < m->map_h)
-			{
-				if (get_next_line(map_fd, &line) == 1)
-				{
-					ft_lay_map_line(line, i++, m);
-					free(line);
-					line = NULL;
-				}
-			}
-			close(map_fd);
-			return (1);
-		}
+			break ;
 		free(line);
 		line = NULL;
 	}
-	return (0);
+	ft_lay_map_line(line, i++, p);
+	free(line);
+	line = NULL;
+	while (i < p->map.map_h)
+	{
+		get_next_line(map_fd, &line);
+		ft_lay_map_line(line, i++, p);
+		free(line);
+		line = NULL;
+	}
+	close(map_fd);
+	return (1);
 }
