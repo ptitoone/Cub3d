@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_file.c									:+:      :+:    :+:   */
+/*   parse_file.c										:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,16 +12,16 @@
 
 #include "get_next_line.h"
 #include "cub.h"
-#include "ft_parse.h"
+#include "parse.h"
 
-static int	ft_is_tex_spec(char c)
+static int	is_tex_spec(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == 'F' || c == 'C')
 		return (1);
 	return (0);
 }
 
-static int	ft_add_info(char *line, t_params *p)
+static int	add_info(char *line, t_params *p)
 {
 	int i;
 
@@ -32,15 +32,15 @@ static int	ft_add_info(char *line, t_params *p)
 		{
 			if (p->win_h == 0 && p->win_w == 0)
 			{
- 				if (ft_parse_res(line, p))
+ 				if (parse_res(line, p))
  					return (1);
 			}
 			else
 				return (throw_error(ERR_RES_DUP));
 		}
-		else if (ft_is_tex_spec(line[i]))
+		else if (is_tex_spec(line[i]))
 		{
-			if (ft_parse_tex(line, &p->tex))
+			if (parse_tex(line, &p->tex))
 				return (1);
 		}
 		i++;
@@ -48,7 +48,7 @@ static int	ft_add_info(char *line, t_params *p)
 	return (0);
 }
 
-int	ft_parse_file(char *map_file, t_params *p)
+int	parse_file(char *map_file, t_params *p)
 {
 	int		map_fd;
 	int 	i;
@@ -65,7 +65,7 @@ int	ft_parse_file(char *map_file, t_params *p)
 			line = NULL;
 			continue ;
 		}
-		if (ft_add_info(line, p))
+		if (add_info(line, p))
 			i++;
 		else
 			return (0);
@@ -74,9 +74,9 @@ int	ft_parse_file(char *map_file, t_params *p)
 		if (i == 8)
 			break ;
 	}
-	if (ft_parse_map_size(map_fd, p))
+	if (parse_map_size(map_fd, p))
 	{
-		if (ft_lay_map(map_file, p))
+		if (lay_map(map_file, p))
 			return (1);
 	}
 	return (0);

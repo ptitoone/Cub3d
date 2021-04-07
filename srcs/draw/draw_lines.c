@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_draw_lines.c                                    :+:      :+:    :+:   */
+/*   draw_lines.c  		                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-static void	ft_calculate_data(t_params *p, double x, double y, double i, t_draw_l *data)
+static void	calculate_data(t_params *p, double x, double y, double i, t_draw_l *data)
 {
 	data->dist = sqrt(pow(p->player.pos_x - x, 2) + pow(p->player.pos_y - y, 2));
 	data->dist = data->dist * cos(p->player.orient - data->ra);
@@ -29,7 +29,7 @@ static void	ft_calculate_data(t_params *p, double x, double y, double i, t_draw_
 	}
 }
 
-void	ft_draw_line_h(int rc, double ra, double x, double y, t_params *p, int color)
+void	draw_line_h(int rc, double ra, double x, double y, t_params *p, int color)
 {
 	int i;
 	int j;
@@ -38,24 +38,24 @@ void	ft_draw_line_h(int rc, double ra, double x, double y, t_params *p, int colo
 	i = 0;
 	j = 0;
 	data.ra = ra;
-	ft_calculate_data(p, x, y, x, &data);
+	calculate_data(p, x, y, x, &data);
 	while (i++ < (p->win_h / 2) - data.wall_h)
-		my_mlx_pixel_put(&p->imgv, rc, j++, 0x002E4172);
+		put_pixel(&p->imgv, rc, j++, 0x002E4172);
 	i = 0;
 	while (i++ < data.wall_h * 2)
 	{
 		if (ra > 0 && ra < PI)
-			ft_draw_tex_col(&p->tex.no, data.tex_x, (int)data.tex_y, rc, j++, &p->imgv);
+			draw_tex_col(&p->tex.no, data.tex_x, (int)data.tex_y, rc, j++, &p->imgv);
 		else if (ra > PI && ra < 2 * PI)
-			ft_draw_tex_col(&p->tex.so, data.tex_x, (int)data.tex_y, rc, j++, &p->imgv);
+			draw_tex_col(&p->tex.so, data.tex_x, (int)data.tex_y, rc, j++, &p->imgv);
 		data.tex_y += data.ratio_y;
 	}
 	i = 0;
 	while (i++ < ((p->win_h / 2) - data.wall_h))
-		my_mlx_pixel_put(&p->imgv, rc, j++, 0x00353D4E);
+		put_pixel(&p->imgv, rc, j++, 0x00353D4E);
 }
 
-void	ft_draw_line_v(int rc, double ra, double x, double y, t_params *p, int color)
+void	draw_line_v(int rc, double ra, double x, double y, t_params *p, int color)
 {
 	int i;
 	int j;
@@ -64,19 +64,19 @@ void	ft_draw_line_v(int rc, double ra, double x, double y, t_params *p, int colo
 	i = 0;
 	j = 0;
 	data.ra = ra;
-	ft_calculate_data(p, x, y, y, &data);
+	calculate_data(p, x, y, y, &data);
 	while (i++ < (p->win_h / 2) - data.wall_h)
-		my_mlx_pixel_put(&p->imgv, rc, j++, 0x002E4172);
+		put_pixel(&p->imgv, rc, j++, 0x002E4172);
 	i = 0;
 	while (i++ < data.wall_h * 2)
 	{
 		if (ra > PI / 2 && ra < 3 * PI / 2)
-			ft_draw_tex_col(&p->tex.we, data.tex_x, (int)data.tex_y, rc, j++, &p->imgv);
+			draw_tex_col(&p->tex.we, data.tex_x, (int)data.tex_y, rc, j++, &p->imgv);
 		else if (ra > 3 * PI / 2 || ra < PI / 2)
-			ft_draw_tex_col(&p->tex.ea, data.tex_x, (int)data.tex_y, rc, j++, &p->imgv);
+			draw_tex_col(&p->tex.ea, data.tex_x, (int)data.tex_y, rc, j++, &p->imgv);
 		data.tex_y += data.ratio_y;
 	}
 	i = 0;
 	while (i++ < ((p->win_h / 2) - data.wall_h))
-		my_mlx_pixel_put(&p->imgv, rc, j++, 0x00353D4E);
+		put_pixel(&p->imgv, rc, j++, 0x00353D4E);
 }

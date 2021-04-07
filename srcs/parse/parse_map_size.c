@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_map_size.c                                :+:      :+:    :+:   */
+/*   parse_map_size.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include "cub.h"
 #include "get_next_line.h"
 
-static int	ft_is_pos(char c, int *pos_found)
+static int	is_pos(char c, int *pos_found)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
@@ -23,7 +23,7 @@ static int	ft_is_pos(char c, int *pos_found)
 	return (0);
 }
 
-static int	ft_is_map_h_limit(char *l, t_params *p)
+static int	is_map_h_limit(char *l, t_params *p)
 {
 	int i;
 	
@@ -45,7 +45,7 @@ static int	ft_is_map_h_limit(char *l, t_params *p)
 	return (0);
 }
 
-static int	ft_is_map_line(char *l, t_params *p)
+static int	is_map_line(char *l, t_params *p)
 {
 	int			i;
 	static int	pos_found;
@@ -56,7 +56,7 @@ static int	ft_is_map_line(char *l, t_params *p)
 	if (l[i] != '1')
 		return (0);
 	i++;
-	while ((l[i] == ' ' || l[i] == '0' || l[i] == '1' || l[i] == '2' || ft_is_pos(l[i], &pos_found))
+	while ((l[i] == ' ' || l[i] == '0' || l[i] == '1' || l[i] == '2' || is_pos(l[i], &pos_found))
 		&& l[i] != 0)
 		i++;
 	if (pos_found > 1)
@@ -76,25 +76,25 @@ static int	ft_is_map_line(char *l, t_params *p)
 	return (0);
 }
 
-int	ft_parse_map_size(int map_fd, t_params *p)
+int	parse_map_size(int map_fd, t_params *p)
 {
 	char *line;
 	
 	line = NULL;
 	while(get_next_line(map_fd, &line) == 1)
 	{
-		if (ft_is_map_h_limit(line, p))
+		if (is_map_h_limit(line, p))
 		{
 			free(line);
 			line = NULL;
 			while(get_next_line(map_fd, &line) == 1)
 			{
-				if (ft_is_map_h_limit(line, p))
+				if (is_map_h_limit(line, p))
 				{
 					free(line);
 					return (1);
 				}
-				else if (!(ft_is_map_line(line, p)))
+				else if (!(is_map_line(line, p)))
 				{
 					free(line);
 					printf("Error : %s\n", ERR_MAP_INV);

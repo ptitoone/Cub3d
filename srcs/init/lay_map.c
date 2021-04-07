@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lay_map.c                                       :+:      :+:    :+:   */
+/*   lay_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_parse.h"
+#include "parse.h"
 #include "get_next_line.h"
 #include "cub.h"
 
-static int	ft_is_pos(char c)
+static int	is_pos(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
 	return (0);
 }
 
-static void	ft_set_player_pos(t_params *p, char pos, int i, int j)
+static void	set_player_pos(t_params *p, char pos, int i, int j)
 {
 	if (pos == 'N')
 		p->player.start_dir = NO;
@@ -35,7 +35,7 @@ static void	ft_set_player_pos(t_params *p, char pos, int i, int j)
 	p->player.pos_block_y = i;
 }
 
-static int	ft_lay_map_line(char *l, int i, t_params *p)
+static int	lay_map_line(char *l, int i, t_params *p)
 {
 	int	j;
 
@@ -45,12 +45,12 @@ static int	ft_lay_map_line(char *l, int i, t_params *p)
 		return (0);
 	while (l[j] == ' ' || l[j] == '0'
 		|| l[j] == '1' || l[j] == '2'
-		|| ft_is_pos(l[j]))
+		|| is_pos(l[j]))
 	{
 		if (l[j] == ' ')
 			p->map.map[i][j] = '0';
-		else if (ft_is_pos(l[j]))
-			ft_set_player_pos(p, l[j], i, j);
+		else if (is_pos(l[j]))
+			set_player_pos(p, l[j], i, j);
 		else
 			p->map.map[i][j] = l[j];
 		j++;
@@ -59,7 +59,7 @@ static int	ft_lay_map_line(char *l, int i, t_params *p)
 	return (1);
 }
 
-static int	ft_is_map_top(char *l)
+static int	is_map_top(char *l)
 {
 	int	i;
 
@@ -78,7 +78,7 @@ static int	ft_is_map_top(char *l)
 	return (0);
 }
 
-int	ft_lay_map(char *map_file, t_params *p)
+int	lay_map(char *map_file, t_params *p)
 {
 	int		i;
 	int		map_fd;
@@ -92,18 +92,18 @@ int	ft_lay_map(char *map_file, t_params *p)
 		return (0);
 	while (get_next_line(map_fd, &line) == 1)
 	{
-		if (ft_is_map_top(line))
+		if (is_map_top(line))
 			break ;
 		free(line);
 		line = NULL;
 	}
-	ft_lay_map_line(line, i++, p);
+	lay_map_line(line, i++, p);
 	free(line);
 	line = NULL;
 	while (i < p->map.map_h)
 	{
 		get_next_line(map_fd, &line);
-		ft_lay_map_line(line, i++, p);
+		lay_map_line(line, i++, p);
 		free(line);
 		line = NULL;
 	}

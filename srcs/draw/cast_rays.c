@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cast_rays.c                                     :+:      :+:    :+:   */
+/*   cast_rays.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-static int	ft_check_wall(t_coords *c, t_params *p, double xo, double yo)
+static int	check_wall(t_coords *c, t_params *p, double xo, double yo)
 {
 	int dof;
 
@@ -31,7 +31,7 @@ static int	ft_check_wall(t_coords *c, t_params *p, double xo, double yo)
 	return (0);
 }
 
-static int ft_check_hori_lines(t_params *p, double ra, t_coords *c)
+static int check_hori_lines(t_params *p, double ra, t_coords *c)
 {
 	double 	xo;
 	double 	yo;
@@ -54,12 +54,12 @@ static int ft_check_hori_lines(t_params *p, double ra, t_coords *c)
 		yo = p->map.c_s ;
 		xo = -yo * itan;
 	}
-	if (ft_check_wall(c, p, xo, yo))
+	if (check_wall(c, p, xo, yo))
 		return (1);
 	return (0);
 }
 
-static int	ft_check_vert_lines(t_params *p, double ra, t_coords *c)
+static int	check_vert_lines(t_params *p, double ra, t_coords *c)
 {
 	double 	xo;
 	double 	yo;
@@ -82,12 +82,12 @@ static int	ft_check_vert_lines(t_params *p, double ra, t_coords *c)
 		xo = p->map.c_s;
 		yo = -xo * ntan;
 	}
-	if (ft_check_wall(c, p, xo, yo))
+	if (check_wall(c, p, xo, yo))
 		return (1);
 	return (0);
 }
 
-static void	ft_init_coords(t_coords *h, t_coords *v, t_params *p)
+static void	init_coords(t_coords *h, t_coords *v, t_params *p)
 {
 	h->x = p->player.pos_x;
 	h->y = p->player.pos_y;
@@ -95,14 +95,14 @@ static void	ft_init_coords(t_coords *h, t_coords *v, t_params *p)
 	v->y = p->player.pos_y;
 }
 
-int ft_find_wall(t_params *p)
+int find_wall(t_params *p)
 {
 	int 	i;
 	double	ra;
 	t_coords h;
 	t_coords v;
 
-	ft_init_coords(&h, &v, p);
+	init_coords(&h, &v, p);
 	i = -1;
 	ra = p->player.orient - (30 * PI / 180);
 	while(i++ < p->win_w - 1)
@@ -111,13 +111,13 @@ int ft_find_wall(t_params *p)
 			ra += 2 * PI;
 		if (ra > 2 * PI)
 			ra -= 2 * PI;
-		ft_check_hori_lines(p, ra, &h);
-		ft_check_vert_lines(p, ra, &v);
+		check_hori_lines(p, ra, &h);
+		check_vert_lines(p, ra, &v);
 		if (sqrt(pow(h.x - p->player.pos_x, 2) + pow(h.y - p->player.pos_y, 2))
 			<= sqrt(pow(v.x - p->player.pos_x, 2) + pow(v.y - p->player.pos_y, 2)))
-			ft_draw_line_h(i, ra, h.x - 1, h.y - 1, p, 0x00F17600);
+			draw_line_h(i, ra, h.x - 1, h.y - 1, p, 0x00F17600);
 		else
-			ft_draw_line_v(i, ra, v.x, v.y, p, 0x00954900);
+			draw_line_v(i, ra, v.x, v.y, p, 0x00954900);
 		ra += ((60 * PI / 180) / p->win_w);
 	}
 //	mlx_sync(1, p->imgv.img);

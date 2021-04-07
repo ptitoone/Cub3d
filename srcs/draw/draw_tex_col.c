@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_draw_tex_col.c                                  :+:      :+:    :+:   */
+/*   draw_tex_col.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,11 @@
 
 #include "cub.h"
 
-void	ft_draw_tex_col(t_img *tex, int tex_x, int tex_y, int rc, int j, t_img *img)
+void	draw_tex_col(t_img *tex, int tex_x, int tex_y, int rc, int j, t_img *img)
 {
 	int i;
 	unsigned int color;
 
-	color = ft_get_pixel_color(tex, tex_x, tex_y);
-	my_mlx_pixel_put(img, rc, j, color);
+	color = get_pixel_color(tex, tex_x, tex_y);
+	put_pixel(img, rc, j, color);
 }

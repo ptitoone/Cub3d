@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_upscale_img.c                                   :+:      :+:    :+:   */
+/*   upscale_img.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-void	ft_upscale_img(int w, int h, int scale, char *img, char *img2)
+void	upscale_img(int w, int h, int scale, char *img, char *img2)
 {
 	int		x;
 	int		y;

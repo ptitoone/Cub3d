@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_draw_map.c                                      :+:      :+:    :+:   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-static int ft_draw_cell(int w, int h, t_params *p)
+static int draw_cell(int w, int h, t_params *p)
 {
 	double	x;
 	double	y;
@@ -28,9 +28,9 @@ static int ft_draw_cell(int w, int h, t_params *p)
 		while (j < x)
 		{
 			if (j == 0 || j == x || i == 0 || i == y)
-				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0x00FFFFFF);
+				put_pixel(&p->img, ((w * x) + j++), ((h * y) + i), 0x00FFFFFF);
 			else
-				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0150150150);
+				put_pixel(&p->img, ((w * x) + j++), ((h * y) + i), 0150150150);
 		}
 		j = 0;
 		i++;
@@ -38,7 +38,7 @@ static int ft_draw_cell(int w, int h, t_params *p)
 	return (0);
 }
 
-static int ft_draw_cell2(int w, int h, t_params *p)
+static int draw_cell2(int w, int h, t_params *p)
 {
 	double	x;
 	double	y;
@@ -54,9 +54,9 @@ static int ft_draw_cell2(int w, int h, t_params *p)
 		while (j < x)
 		{
 			if (j == 0 || j == x || i == 0 || i == y)
-				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0x00FFFFFF);
+				put_pixel(&p->img, ((w * x) + j++), ((h * y) + i), 0x00FFFFFF);
 			else
-				my_mlx_pixel_put(&p->img, ((w * x) + j++), ((h * y) + i), 0200200200);
+				put_pixel(&p->img, ((w * x) + j++), ((h * y) + i), 0200200200);
 		}
 		j = 0;
 		i++;
@@ -64,7 +64,7 @@ static int ft_draw_cell2(int w, int h, t_params *p)
 	return (0);
 }
 
-int	ft_draw_map(t_params *p)
+int	draw_map(t_params *p)
 {
 	int		h;
 	int		w;
@@ -76,9 +76,9 @@ int	ft_draw_map(t_params *p)
 		while (w < p->map.map_w)
 		{
 			if (p->map.map[h][w] == '1')
-				ft_draw_cell(w, h, p);
+				draw_cell(w, h, p);
 			else
-				ft_draw_cell2(w, h, p);
+				draw_cell2(w, h, p);
 			w++;
 		}
 		w = 0;

@@ -1,0 +1,90 @@
+OpenJDK 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release.
+2021-04-07 21:01:58,152 [ 194093]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;..ev/C/42/cub3d 
+2021-04-07 21:01:58,160 [ 194101]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2021-04-07 21:02:05,134 [ 201075]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004l
+bytes read                    :ESC[ 
+2021-04-07 21:02:05,139 [ 201080]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;make 
+2021-04-07 21:02:05,143 [ 201084]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;..ev/C/42/cub3d 
+2021-04-07 21:02:05,157 [ 201098]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2021-04-07 21:22:56,284 [1452225]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (16)!!! 
+2021-04-07 21:22:56,288 [1452229]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (16)!!! 
+2021-04-07 21:22:56,296 [1452237]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (16)!!! 
+2021-04-07 21:41:33,760 [2569701]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (12)!!! 
+2021-04-07 21:41:33,800 [2569741]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (12)!!! 
+2021-04-07 21:41:33,932 [2569873]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (16)!!! 
+2021-04-07 21:41:33,946 [2569887]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (16)!!! 
+2021-04-07 22:01:33,082 [3769023]  ERROR - plication.impl.ApplicationImpl - SHELL_SCRIPT != SHELL_SCRIPT
+Single root injected file 'Makefile'  != Single root injected file 'Makefile' 
+host of class name.kropp.intellij.makefile.psi.impl.MakefileFunctionImpl 
+java.lang.AssertionError: SHELL_SCRIPT != SHELL_SCRIPT
+Single root injected file 'Makefile'  != Single root injected file 'Makefile' 
+host of class name.kropp.intellij.makefile.psi.impl.MakefileFunctionImpl
+	at com.intellij.codeInsight.completion.CompletionInitializationUtil.setOriginalFile(CompletionInitializationUtil.java:218)
+	at com.intellij.codeInsight.completion.CompletionInitializationUtil.toInjectedIfAny(CompletionInitializationUtil.java:185)
+	at com.intellij.codeInsight.completion.CodeCompletionHandlerBase.lambda$startContributorThread$6(CodeCompletionHandlerBase.java:346)
+	at com.intellij.codeInsight.completion.AsyncCompletion.lambda$tryReadOrCancel$5(CompletionThreading.java:172)
+	at com.intellij.openapi.application.impl.ApplicationImpl.tryRunReadAction(ApplicationImpl.java:1137)
+	at com.intellij.codeInsight.completion.AsyncCompletion.tryReadOrCancel(CompletionThreading.java:170)
+	at com.intellij.codeInsight.completion.CodeCompletionHandlerBase.lambda$startContributorThread$7(CodeCompletionHandlerBase.java:345)
+	at com.intellij.codeInsight.completion.AsyncCompletion.lambda$startThread$0(CompletionThreading.java:95)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.lambda$runProcess$2(CoreProgressManager.java:178)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.registerIndicatorAndRun(CoreProgressManager.java:658)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.executeProcessUnderProgress(CoreProgressManager.java:610)
+	at com.intellij.openapi.progress.impl.ProgressManagerImpl.executeProcessUnderProgress(ProgressManagerImpl.java:65)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.runProcess(CoreProgressManager.java:165)
+	at com.intellij.codeInsight.completion.AsyncCompletion.lambda$startThread$1(CompletionThreading.java:91)
+	at com.intellij.util.RunnableCallable.call(RunnableCallable.java:20)
+	at com.intellij.util.RunnableCallable.call(RunnableCallable.java:11)
+	at com.intellij.openapi.application.impl.ApplicationImpl$1.call(ApplicationImpl.java:270)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:668)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:665)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1.run(Executors.java:665)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2021-04-07 22:01:33,083 [3769024]  ERROR - plication.impl.ApplicationImpl - CLion 2020.3.2  Build #CL-203.7148.70 
+2021-04-07 22:01:33,083 [3769024]  ERROR - plication.impl.ApplicationImpl - JDK: 11.0.9.1; VM: OpenJDK 64-Bit Server VM; Vendor: JetBrains s.r.o. 
+2021-04-07 22:01:33,083 [3769024]  ERROR - plication.impl.ApplicationImpl - OS: Linux 
+2021-04-07 22:01:33,083 [3769024]  ERROR - plication.impl.ApplicationImpl - Last Action: EditorBackSpace 
+2021-04-07 22:02:36,223 [3832164]  ERROR - plication.impl.ApplicationImpl - SHELL_SCRIPT != SHELL_SCRIPT
+Single root injected file 'Makefile'  != Single root injected file 'Makefile' 
+host of class name.kropp.intellij.makefile.psi.impl.MakefileFunctionImpl 
+java.lang.AssertionError: SHELL_SCRIPT != SHELL_SCRIPT
+Single root injected file 'Makefile'  != Single root injected file 'Makefile' 
+host of class name.kropp.intellij.makefile.psi.impl.MakefileFunctionImpl
+	at com.intellij.codeInsight.completion.CompletionInitializationUtil.setOriginalFile(CompletionInitializationUtil.java:218)
+	at com.intellij.codeInsight.completion.CompletionInitializationUtil.toInjectedIfAny(CompletionInitializationUtil.java:185)
+	at com.intellij.codeInsight.completion.CodeCompletionHandlerBase.lambda$startContributorThread$6(CodeCompletionHandlerBase.java:346)
+	at com.intellij.codeInsight.completion.AsyncCompletion.lambda$tryReadOrCancel$5(CompletionThreading.java:172)
+	at com.intellij.openapi.application.impl.ApplicationImpl.tryRunReadAction(ApplicationImpl.java:1137)
+	at com.intellij.codeInsight.completion.AsyncCompletion.tryReadOrCancel(CompletionThreading.java:170)
+	at com.intellij.codeInsight.completion.CodeCompletionHandlerBase.lambda$startContributorThread$7(CodeCompletionHandlerBase.java:345)
+	at com.intellij.codeInsight.completion.AsyncCompletion.lambda$startThread$0(CompletionThreading.java:95)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.lambda$runProcess$2(CoreProgressManager.java:178)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.registerIndicatorAndRun(CoreProgressManager.java:658)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.executeProcessUnderProgress(CoreProgressManager.java:610)
+	at com.intellij.openapi.progress.impl.ProgressManagerImpl.executeProcessUnderProgress(ProgressManagerImpl.java:65)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.runProcess(CoreProgressManager.java:165)
+	at com.intellij.codeInsight.completion.AsyncCompletion.lambda$startThread$1(CompletionThreading.java:91)
+	at com.intellij.util.RunnableCallable.call(RunnableCallable.java:20)
+	at com.intellij.util.RunnableCallable.call(RunnableCallable.java:11)
+	at com.intellij.openapi.application.impl.ApplicationImpl$1.call(ApplicationImpl.java:270)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:668)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:665)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1.run(Executors.java:665)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2021-04-07 22:02:36,224 [3832165]  ERROR - plication.impl.ApplicationImpl - CLion 2020.3.2  Build #CL-203.7148.70 
+2021-04-07 22:02:36,224 [3832165]  ERROR - plication.impl.ApplicationImpl - JDK: 11.0.9.1; VM: OpenJDK 64-Bit Server VM; Vendor: JetBrains s.r.o. 
+2021-04-07 22:02:36,224 [3832165]  ERROR - plication.impl.ApplicationImpl - OS: Linux 
+2021-04-07 22:02:36,224 [3832165]  ERROR - plication.impl.ApplicationImpl - Last Action: EditorBackSpace 

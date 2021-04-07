@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_tex.c                                     :+:      :+:    :+:   */
+/*   parse_tex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-static int	ft_add_tex(char *l, char **dst)
+static int	add_tex(char *l, char **dst)
 {
 	int i;
 	int j;
@@ -39,7 +39,7 @@ static int	ft_add_tex(char *l, char **dst)
 	return (0);
 }
 
-int	ft_parse_tex(char *l, t_tex *t)
+int	parse_tex(char *l, t_tex *t)
 {
 	int i;
 
@@ -47,19 +47,19 @@ int	ft_parse_tex(char *l, t_tex *t)
 	while (l[i] == ' ' && l[i] != 0)
 		i++;
 	if (l[i] == 'N' && l[i + 1] == 'O' && l[i + 2] == ' ')
-		return (ft_add_tex(&l[i + 2], &t->dir[NO]));
+		return (add_tex(&l[i + 2], &t->dir[NO]));
 	else if (l[i] == 'S' && l[i + 1] == 'O' && l[i + 2] == ' ')
-		return (ft_add_tex(&l[i + 2], &t->dir[SO]));
+		return (add_tex(&l[i + 2], &t->dir[SO]));
 	else if (l[i] == 'W' && l[i + 1] == 'E' && l[i + 2] == ' ')
-		return (ft_add_tex(&l[i + 2], &t->dir[WE]));
+		return (add_tex(&l[i + 2], &t->dir[WE]));
 	else if (l[i] == 'E' && l[i + 1] == 'A' && l[i + 2] == ' ')
-		return (ft_add_tex(&l[i + 2], &t->dir[EA]));
+		return (add_tex(&l[i + 2], &t->dir[EA]));
 	else if (l[i] == 'S' && l[i + 1] == ' ')
-		return (ft_add_tex(&l[i + 1], &t->sp));
+		return (add_tex(&l[i + 1], &t->sp));
 	else if (l[i] == 'F' && l[i + 1] == ' ')
-		return (ft_add_tex(&l[i + 1], &t->f));
+		return (add_tex(&l[i + 1], &t->f));
 	else if (l[i] == 'C' && l[i + 1] == ' ')
-		return(ft_add_tex(&l[i + 1], &t->c));
+		return(add_tex(&l[i + 1], &t->c));
 	else
 		printf("Error : %s \"%s\"\n", ERR_TEX_INV, l);
 	return (0);

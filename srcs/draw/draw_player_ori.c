@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_draw_player_ori.c                               :+:      :+:    :+:   */
+/*   draw_player_ori.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-void	ft_plot_line(int x0, int y0, int x1, int y1, int color, t_params *p)
+void	plot_line(int x0, int y0, int x1, int y1, int color, t_params *p)
 {
 	int dx;
 	int dy;
@@ -34,7 +34,7 @@ void	ft_plot_line(int x0, int y0, int x1, int y1, int color, t_params *p)
 		sy = -1;
 	while (1)
 	{  
-		my_mlx_pixel_put(&p->img, x0, y0, color);
+		put_pixel(&p->img, x0, y0, color);
 		if (x0 == x1 && y0 == y1)
 			break;
 		e2 = 2 * err;
@@ -51,10 +51,10 @@ void	ft_plot_line(int x0, int y0, int x1, int y1, int color, t_params *p)
 	}
 }
 
-void	ft_draw_player_ori(t_params *p)
+void	draw_player_ori(t_params *p)
 {
 	int x1 = cos(p->player.orient) * (p->map.c_s  / 2);
 	int y1 = sin(p->player.orient) * (p->map.c_s  / 2);
 
-	ft_plot_line(p->player.pos_x, p->player.pos_y, p->player.pos_x + x1, p->player.pos_y + y1, 0x00FF0000, p);
+	plot_line(p->player.pos_x, p->player.pos_y, p->player.pos_x + x1, p->player.pos_y + y1, 0x00FF0000, p);
 }

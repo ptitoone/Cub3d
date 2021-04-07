@@ -14,7 +14,8 @@ CFLAGS		=	-g -Wall -Werror -Wextra -L . -lft -lmlx -framework OpenGl -framework 
 
 CFLAGSL		=	-g -Wall -Werror -Wextra -L . -lft -lmlx_linux -lXext -lX11 -lm
 
-SRCS		:=	$(shell echo srcs/*.c)
+SRCS		:=	$(shell echo srcs/*.c && echo srcs/parse/*.c && echo srcs/draw/*.c && echo srcs/controls/*.c && \
+ 						echo srcs/init/*.c)
 
 OBJS		=	$(SRCS:.c=.o)
 

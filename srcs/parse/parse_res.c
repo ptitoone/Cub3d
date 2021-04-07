@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_res.c                                     :+:      :+:    :+:   */
+/*   parse_res.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "ft_parse.h"
+#include "parse.h"
 
-static int	ft_push_res(char *l, int i, int j)
+static int	push_res(char *l, int i, int j)
 {
 	char	*tmp;
 	int		res;
@@ -28,7 +28,7 @@ static int	ft_push_res(char *l, int i, int j)
 	return (0);
 }
 
-static int	ft_add_res(char *l, t_params *p)
+static int	add_res(char *l, t_params *p)
 {
 	int	i;
 	int	j;
@@ -47,9 +47,9 @@ static int	ft_add_res(char *l, t_params *p)
 		while (l[i + j] >= '0' && l[i + j] <= '9')
 			j++;
 		if (!(x % 2))
-			p->win_w = ft_push_res(l, i, j + 1);
+			p->win_w = push_res(l, i, j + 1);
 		else
-			p->win_h = ft_push_res(l, i, j + 1);
+			p->win_h = push_res(l, i, j + 1);
 		i += (j + 1);
 	}
 	while (l[i] == ' ')
@@ -59,7 +59,7 @@ static int	ft_add_res(char *l, t_params *p)
 	return (0);
 }
 
-int	ft_parse_res(char *l, t_params *p)
+int	parse_res(char *l, t_params *p)
 {
 	int	i;
 
@@ -69,7 +69,7 @@ int	ft_parse_res(char *l, t_params *p)
 	while (l[i] == ' ' && l[i] != 0)
 		i++;
 	if (l[i] == 'R' && l[i + 1] == ' ')
-		if (ft_add_res(&l[i + 1], p))
+		if (add_res(&l[i + 1], p))
 			return (1);
 	return (throw_error(ERR_RES_INV));
 }

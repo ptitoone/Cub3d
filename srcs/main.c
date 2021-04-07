@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "ft_parse.h"
+#include "parse.h"
 #include "controls.h"
 
 static int	render(void *pr)
@@ -29,7 +29,7 @@ static int	render(void *pr)
 		key_a_l(p);
 	if (p->keys.r == 1)
 		key_a_r(p);
-	ft_find_wall(p);
+	find_wall(p);
 	return (0);
 }
 
@@ -38,11 +38,11 @@ int main()
 	static t_params	p;
 //////// PARAMS SETUP /////////////////////////////////////////////////////////
 	p.player.start_dir = -1;
-	if(!(ft_parse_file("map.cub", &p)))
+	if(!(parse_file("map.cub", &p)))
 		return (0);
-	if (!(ft_init_params(&p)))
+	if (!(init_params(&p)))
 		return (0);
-	if (!(ft_init_tex_img(&p)))
+	if (!(init_tex_img(&p)))
 		return (0);
 
 ///////// CREATE IMAGES ///////////////////////////////////////////////////////
@@ -68,19 +68,19 @@ int main()
 //	img_up.img	=	mlx_new_image(p.mlx, (img_w * 11), (img_h * 11));
 //	img_up.addr	=	mlx_get_data_addr(img_up.img, &img_up.bpp,
 //					&img_up.line_len, &img_up.endian);
-//	ft_upscale_img(img_w, img_h, 11, img_x.addr, img_up.addr);
+//	upscale_img(img_w, img_h, 11, img_x.addr, img_up.addr);
 //	mlx_put_image_to_window(p.mlx, p.win2, img_up.img, 0, 0);
 
 ///////// DRAW AND PUT IMAGES TO WINDIOWS //////////////////////////////////////
 
-//	ft_draw_map(&p);
-//	ft_draw_player(p.player.pos_x, p.player.pos_y, &p);
+//	draw_map(&p);
+//	draw_player(p.player.pos_x, p.player.pos_y, &p);
 //	mlx_put_image_to_window(p.mlx, p.win, p.img.img, 0, 0);
 
 ///////// HOOKS AND LOOP //////////////////////////////////////////////////////
 	mlx_hook(p.win2, 2, 1L<<0, &key_press, (void *)&p);
 	mlx_hook(p.win2, 3, 1L<<1, &key_release, (void *)&p);
-//	mlx_hook(p.win2, 6, 1L<<6, mouse, (void *)&p);
+//	mlx_hook(p.win2, 6, 1L<<6, &mouse, (void *)&p);
 	mlx_loop_hook(p.mlx, &render, (void *)&p);
 	mlx_loop(p.mlx);
  	return (0);

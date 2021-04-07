@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_draw_player.c                                   :+:      :+:    :+:   */
+/*   draw_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,12 +12,12 @@
 
 #include "cub.h"
 
-void	ft_draw_player(int x, int y, t_params *p)
+void	draw_player(int x, int y, t_params *p)
 {
-	my_mlx_pixel_put(&p->img, x, y, 0x00D66100);
-	my_mlx_pixel_put(&p->img, x - 1, y - 1, 0x00D66100);
-	my_mlx_pixel_put(&p->img, x - 1, y + 1, 0x00D66100);
-	my_mlx_pixel_put(&p->img, x + 1, y - 1, 0x00D66100);
-	my_mlx_pixel_put(&p->img, x + 1, y + 1, 0x00D66100);
-	ft_draw_player_ori(p);
+	put_pixel(&p->img, x, y, 0x00D66100);
+	put_pixel(&p->img, x - 1, y - 1, 0x00D66100);
+	put_pixel(&p->img, x - 1, y + 1, 0x00D66100);
+	put_pixel(&p->img, x + 1, y - 1, 0x00D66100);
+	put_pixel(&p->img, x + 1, y + 1, 0x00D66100);
+	draw_player_ori(p);
 }
