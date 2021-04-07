@@ -37,12 +37,11 @@ int main()
 {
 	static t_params	p;
 //////// PARAMS SETUP /////////////////////////////////////////////////////////
-
+	p.player.start_dir = -1;
 	if(!(ft_parse_file("map.cub", &p)))
 		return (0);
-	ft_init_params(&p);
-	p.player.pos_x	=	(p.map.c_s * p.map.map_w) / 2;
-	p.player.pos_y	=	(p.map.c_s * p.map.map_h) / 2;
+	if (!(ft_init_params(&p)))
+		return (0);
 	if (!(ft_init_tex_img(&p)))
 		return (0);
 

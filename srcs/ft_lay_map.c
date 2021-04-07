@@ -31,7 +31,8 @@ static void	ft_set_player_pos(t_params *p, char pos, int i, int j)
 		p->player.start_dir = WE;
 	else if (pos == 'W')
 		p->player.start_dir = EA;
-player_pos
+	p->player.pos_block_x = j;
+	p->player.pos_block_y = i;
 }
 
 static int	ft_lay_map_line(char *l, int i, t_params *p)

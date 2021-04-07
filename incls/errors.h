@@ -28,6 +28,7 @@
 # define ERR_TEX_DUP		"Duplicate texture parameter"
 
 # define ERR_MAP_DUP_POS	"Duplicate player position"
+# define ERR_MAP_NO_POS		"No player position found"
 # define ERR_MAP_INV		"Invalid map format"
 
 # define ERR_MLX_FAIL		"MinilibX failed to init"

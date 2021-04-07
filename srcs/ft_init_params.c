@@ -12,11 +12,11 @@
 
 #include "cub.h"
 
-static	void ft_init_player(t_params *p)
+static void ft_init_imgs(t_params *p)
 {
-	p->player.orient = PI;
-	p->player.strafe_orient = PI / 2;
-	p->player.start_dir = -1;
+	p->imgv.img = mlx_new_image(p->mlx, (p->win_w), (p->win_h));
+	p->imgv.addr = mlx_get_data_addr(p->imgv.img, &p->imgv.bpp,
+			&p->imgv.line_len, &p->imgv.endian);
 }
 
 static	void ft_init_map(t_params *p)
@@ -25,11 +25,30 @@ static	void ft_init_map(t_params *p)
 	p->map.block_h = 64;
 }
 
-static void ft_init_imgs(t_params *p)
+static	void ft_init_player(t_params *p)
 {
-	p->imgv.img = mlx_new_image(p->mlx, (p->win_w), (p->win_h));
-	p->imgv.addr = mlx_get_data_addr(p->imgv.img, &p->imgv.bpp,
-			&p->imgv.line_len, &p->imgv.endian);
+	if (p->player.start_dir == NO)
+	{
+		p->player.orient = 3 * PI / 2;
+		p->player.strafe_orient = PI;
+	}
+	else if (p->player.start_dir == SO)
+	{
+		p->player.orient = PI / 2;
+		p->player.strafe_orient = 0;
+	}
+	else if (p->player.start_dir == WE)
+	{
+		p->player.orient = 0;
+		p->player.strafe_orient = 3 * PI / 2;
+	}
+	else if (p->player.start_dir == EA)
+	{
+		p->player.orient = PI;
+		p->player.strafe_orient = PI / 2;
+	}
+	p->player.pos_x = ((p->player.pos_block_x + 1) * p->map.c_s) - (p->map.c_s / 2);
+	p->player.pos_y = ((p->player.pos_block_y + 1) * p->map.c_s) - (p->map.c_s / 2);
 }
 
 int	ft_init_params(t_params *p)
@@ -39,8 +58,10 @@ int	ft_init_params(t_params *p)
 		return (throw_error(ERR_MLX_FAIL));
 	p->ratio = p->win_w / p->win_h;
 	p->win2 = mlx_new_window(p->mlx, (p->win_w), (p->win_h), "FPV");
-	ft_init_player(p);
-	ft_init_map(p);
 	ft_init_imgs(p);
+	ft_init_map(p);
+	if (p->player.start_dir == -1)
+		return (throw_error(ERR_MAP_NO_POS));
+	ft_init_player(p);
 	return (1);
 }
