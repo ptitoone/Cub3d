@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 17:37:11 by akotzky           #+#    #+#             */
-/*   Updated: 2021/04/07 10:35:12 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/04/07 15:00:58 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,13 @@ static int	ft_add_info(char *line, t_params *p)
 	{
  		if (line[i] == 'R')
 		{
-			if (p->win_h == -1 && p->win_w == -1)
+			if (p->win_h == 0 && p->win_w == 0)
 			{
  				if (ft_parse_res(line, p))
  					return (1);
 			}
 			else
-			{
-				printf("Error : %s\n", ERR_RES_DUP);
-				break ;
-			}
+				return (throw_error(ERR_RES_DUP));
 		}
 		else if (ft_is_tex_spec(line[i]))
 		{
@@ -80,11 +77,7 @@ int	ft_parse_file(char *map_file, t_params *p)
 	if (ft_parse_map_size(map_fd, p))
 	{
 		if (ft_lay_map(map_file, p))
-		{
-			p->map.c_s = p->win_w / 16;
-			p->map.block_h = p->win_h / 16;
 			return (1);
-		}
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:26:23 by akotzky           #+#    #+#             */
-/*   Updated: 2021/04/07 11:35:15 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/04/07 16:16:28 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,17 @@ static int	ft_is_pos(char c)
 	return (0);
 }
 
-static int	ft_set_player_pos(t_params *p, char pos)
+static void	ft_set_player_pos(t_params *p, char pos, int i, int j)
 {
-	if (p->player.start_dir == -1)
-	{
-		if (pos == 'N')
-			p->player.start_dir = NO;
-		else if (pos == 'S')
-			p->player.start_dir = SO;
-		else if (pos == 'E')
-			p->player.start_dir = WE;
-		else if (pos == 'W')
-			p->player.start_dir = EA;
-	}
-	else
-	{
-		p->player.start_dir = -2;
-		return (0);
-	}
-	return (1);
+	if (pos == 'N')
+		p->player.start_dir = NO;
+	else if (pos == 'S')
+		p->player.start_dir = SO;
+	else if (pos == 'E')
+		p->player.start_dir = WE;
+	else if (pos == 'W')
+		p->player.start_dir = EA;
+player_pos
 }
 
 static int	ft_lay_map_line(char *l, int i, t_params *p)
@@ -57,10 +49,7 @@ static int	ft_lay_map_line(char *l, int i, t_params *p)
 		if (l[j] == ' ')
 			p->map.map[i][j] = '0';
 		else if (ft_is_pos(l[j]))
-		{
-			if (!(ft_set_player_pos(p, l[j])))
-				return (0);
-		}
+			ft_set_player_pos(p, l[j], i, j);
 		else
 			p->map.map[i][j] = l[j];
 		j++;

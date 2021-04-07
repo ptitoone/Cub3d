@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_keys.c                                     :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 11:25:01 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/23 15:47:45 by akotzky          ###   ########.fr       */
+/*   Created: 2021/04/07 14:47:06 by akotzky           #+#    #+#             */
+/*   Updated: 2021/04/07 15:17:41 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	ft_init_keys(t_keys *k)
+int	throw_error(char *error)
 {
-	k->w = 0;
-	k->a = 0;
-	k->s = 0;
-	k->d = 0;
-	k->l = 0;
-	k->r = 0;
+	printf("Error : %s\n", error);
+	return (0);
+}
+
+int	check_missing_params(t_params *p)
+{
+	return (1);
 }

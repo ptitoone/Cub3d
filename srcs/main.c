@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:23:59 by akotzky           #+#    #+#             */
-/*   Updated: 2021/04/07 13:21:13 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/04/07 15:37:28 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,26 @@ static int	render(void *pr)
 
 int main()
 {
-	t_params	p;
+	static t_params	p;
 //////// PARAMS SETUP /////////////////////////////////////////////////////////
 
-	ft_init_params(&p);
-	ft_init_keys(&p.keys);
 	if(!(ft_parse_file("map.cub", &p)))
 		return (0);
-	p.map.c_s		=	64;
+	ft_init_params(&p);
 	p.player.pos_x	=	(p.map.c_s * p.map.map_w) / 2;
 	p.player.pos_y	=	(p.map.c_s * p.map.map_h) / 2;
-	p.ratio			=	p.win_w / p.win_h;
-	p.mlx			=	mlx_init();
-	ft_init_tex_img(&p);
-	if (p.mlx == NULL)
-		puts("Error");
+	if (!(ft_init_tex_img(&p)))
+		return (0);
 
 ///////// CREATE IMAGES ///////////////////////////////////////////////////////
 
 //	p.img.img	= 	mlx_new_image(p.mlx, (p.win_w), (p.win_h));
 //	p.img.addr	= 	mlx_get_data_addr(p.img.img, &p.img.bpp, 
 //					&p.img.line_len, &p.img.endian);
-	p.imgv.img	= 	mlx_new_image(p.mlx, (p.win_w), (p.win_h));
-	p.imgv.addr	= 	mlx_get_data_addr(p.imgv.img, &p.imgv.bpp,
-					&p.imgv.line_len, &p.imgv.endian);
 
 ///////// CREATE WINDOWS //////////////////////////////////////////////////////
 
 //	p.win		=	mlx_new_window(p.mlx, (p.win_w), (p.win_h), "Map");
-	p.win2		=	mlx_new_window(p.mlx, (p.win_w), (p.win_h), "FPV");
 
 //////// TEST UPSCALE IMG /////////////////////////////////////////////////////
 

@@ -6,7 +6,7 @@
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 11:23:05 by akotzky           #+#    #+#             */
-/*   Updated: 2021/04/07 10:37:06 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/04/07 15:04:38 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int	ft_add_res(char *l, t_params *p)
 			p->win_h = ft_push_res(l, i, j + 1);
 		i += (j + 1);
 	}
+	while (l[i] == ' ')
+		i++;
 	if (!l[i])
 		return (1);
 	return (0);
@@ -62,19 +64,12 @@ int	ft_parse_res(char *l, t_params *p)
 	int	i;
 
 	i = 0;
-	if (p->win_h != -1 && p->win_w != -1)
-	{
-		printf("Error : %s", ERR_RES_DUP);
-		return (0);
-	}
+	if (p->win_h != 0 && p->win_w != 0)
+		return (throw_error(ERR_RES_DUP));
 	while (l[i] == ' ' && l[i] != 0)
 		i++;
 	if (l[i] == 'R' && l[i + 1] == ' ')
-	{
 		if (ft_add_res(&l[i + 1], p))
 			return (1);
-	}
-	else
-		printf("Error : %s \"%s\"\n", ERR_RES_INV, l);
-	return (0);
+	return (throw_error(ERR_RES_INV));
 }

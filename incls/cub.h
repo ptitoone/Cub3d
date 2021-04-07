@@ -87,6 +87,8 @@ typedef struct	s_play
 
 	double	pos_x;
 	double	pos_y;
+	int		pos_block_x;
+	int		pos_block_y;
 	double	del_x;
 	double	del_y;
 	double	orient;
@@ -159,9 +161,9 @@ typedef struct	s_draw_l
 
 }				t_draw_l;
 
-void			ft_init_params(t_params *p);
+int				ft_init_params(t_params *p);
 void			ft_init_keys(t_keys *k);
-void			ft_init_tex_img(t_params*p);
+int				ft_init_tex_img(t_params*p);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 unsigned int 	ft_get_pixel_color(t_img *img, int x, int y);
 void			ft_draw_player(int x, int y, t_params *p);
