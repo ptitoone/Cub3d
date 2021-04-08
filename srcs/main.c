@@ -38,11 +38,14 @@ int main()
 	static t_params	p;
 //////// PARAMS SETUP /////////////////////////////////////////////////////////
 	p.player.start_dir = -1;
+	p.mlx = mlx_init();
+	if (p.mlx == NULL)
+		return (throw_error(ERR_MLX_FAIL));
 	if(!(parse_file("map.cub", &p)))
 		return (0);
-	if (!(init_params(&p)))
-		return (0);
 	if (!(init_tex_img(&p)))
+		return (0);
+	if (!(init_params(&p)))
 		return (0);
 
 ///////// CREATE IMAGES ///////////////////////////////////////////////////////

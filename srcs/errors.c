@@ -20,5 +20,6 @@ int	throw_error(char *error)
 
 int	check_missing_params(t_params *p)
 {
+
 	return (1);
 }

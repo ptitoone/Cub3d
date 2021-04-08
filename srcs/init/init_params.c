@@ -12,17 +12,23 @@
 
 #include "cub.h"
 
-static void init_images(t_params *p)
+static int init_images(t_params *p)
 {
 	p->imgv.img = mlx_new_image(p->mlx, (p->win_w), (p->win_h));
+	if (p->imgv.img == NULL)
+		return (throw_error(ERR_IMG_CREATE));
 	p->imgv.addr = mlx_get_data_addr(p->imgv.img, &p->imgv.bpp,
 			&p->imgv.line_len, &p->imgv.endian);
+	return (1);
 }
 
-static	void init_map(t_params *p)
+static int	init_map(t_params *p)
 {
+	if (p->map.map_w < 3 && p->map.map_h < 3)
+		return (throw_error(ERR_MAP_TOO_SMALL));
 	p->map.c_s = 64;
 	p->map.block_h = 64;
+	return (1);
 }
 
 static	void init_player(t_params *p)
@@ -53,15 +59,14 @@ static	void init_player(t_params *p)
 
 int	init_params(t_params *p)
 {
-	p->mlx = mlx_init();
-	if (p->mlx == NULL)
-		return (throw_error(ERR_MLX_FAIL));
 	p->ratio = p->win_w / p->win_h;
-	p->win2 = mlx_new_window(p->mlx, (p->win_w), (p->win_h), "FPV");
-	init_images(p);
-	init_map(p);
+	if (!(init_images(p)))
+		return (0);
+	if (!(init_map(p)))
+		return (0);
 	if (p->player.start_dir == -1)
 		return (throw_error(ERR_MAP_NO_POS));
 	init_player(p);
+	p->win2 = mlx_new_window(p->mlx, (p->win_w), (p->win_h), "FPV");
 	return (1);
 }

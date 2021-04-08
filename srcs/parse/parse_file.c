@@ -75,9 +75,7 @@ int	parse_file(char *map_file, t_params *p)
 			break ;
 	}
 	if (parse_map_size(map_fd, p))
-	{
 		if (lay_map(map_file, p))
 			return (1);
-	}
 	return (0);
 }

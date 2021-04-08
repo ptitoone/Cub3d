@@ -29,7 +29,11 @@
 
 # define ERR_MAP_DUP_POS	"Duplicate player position"
 # define ERR_MAP_NO_POS		"No player position found"
-# define ERR_MAP_INV		"Invalid map format"
+# define ERR_MAP_INV		"Invalid map character"
+# define ERR_MAP_INV_WALL	"Map must be surrounded by walls '1'"
+# define ERR_MAP_TOO_SMALL	"Map must be surrounded by walls '1'"
+
+# define ERR_IMG_CREAT		"Failed to create new mlx_image"
 
 # define ERR_MLX_FAIL		"MinilibX failed to init"
 

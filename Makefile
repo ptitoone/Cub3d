@@ -10,9 +10,9 @@ LIBMLX		=	libmlx.a
 
 LIBMLXL		=	libmlx_linux.a
 
-CFLAGS		=	-g -Wall -Werror -Wextra -L . -lft -lmlx -framework OpenGl -framework AppKit
+CFLAGS		=	-Wall -Werror -Wextra -L . -lft -lmlx -framework OpenGl -framework AppKit
 
-CFLAGSL		=	-g -Wall -Werror -Wextra -L . -lft -lmlx_linux -lXext -lX11 -lm
+CFLAGSL		=	-Wall -Werror -Wextra -L . -lft -lmlx_linux -lXext -lX11 -lm
 
 SRCS		:=	$(shell echo srcs/*.c && echo srcs/parse/*.c && echo srcs/draw/*.c && echo srcs/controls/*.c && \
  						echo srcs/init/*.c)
@@ -25,7 +25,10 @@ LIBMLXOBJSL	:=	$(wildcard minilibx-linux/*.o)
 
 INCLS		=	incls
 
-.PHONY : all  alll clean fclean re rel
+.PHONY : all  alll clean fclean re rel debug
+
+debug :
+	$(CC) $(SRCS) -g -L . -lft -lmlx_linux -lXext -lX11 -lm -I$(INCLS) && lldb ./a.out
 
 all : $(NAME)
 
