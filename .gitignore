@@ -10,6 +10,4 @@ a.out
 
 *.dSYM
 
-./.idea
-
 nohup.out

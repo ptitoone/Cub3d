@@ -28,7 +28,7 @@ INCLS		=	incls
 .PHONY : all  alll clean fclean re rel debug
 
 debug :
-	$(CC) $(SRCS) -g -L . -lft -lmlx_linux -lXext -lX11 -lm -I$(INCLS) && lldb ./a.out
+	$(CC) $(SRCS) -g -L . -lft -lmlx_linux -lXext -lX11 -lm -I$(INCLS)
 
 all : $(NAME)
 

@@ -33,7 +33,7 @@
 # define ERR_MAP_INV_WALL	"Map must be surrounded by walls '1'"
 # define ERR_MAP_TOO_SMALL	"Map must be surrounded by walls '1'"
 
-# define ERR_IMG_CREAT		"Failed to create new mlx_image"
+# define ERR_IMG_CREATE		"Failed to create new mlx_image"
 
 # define ERR_MLX_FAIL		"MinilibX failed to init"
 

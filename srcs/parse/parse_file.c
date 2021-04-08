@@ -38,7 +38,7 @@ static int	add_info(char *line, t_params *p)
 			else
 				return (throw_error(ERR_RES_DUP));
 		}
-		else if (is_tex_spec(line[i]))
+ 		else if (is_tex_spec(line[i]))
 		{
 			if (parse_tex(line, &p->tex))
 				return (1);
