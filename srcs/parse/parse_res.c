@@ -25,7 +25,7 @@ static int	push_res(char *l, int i, int j)
 		free(tmp);
 		return (res);
 	}
-	return (0);
+	return (throw_error(ERR_MALLOC_FAIL));
 }
 
 static int	add_res(char *l, t_params *p)
@@ -53,9 +53,8 @@ static int	add_res(char *l, t_params *p)
 		i += (j + 1);
 	}
 	while (l[i] == ' ')
-		i++;
-	if (!l[i])
-		return (1);
+		if (!l[i++])
+			return (1);
 	return (0);
 }
 
@@ -66,7 +65,7 @@ int	parse_res(char *l, t_params *p)
 	i = 0;
 	if (p->win_h != 0 && p->win_w != 0)
 		return (throw_error(ERR_RES_DUP));
-	while (l[i] == ' ' && l[i] != 0)
+	while (l[i] == ' ')
 		i++;
 	if (l[i] == 'R' && l[i + 1] == ' ')
 		if (add_res(&l[i + 1], p))

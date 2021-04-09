@@ -15,8 +15,7 @@
 
 # define ERR_RES_INV		"Invalid resolution format"
 # define ERR_RES_DUP		"Duplicate resolution parameter"
-# define ERR_RES_NF			"Resolution not found"
-# define ERR_RES_ZERO		"Resolution cant't start or be zero"
+# define ERR_RES_ZERO		"Resolution can't start or be zero"
 
 # define ERR_TEX_NO_OF		"Failed to open NORTH texture"
 # define ERR_TEX_SO_OF		"Failed to open SOUTH texture"
@@ -27,16 +26,20 @@
 # define ERR_TEX_S_NF		"Sprite not found"
 # define ERR_TEX_DUP		"Duplicate texture parameter"
 
+# define ERR_MAP_NF			"Map not found"
 # define ERR_MAP_DUP_POS	"Duplicate player position"
 # define ERR_MAP_NO_POS		"No player position found"
 # define ERR_MAP_INV		"Invalid map character"
 # define ERR_MAP_INV_WALL	"Map must be surrounded by walls '1'"
-# define ERR_MAP_TOO_SMALL	"Map must be surrounded by walls '1'"
+# define ERR_MAP_TOO_SMALL	"Map size too small, must be minimum 3x3"
 
 # define ERR_IMG_CREATE		"Failed to create new mlx_image"
+
+# define ERR_MALLOC_FAIL	"Malloc failed"
 
 # define ERR_MLX_FAIL		"MinilibX failed to init"
 
 int							throw_error(char *error);
+int							check_map_validity(char **map, int height);
 
 #endif

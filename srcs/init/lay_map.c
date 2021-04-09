@@ -31,6 +31,7 @@ static void	set_player_pos(t_params *p, char pos, int i, int j)
 		p->player.start_dir = WE;
 	else if (pos == 'W')
 		p->player.start_dir = EA;
+	p->map.map[i][j] = '0';
 	p->player.pos_block_x = j;
 	p->player.pos_block_y = i;
 }
@@ -55,26 +56,44 @@ static int	lay_map_line(char *l, int i, t_params *p)
 			p->map.map[i][j] = l[j];
 		j++;
 	}
+	while (j < p->map.map_w)
+		p->map.map[i][j++] = '0';
 	p->map.map[i][j] = 0;
 	return (1);
 }
 
-static int	is_map_top(char *l)
+static int	is_map_line(char const *l)
 {
 	int	i;
 
 	i = 0;
-	while (l[i] == ' ')
+	while (((l[i] == ' '
+			 || l[i] == '0'
+			 || l[i] == '1'
+			 || l[i] == '2'
+			 || is_pos(l[i])) && l[i] != 0))
 		i++;
-	if (l[i] != '1')
-		return (0);
-	while (l[i] == '1')
-		i++;
-	if (l[i] == ' ')
-		while (l[i] == ' ')
-			i++;
 	if (l[i] == 0)
 		return (1);
+	return (0);
+}
+
+static int	is_map_vert_end_line(char const *l)
+{
+	int	i;
+
+	i = 0;
+	while (l[i] == ' ' || l[i] == '0')
+		i++;
+	if (l[i] == '1')
+	{
+		while (((l[i] == ' '
+				 || l[i] == '0'
+				 || l[i] == '1') && l[i] != 0))
+			i++;
+		if (l[i] == 0)
+			return (1);
+	}
 	return (0);
 }
 
@@ -86,26 +105,21 @@ int	lay_map(char *map_file, t_params *p)
 
 	i = 0;
 	map_fd = open(map_file, O_RDONLY);
+	if (map_fd < 0)
+		perror("Error : ");
 	line = NULL;
 	p->map.map = (char **)malloc(sizeof(char *) * p->map.map_h);
 	if (p->map.map == NULL)
 		return (0);
-	while (get_next_line(map_fd, &line) == 1)
-	{
-		if (is_map_top(line))
-			break ;
-		free(line);
-		line = NULL;
-	}
+	while (get_next_line(map_fd, &line) == 1 && !(is_map_vert_end_line(line)))
+		free_line(&line);
 	lay_map_line(line, i++, p);
-	free(line);
-	line = NULL;
+	free_line(&line);
 	while (i < p->map.map_h)
 	{
 		get_next_line(map_fd, &line);
 		lay_map_line(line, i++, p);
-		free(line);
-		line = NULL;
+		free_line(&line);
 	}
 	close(map_fd);
 	return (1);

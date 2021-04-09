@@ -13,66 +13,36 @@
 #include "cub.h"
 #include "get_next_line.h"
 
-static int	is_pos(char c, int *pos_found)
+static int	is_pos(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-	{
-		*pos_found += 1;
 		return (1);
-	}
 	return (0);
 }
 
-static int	is_map_h_limit(char *l, t_params *p)
-{
-	int i;
-
-	i = 0;
-	while (l[i] ==  ' ')
-		i++;
-	if (l[i] != '1')
-		return (0);
-	while (l[i] == '1')
-		i++;
-	if (l[i] == ' ')
-		while (l[i] == ' ')
-			i++;
-	if (l[i] == 0)
-	{
-		p->map.map_h++;
-		return (1);
-	}
-	return (0);
-}
-
-static int	is_map_line(char *l, t_params *p)
+static int	is_map_line(char const *l, t_params *p)
 {
 	int			i;
-	static int	pos_found;
 
 	i = 0;
 	while (l[i] == ' ')
 		i++;
-	if (l[i] != '1')
-		return (throw_error(ERR_MAP_INV_WALL));
-	while (l[i + 1] != 0)
-	{
-		if (!(l[i] == ' ' || l[i] == '0' || l[i] == '1' || l[i] == '2' || is_pos(l[i], &pos_found)))
-			return (throw_error(ERR_MAP_INV));
+	if (l[i] == 0)
+		return (0);
+	while (l[i] == ' '
+		|| l[i] == '0'
+		|| l[i] == '1'
+		|| l[i] == '2'
+		|| is_pos(l[i]))
 		i++;
-	}
-	if (pos_found > 1)
-		return (throw_error(ERR_MAP_DUP_POS));
-	if (i >= p->map.map_w)
-		p->map.map_w = i;
-	while (l[i] == ' ' && i > 0)
-		i--;
-	if (l[i] == '1')
+	if (l[i] == 0)
 	{
+		if (i >= p->map.map_w)
+			p->map.map_w = i + 1;
 		p->map.map_h++;
 		return (1);
 	}
-	return (throw_error(ERR_MAP_INV_WALL));
+	return (0);
 }
 
 int	parse_map_size(int map_fd, t_params *p)
@@ -80,30 +50,15 @@ int	parse_map_size(int map_fd, t_params *p)
 	char *line;
 
 	line = NULL;
-	while(get_next_line(map_fd, &line) == 1)
+	while(get_next_line(map_fd, &line) == 1 && !(is_map_line(line, p)))
+		free_line(&line);
+	if (p->map.map_w == 1)
 	{
-		if (is_map_h_limit(line, p))
-		{
-			free(line);
-			line = NULL;
-			while(get_next_line(map_fd, &line) == 1)
-			{
-				if (is_map_h_limit(line, p))
-				{
-					free(line);
-					return (1);
-				}
-				else if (!(is_map_line(line, p)))
-				{
-					free(line);
-					return (0);
-				}
-				free(line);
-				line = NULL;
-			}
-		}
-		free(line);
-		line = NULL;
+		free_line(&line);
+		while (get_next_line(map_fd, &line) == 1 && is_map_line(line, p))
+			free_line(&line);
+		free_line(&line);
+		return (1);
 	}
-	return (1);
+	return (throw_error(ERR_MAP_NF));
 }

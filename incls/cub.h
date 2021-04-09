@@ -1,14 +1,16 @@
 #ifndef CUB_H
 #define CUB_H
+
 # include "libft.h"
 # include "errors.h"
 # include "mlx.h"
+# include "utils.h"
 # include <stdio.h>
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <time.h>
+# include <errno.h>
 
 # ifdef  __unix__
 
@@ -107,7 +109,6 @@ typedef struct	s_map
 	int		c_s;
 	int		block_h;
 	char	**map;
-	int		*mapi;
 
 }				t_map;
 

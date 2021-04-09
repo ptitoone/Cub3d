@@ -24,19 +24,14 @@ static int	add_tex(char *l, char **dst)
 		while (l[i] == ' ')
 			i++;
 		if (!l[i])
-		{
-			printf("Error : %s\n", ERR_TEX_NULL);
-			return (0);
-		}
+			return (throw_error(ERR_TEX_NULL));
 		while (l[i + j] != ' ' && l[i + j] != 0)
 			j++;
 		*dst = ft_substr(l, i, j);
 		if (*dst)
 			return (1);
 	}
-	else
-		printf("Error : %s\n", ERR_TEX_DUP);
-	return (0);
+	return (throw_error(ERR_TEX_DUP));
 }
 
 int	parse_tex(char *l, t_tex *t)
@@ -44,7 +39,7 @@ int	parse_tex(char *l, t_tex *t)
 	int i;
 
 	i = 0;
-	while (l[i] == ' ' && l[i] != 0)
+	while (l[i] == ' ')
 		i++;
 	if (l[i] == 'N' && l[i + 1] == 'O' && l[i + 2] == ' ')
 		return (add_tex(&l[i + 2], &t->dir[NO]));

@@ -14,12 +14,32 @@
 
 int	throw_error(char *error)
 {
-	printf("Error : %s\n", error);
+	ft_putstr_fd("Error: ", 2);
+	ft_putstr_fd(error, 2);
 	return (0);
 }
 
-int	check_missing_params(t_params *p)
+int	check_map_validity(char **map, int height)
 {
+	int x;
+	int y;
+	int len;
 
+	x = 0;
+	y = 0;
+	len = 0;
+	while (map[y][x++] != 0)
+		len++;
+	x = 0;
+	while (y < height)
+	{
+		while (map[y][x] != 0)
+			x++;
+		if ((x - len) >= 2 || (len - x) >= 2)
+			return (throw_error(ERR_MAP_INV_WALL));
+		len = x;
+		x = 0;
+		y++;
+	}
 	return (1);
 }

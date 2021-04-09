@@ -14,8 +14,8 @@
 
 int	init_tex_img(t_params *p)
 {
-	int w;
-	int h;
+	int	w;
+	int	h;
 
 	p->tex.no.img = mlx_xpm_file_to_image(p->mlx, p->tex.dir[NO], &w, &h);
 	if (p->tex.no.img == NULL)

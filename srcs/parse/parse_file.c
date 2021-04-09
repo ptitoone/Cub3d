@@ -14,14 +14,14 @@
 #include "cub.h"
 #include "parse.h"
 
-static int	is_tex_spec(char c)
+static int	is_tex_specifier(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == 'F' || c == 'C')
 		return (1);
 	return (0);
 }
 
-static int	add_info(char *line, t_params *p)
+static int	add_parameter(char *line, t_params *p)
 {
 	int i;
 
@@ -30,15 +30,12 @@ static int	add_info(char *line, t_params *p)
 	{
  		if (line[i] == 'R')
 		{
-			if (p->win_h == 0 && p->win_w == 0)
-			{
- 				if (parse_res(line, p))
- 					return (1);
-			}
+			if (parse_res(line, p))
+				return (1);
 			else
-				return (throw_error(ERR_RES_DUP));
+				return (0);
 		}
- 		else if (is_tex_spec(line[i]))
+ 		else if (is_tex_specifier(line[i]))
 		{
 			if (parse_tex(line, &p->tex))
 				return (1);
@@ -55,27 +52,22 @@ int	parse_file(char *map_file, t_params *p)
 	char	*line;
 
 	map_fd = open(map_file, O_RDONLY);
+	if (map_fd < 0)
+		return (throw_error(strerror(errno)));
 	line = NULL;
 	i = 0;
 	while (get_next_line(map_fd, &line) == 1)
 	{
 		if (line[0] == '\0')
-		{
-			free(line);
-			line = NULL;
-			continue ;
-		}
-		if (add_info(line, p))
+			free_line(&line);
+		else if (add_parameter(line, p))
 			i++;
 		else
 			return (0);
-		free(line);
-		line = NULL;
 		if (i == 8)
 			break ;
 	}
 	if (parse_map_size(map_fd, p))
-		if (lay_map(map_file, p))
 			return (1);
 	return (0);
 }
