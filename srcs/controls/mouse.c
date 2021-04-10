@@ -24,10 +24,6 @@ static int	mouse_a(t_params *p)
 	p->player.strafe_del_x = cos(p->player.strafe_orient) * 5;
 	p->player.strafe_del_y = sin(p->player.strafe_orient) * 5;
 	return (0);
-//	find_wall(p);
-//	draw_map(p);
-//	draw_player(p->player.pos_x, p->player.pos_y, p);
-//	mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 }
 
 static int	mouse_d(t_params *p)
@@ -43,16 +39,12 @@ static int	mouse_d(t_params *p)
 	p->player.strafe_del_x = cos(p->player.strafe_orient) * 5;
 	p->player.strafe_del_y = sin(p->player.strafe_orient) * 5;
 	return (0);
-//	find_wall(p);
-//	draw_map(p);
-//	printf("color = %u\n", get_pixel_color(&p->img, p->player.pos_x, p->player.pos_y));
-//	draw_player(p->player.pos_x, p->player.pos_y, p);
-//	mlx_put_image_to_window(p->mlx, p->win, p->img.img, 0, 0);
 }
 
-int mouse(int x, int y, void *pr)
+int	mouse(int x, int y, void *pr)
 {
-	t_params *p;
+	t_params	*p;
+
 	p = (t_params *)pr;
 	if (x < (p->win_w / 2) - 1)
 		mouse_a(p);

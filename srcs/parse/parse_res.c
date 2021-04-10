@@ -55,7 +55,7 @@ static int	add_res(char *l, t_params *p)
 	}
 	while (l[i] == ' ')
 		i++;
-	if (!l[i++])
+	if (!l[i])
 		return (1);
 	return (0);
 }

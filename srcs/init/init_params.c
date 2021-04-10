@@ -13,7 +13,7 @@
 #include "cub.h"
 #include "errors.h"
 
-static int init_images(t_params *p)
+static int	init_images(t_params *p)
 {
 	p->imgv.img = mlx_new_image(p->mlx, (p->win_w), (p->win_h));
 	if (p->imgv.img == NULL)
@@ -30,7 +30,7 @@ static int	init_map(t_params *p)
 	return (1);
 }
 
-static	void init_player(t_params *p)
+static void	init_player(t_params *p)
 {
 	if (p->player.start_dir == NO)
 	{
@@ -58,8 +58,8 @@ static	void init_player(t_params *p)
 
 int	init_params(t_params *p)
 {
-	int screen_w;
-	int screen_h;
+	int	screen_w;
+	int	screen_h;
 
 	screen_w = 0;
 	screen_h = 0;
@@ -68,6 +68,7 @@ int	init_params(t_params *p)
 		p->win_w = screen_w;
 	if (p->win_h > screen_h)
 		p->win_h = screen_h;
+	p->s_data.line_dist = (double *)malloc(sizeof(double) * p->win_w);
 	if (!(init_images(p)))
 		return (0);
 	if (!(init_map(p)))
@@ -75,6 +76,10 @@ int	init_params(t_params *p)
 	if (!(check_player_pos(p)))
 		return (0);
 	init_player(p);
+	p->player.del_x = cos(p->player.orient) * 5;
+	p->player.del_y = sin(p->player.orient) * 5;
+	p->player.strafe_del_x = cos(p->player.strafe_orient) * 5;
+	p->player.strafe_del_y = sin(p->player.strafe_orient) * 5;
 	p->win2 = mlx_new_window(p->mlx, (p->win_w), (p->win_h), "FPV");
 	return (1);
 }

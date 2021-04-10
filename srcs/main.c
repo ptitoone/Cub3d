@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
 #include "cub.h"
 #include "parse.h"
+#include "utils.h"
 #include "errors.h"
 #include "controls.h"
 

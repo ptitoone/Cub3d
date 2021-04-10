@@ -15,8 +15,8 @@
 
 static int	add_tex(char *l, char **dst)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -37,7 +37,7 @@ static int	add_tex(char *l, char **dst)
 
 int	parse_tex(char *l, t_tex *t)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (l[i] == ' ')
@@ -55,8 +55,7 @@ int	parse_tex(char *l, t_tex *t)
 	else if (l[i] == 'F' && l[i + 1] == ' ')
 		return (add_tex(&l[i + 1], &t->f));
 	else if (l[i] == 'C' && l[i + 1] == ' ')
-		return(add_tex(&l[i + 1], &t->c));
+		return (add_tex(&l[i + 1], &t->c));
 	else
-		printf("Error : %s \"%s\"\n", ERR_TEX_INV, l);
-	return (0);
+		return (0);
 }

@@ -12,15 +12,15 @@
 
 #include "cub.h"
 
-static int draw_cell(int w, int h, t_params *p)
+static int	draw_cell(int w, int h, t_params *p)
 {
 	double	x;
 	double	y;
 	int		i;
 	int		j;
 
-	x = p->win_w / p->map.map_w;
-	y = p->win_h / p->map.map_h;
+	x = (double)p->win_w / p->map.map_w;
+	y = (double)p->win_h / p->map.map_h;
 	i = 0;
 	j = 0;
 	while (i < y)
@@ -28,9 +28,13 @@ static int draw_cell(int w, int h, t_params *p)
 		while (j < x)
 		{
 			if (j == 0 || j == x || i == 0 || i == y)
-				put_pixel(&p->img, ((w * x) + j++), ((h * y) + i), 0x00FFFFFF);
+				put_pixel(&p->img,
+					(int)((w * x) + j++),
+					(int)((h * y) + i), 0x00FFFFFF);
 			else
-				put_pixel(&p->img, ((w * x) + j++), ((h * y) + i), 0150150150);
+				put_pixel(&p->img,
+					(int)((w * x) + j++),
+					(int)((h * y) + i), 0150150150);
 		}
 		j = 0;
 		i++;
@@ -38,15 +42,15 @@ static int draw_cell(int w, int h, t_params *p)
 	return (0);
 }
 
-static int draw_cell2(int w, int h, t_params *p)
+static int	draw_cell2(int w, int h, t_params *p)
 {
 	double	x;
 	double	y;
 	int		i;
 	int		j;
 
-	x = floor(p->win_w / p->map.map_w);
-	y = floor(p->win_h / p->map.map_h);
+	x = floor((double)p->win_w / p->map.map_w);
+	y = floor((double)p->win_h / p->map.map_h);
 	i = 0;
 	j = 0;
 	while (i < y)
@@ -54,9 +58,13 @@ static int draw_cell2(int w, int h, t_params *p)
 		while (j < x)
 		{
 			if (j == 0 || j == x || i == 0 || i == y)
-				put_pixel(&p->img, ((w * x) + j++), ((h * y) + i), 0x00FFFFFF);
+				put_pixel(&p->img,
+					(int)((w * x) + j++),
+					(int)((h * y) + i), 0x00FFFFFF);
 			else
-				put_pixel(&p->img, ((w * x) + j++), ((h * y) + i), 0200200200);
+				put_pixel(&p->img,
+					(int)((w * x) + j++),
+					(int)((h * y) + i), 0200200200);
 		}
 		j = 0;
 		i++;

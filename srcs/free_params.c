@@ -12,9 +12,9 @@
 
 #include "cub.h"
 
-static void free_tex(t_params *p)
+static void	free_tex(t_params *p)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 4)
@@ -39,7 +39,7 @@ static void free_tex(t_params *p)
 		mlx_destroy_image(p->mlx, p->tex.ea.img);
 }
 
-static void free_map(t_params *p)
+static void	free_map(t_params *p)
 {
 	int	y;
 
@@ -55,7 +55,7 @@ static void free_map(t_params *p)
 	}
 }
 
-int free_params(t_params *p)
+int	free_params(t_params *p)
 {
 	if (p->win != NULL)
 		mlx_clear_window(p->mlx, p->win);
@@ -69,4 +69,3 @@ int free_params(t_params *p)
 	free_tex(p);
 	return (0);
 }
-

@@ -22,9 +22,9 @@ int	throw_error(char *error)
 
 int	check_map_validity(char **map, int height)
 {
-	int x;
-	int y;
-	int len;
+	int	x;
+	int	y;
+	int	len;
 
 	x = 0;
 	y = 0;

@@ -34,7 +34,7 @@ static int	is_map_line(char const *l, t_params *p)
 	if (l[i] == 0)
 	{
 		if (i >= p->map.map_w)
-			p->map.map_w = i + 1;
+			p->map.map_w = i;
 		p->map.map_h++;
 		return (1);
 	}
@@ -51,8 +51,17 @@ int	parse_map_size(int map_fd, t_params *p)
 	if (p->map.map_h == 1)
 	{
 		free_line(&line);
-		while (get_next_line(map_fd, &line) == 1 && is_map_line(line, p))
+		while (get_next_line(map_fd, &line) == 1)
+		{
+			if (!(is_map_line(line, p)))
+				return (throw_error(ERR_MAP_INV));
 			free_line(&line);
+		}
+		if (!(is_map_line(line, p)))
+		{
+			free_line(&line);
+			return (throw_error(ERR_MAP_INV));
+		}
 		free_line(&line);
 		return (1);
 	}

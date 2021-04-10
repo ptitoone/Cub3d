@@ -52,7 +52,6 @@
 
 # define PI		M_PI	
 # define C_S	64
-# define TEX_S	128	
 
 enum			e_dir
 {NO, SO, WE, EA};
@@ -128,6 +127,13 @@ typedef struct	s_keys
 
 }				t_keys;
 
+typedef struct	s_sprite_data
+{
+
+	double	*line_dist;
+
+}				t_sprite_data;
+
 typedef struct	s_params
 {
 
@@ -142,6 +148,7 @@ typedef struct	s_params
 	t_img	img;
 	t_img	imgv;
 	t_keys	keys;
+	t_sprite_data s_data;
 
 }				t_params;
 

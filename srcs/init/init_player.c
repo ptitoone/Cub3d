@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lay_map.c                                          :+:      :+:    :+:   */
+/*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,7 +14,7 @@
 #include "parse.h"
 #include "errors.h"
 
-static void	set_player_pos(t_params *p, char pos, int i, int j, int *pos_found)
+static void	set_player_pos(t_params *p, char pos, t_coords *c, int *pos_found)
 {
 	if (pos == 'N')
 		p->player.start_dir = NO;
@@ -24,32 +24,35 @@ static void	set_player_pos(t_params *p, char pos, int i, int j, int *pos_found)
 		p->player.start_dir = WE;
 	else if (pos == 'W')
 		p->player.start_dir = EA;
-	p->map.map[i][j] = '0';
-	p->player.pos_block_x = j;
-	p->player.pos_block_y = i;
+	p->map.map[(int)c->y][(int)c->x] = '0';
+	p->player.pos_block_x = (int)c->x;
+	p->player.pos_block_y = (int)c->y;
 	*pos_found += 1;
 }
 
 int	check_player_pos(t_params *p)
 {
-	int 		x;
-	int 		y;
+	t_coords	coords;
 	static int	pos_found;
 
-	x = 0;
-	y = 0;
-	while (y < p->map.map_h)
+	coords.x = 0;
+	coords.y = 0;
+	while (coords.y < p->map.map_h)
 	{
-		while (x < p->map.map_w)
+		while (coords.x < p->map.map_w)
 		{
-			if (is_pos(p->map.map[y][x]))
-				set_player_pos(p, p->map.map[y][x], y, x, &pos_found);
+			if (is_pos(p->map.map[(int)coords.y][(int)coords.x]))
+				set_player_pos(
+					p,
+					p->map.map[(int)coords.y][(int)coords.x],
+					&coords,
+					&pos_found);
 			if (pos_found > 1)
 				return (throw_error(ERR_MAP_DUP_POS));
-			x++;
+			coords.x++;
 		}
-		x = 0;
-		y++;
+		coords.x = 0;
+		coords.y++;
 	}
 	if (!pos_found)
 		return (throw_error(ERR_MAP_NO_POS));
