@@ -13,6 +13,8 @@
 #ifndef ERRORS_H
 # define ERRORS_H
 
+# include "cub.h"
+
 # define ERR_RES_INV		"Invalid resolution format"
 # define ERR_RES_DUP		"Duplicate resolution parameter"
 # define ERR_RES_ZERO		"Resolution can't start or be zero"
@@ -41,5 +43,6 @@
 
 int							throw_error(char *error);
 int							check_map_validity(char **map, int height);
+int							check_player_pos(t_params *p);
 
 #endif

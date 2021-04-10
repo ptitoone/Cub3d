@@ -10,19 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "errors.h"
 #include "cub.h"
+#include "parse.h"
+#include "utils.h"
 #include "get_next_line.h"
-
-static int	is_pos(char c)
-{
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (1);
-	return (0);
-}
 
 static int	is_map_line(char const *l, t_params *p)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (l[i] == ' ')
@@ -47,12 +43,12 @@ static int	is_map_line(char const *l, t_params *p)
 
 int	parse_map_size(int map_fd, t_params *p)
 {
-	char *line;
+	char	*line;
 
 	line = NULL;
-	while(get_next_line(map_fd, &line) == 1 && !(is_map_line(line, p)))
+	while (get_next_line(map_fd, &line) == 1 && !(is_map_line(line, p)))
 		free_line(&line);
-	if (p->map.map_w == 1)
+	if (p->map.map_h == 1)
 	{
 		free_line(&line);
 		while (get_next_line(map_fd, &line) == 1 && is_map_line(line, p))

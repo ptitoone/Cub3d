@@ -20,7 +20,7 @@ int	key_w(t_params *p)
 
 	x_offset = p->player.pos_x + p->player.del_x * 7;
 	y_offset = p->player.pos_y + p->player.del_y * 7;
-	if (p->map.map[y_offset/p->map.c_s][x_offset/p->map.c_s] != '1')
+	if (p->map.map[y_offset/C_S][x_offset/C_S] != '1')
 	{
 		p->player.pos_x += (2 * p->player.del_x);
 		p->player.pos_y += (2 * p->player.del_y);
@@ -35,7 +35,7 @@ int	key_s(t_params *p)
 
 	x_offset = p->player.pos_x - p->player.del_x * 7;
 	y_offset = p->player.pos_y - p->player.del_y * 7;
-	if (p->map.map[y_offset/p->map.c_s][x_offset/p->map.c_s] != '1')
+	if (p->map.map[y_offset/C_S][x_offset/C_S] != '1')
 	{
 		p->player.pos_x -= (2 * p->player.del_x);
 		p->player.pos_y -= (2 * p->player.del_y);
@@ -50,7 +50,7 @@ int	key_a(t_params *p)
 
 	x_offset = p->player.pos_x + p->player.strafe_del_x * 7;
 	y_offset = p->player.pos_y + p->player.strafe_del_y * 7;
-	if (p->map.map[y_offset/p->map.c_s][x_offset/p->map.c_s] != '1')
+	if (p->map.map[y_offset/C_S][x_offset/C_S] != '1')
 	{
 		p->player.pos_x += (2 * p->player.strafe_del_x);
 		p->player.pos_y += (2 * p->player.strafe_del_y);
@@ -65,7 +65,7 @@ int	key_d(t_params *p)
 
 	x_offset = p->player.pos_x - p->player.strafe_del_x * 7;
 	y_offset = p->player.pos_y - p->player.strafe_del_y * 7;
-	if (p->map.map[y_offset/p->map.c_s][x_offset/p->map.c_s] != '1')
+	if (p->map.map[y_offset/C_S][x_offset/C_S] != '1')
 	{
 		p->player.pos_x -= (2 * p->player.strafe_del_x);
 		p->player.pos_y -= (2 * p->player.strafe_del_y);

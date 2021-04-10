@@ -10,31 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
-#include "get_next_line.h"
 #include "cub.h"
-
-static int	is_pos(char c)
-{
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (1);
-	return (0);
-}
-
-static void	set_player_pos(t_params *p, char pos, int i, int j)
-{
-	if (pos == 'N')
-		p->player.start_dir = NO;
-	else if (pos == 'S')
-		p->player.start_dir = SO;
-	else if (pos == 'E')
-		p->player.start_dir = WE;
-	else if (pos == 'W')
-		p->player.start_dir = EA;
-	p->map.map[i][j] = '0';
-	p->player.pos_block_x = j;
-	p->player.pos_block_y = i;
-}
+#include "parse.h"
+#include "utils.h"
+#include "get_next_line.h"
 
 static int	lay_map_line(char *l, int i, t_params *p)
 {
@@ -50,8 +29,6 @@ static int	lay_map_line(char *l, int i, t_params *p)
 	{
 		if (l[j] == ' ')
 			p->map.map[i][j] = '0';
-		else if (is_pos(l[j]))
-			set_player_pos(p, l[j], i, j);
 		else
 			p->map.map[i][j] = l[j];
 		j++;
@@ -60,22 +37,6 @@ static int	lay_map_line(char *l, int i, t_params *p)
 		p->map.map[i][j++] = '0';
 	p->map.map[i][j] = 0;
 	return (1);
-}
-
-static int	is_map_line(char const *l)
-{
-	int	i;
-
-	i = 0;
-	while (((l[i] == ' '
-			 || l[i] == '0'
-			 || l[i] == '1'
-			 || l[i] == '2'
-			 || is_pos(l[i])) && l[i] != 0))
-		i++;
-	if (l[i] == 0)
-		return (1);
-	return (0);
 }
 
 static int	is_map_vert_end_line(char const *l)

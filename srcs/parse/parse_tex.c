@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "errors.h"
 
 static int	add_tex(char *l, char **dst)
 {

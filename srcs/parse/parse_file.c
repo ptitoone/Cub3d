@@ -10,16 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
 #include "cub.h"
 #include "parse.h"
-
-static int	is_tex_specifier(char c)
-{
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == 'F' || c == 'C')
-		return (1);
-	return (0);
-}
+#include "utils.h"
+#include "errors.h"
+#include "get_next_line.h"
 
 static int	add_parameter(char *line, t_params *p)
 {
@@ -63,9 +58,13 @@ int	parse_file(char *map_file, t_params *p)
 		else if (add_parameter(line, p))
 			i++;
 		else
+		{
+			free_line(&line);
 			return (0);
+		}
 		if (i == 8)
 			break ;
+		free_line(&line);
 	}
 	if (parse_map_size(map_fd, p))
 			return (1);

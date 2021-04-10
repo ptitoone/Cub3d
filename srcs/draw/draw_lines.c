@@ -16,20 +16,21 @@ static void	calculate_data(t_params *p, double x, double y, double i, t_draw_l *
 {
 	data->dist = sqrt(pow(p->player.pos_x - x, 2) + pow(p->player.pos_y - y, 2));
 	data->dist = data->dist * cos(p->player.orient - data->ra);
-	data->wall_h = (int)floor(((p->map.c_s  * p->win_h) / data->dist) / p->ratio);
+	data->wall_h = (int)floor(((C_S  * p->win_h) / data->dist));
 	data->ratio_y = 64.0 / (double)(data->wall_h * 2);
-	data->tex_x = (int)i % p->map.c_s;
+	data->tex_x = (int)i % C_S;
 	if(data->tex_x == 64)
 		data->tex_x -= 1;
 	data->tex_y = 0;
 	if (data->wall_h * 2 > p->win_h)
 	{
-		data->tex_y = (((data->wall_h * 2) - p->win_h) / 2) * data->ratio_y;
+		data->tex_y = (((data->wall_h * 2) - (double)p->win_h) / 2)
+			* data->ratio_y;
 		data->wall_h = p->win_h / 2;
 	}
 }
 
-void	draw_line_h(int rc, double ra, double x, double y, t_params *p, int color)
+void	draw_line_h(int rc, double ra, double x, double y, t_params *p)
 {
 	int i;
 	int j;
@@ -55,7 +56,7 @@ void	draw_line_h(int rc, double ra, double x, double y, t_params *p, int color)
 		put_pixel(&p->imgv, rc, j++, 0x00353D4E);
 }
 
-void	draw_line_v(int rc, double ra, double x, double y, t_params *p, int color)
+void	draw_line_v(int rc, double ra, double x, double y, t_params *p)
 {
 	int i;
 	int j;

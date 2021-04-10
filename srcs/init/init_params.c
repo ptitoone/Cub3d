@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "errors.h"
 
 static int init_images(t_params *p)
 {
@@ -26,8 +27,6 @@ static int	init_map(t_params *p)
 {
 	if (p->map.map_w < 3 && p->map.map_h < 3)
 		return (throw_error(ERR_MAP_TOO_SMALL));
-	p->map.c_s = 64;
-	p->map.block_h = 64;
 	return (1);
 }
 
@@ -53,19 +52,28 @@ static	void init_player(t_params *p)
 		p->player.orient = PI;
 		p->player.strafe_orient = PI / 2;
 	}
-	p->player.pos_x = ((p->player.pos_block_x + 1) * p->map.c_s) - (p->map.c_s / 2);
-	p->player.pos_y = ((p->player.pos_block_y + 1) * p->map.c_s) - (p->map.c_s / 2);
+	p->player.pos_x = ((p->player.pos_block_x + 1) * C_S) - (double)C_S / 2;
+	p->player.pos_y = ((p->player.pos_block_y + 1) * C_S) - (double)C_S / 2;
 }
 
 int	init_params(t_params *p)
 {
-	p->ratio = p->win_w / p->win_h;
+	int screen_w;
+	int screen_h;
+
+	screen_w = 0;
+	screen_h = 0;
+	mlx_get_screen_size(p->mlx, &screen_w, &screen_h);
+	if (p->win_w > screen_w)
+		p->win_w = screen_w;
+	if (p->win_h > screen_h)
+		p->win_h = screen_h;
 	if (!(init_images(p)))
 		return (0);
 	if (!(init_map(p)))
 		return (0);
-	if (p->player.start_dir == -1)
-		return (throw_error(ERR_MAP_NO_POS));
+	if (!(check_player_pos(p)))
+		return (0);
 	init_player(p);
 	p->win2 = mlx_new_window(p->mlx, (p->win_w), (p->win_h), "FPV");
 	return (1);

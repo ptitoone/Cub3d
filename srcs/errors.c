@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "errors.h"
 
 int	throw_error(char *error)
 {

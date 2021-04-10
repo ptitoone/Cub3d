@@ -2,9 +2,7 @@
 #define CUB_H
 
 # include "libft.h"
-# include "errors.h"
 # include "mlx.h"
-# include "utils.h"
 # include <stdio.h>
 # include <math.h>
 # include <unistd.h>
@@ -53,7 +51,7 @@
 # endif
 
 # define PI		M_PI	
-# define C_H	64	
+# define C_S	64
 # define TEX_S	128	
 
 enum			e_dir
@@ -106,8 +104,6 @@ typedef struct	s_map
 
 	int		map_w;
 	int		map_h;
-	int		c_s;
-	int		block_h;
 	char	**map;
 
 }				t_map;
@@ -140,7 +136,6 @@ typedef struct	s_params
 	void	*win2;
 	int		win_w;
 	int		win_h;
-	double	ratio;
 	t_tex	tex;
 	t_play	player;
 	t_map	map;
@@ -163,19 +158,17 @@ typedef struct	s_draw_l
 }				t_draw_l;
 
 int				init_params(t_params *p);
-void			ft_init_keys(t_keys *k);
 int				init_tex_img(t_params*p);
 void			put_pixel(t_img *img, int x, int y, int color);
 unsigned int 	get_pixel_color(t_img *img, int x, int y);
 void			draw_player(int x, int y, t_params *p);
 void			draw_player_ori(t_params *p);
-int				ft_keys(int keycode, void *pr);
-int				ft_keysr(int keycode, void *pr);
+
 int				mouse(int x, int y, void *pr);
 void    		plot_line(int x0, int y0, int x1, int y1, int color, t_params *p);
 int				find_wall(t_params *p);
 void			upscale_img(int w, int h, int scale, char *img, char *img2);
 void			draw_tex_col(t_img *tex, int tex_x, int tex_y, int rc, int j, t_img *img);
-void			draw_line_h(int rc, double ra, double x, double y, t_params *p, int color);
-void			draw_line_v(int rc, double ra, double x, double y, t_params *p, int color);
+void			draw_line_h(int rc, double ra, double x, double y, t_params *p);
+void			draw_line_v(int rc, double ra, double x, double y, t_params *p);
 #endif

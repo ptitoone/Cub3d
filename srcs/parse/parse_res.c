@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "errors.h"
 #include "parse.h"
 
 static int	push_res(char *l, int i, int j)
@@ -53,8 +54,9 @@ static int	add_res(char *l, t_params *p)
 		i += (j + 1);
 	}
 	while (l[i] == ' ')
-		if (!l[i++])
-			return (1);
+		i++;
+	if (!l[i++])
+		return (1);
 	return (0);
 }
 

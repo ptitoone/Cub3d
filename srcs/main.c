@@ -10,8 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "utils.h"
 #include "cub.h"
 #include "parse.h"
+#include "errors.h"
 #include "controls.h"
 
 static int	render(void *pr)
@@ -42,15 +44,15 @@ int main()
 	if (p.mlx == NULL)
 		return (throw_error(ERR_MLX_FAIL));
 	if(!(parse_file("map.cub", &p)))
-		return (0);
-	if (lay_map("map.cub", &p))
-		return (0);
+		return (free_params(&p));
+	if (!(lay_map("map.cub", &p)))
+		return (free_params(&p));
 	if (!(init_tex_img(&p)))
-		return (0);
+		return (free_params(&p));
 //	if (!(check_map_validity(p.map.map, p.map.map_h)))
 //		return (0);
 	if (!(init_params(&p)))
-		return (0);
+		return (free_params(&p));
 
 ///////// CREATE IMAGES ///////////////////////////////////////////////////////
 

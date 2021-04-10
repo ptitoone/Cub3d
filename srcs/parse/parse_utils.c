@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/06 15:30:28 by akotzky           #+#    #+#             */
-/*   Updated: 2021/04/07 15:26:31 by akotzky          ###   ########.fr       */
+/*   Created: 2021/04/10 11:22:58 by akotzky           #+#    #+#             */
+/*   Updated: 2021/04/10 14:44:25 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+# include "parse.h"
 
-# include "cub.h"
+int	is_pos(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
 
-void	free_line(char **line);
-int 	free_params(t_params *p);
-
-#endif
+int	is_tex_specifier(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == 'F' || c == 'C')
+		return (1);
+	return (0);
+}

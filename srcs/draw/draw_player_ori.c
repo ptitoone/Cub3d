@@ -53,8 +53,8 @@ void	plot_line(int x0, int y0, int x1, int y1, int color, t_params *p)
 
 void	draw_player_ori(t_params *p)
 {
-	int x1 = cos(p->player.orient) * (p->map.c_s  / 2);
-	int y1 = sin(p->player.orient) * (p->map.c_s  / 2);
+	int x1 = cos(p->player.orient) * (C_S  / 2);
+	int y1 = sin(p->player.orient) * (C_S  / 2);
 
 	plot_line(p->player.pos_x, p->player.pos_y, p->player.pos_x + x1, p->player.pos_y + y1, 0x00FF0000, p);
 }

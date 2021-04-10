@@ -20,10 +20,10 @@ static int	check_wall(t_coords *c, t_params *p, double xo, double yo)
 	while (dof++ < 100)
 	{
 		if (c->x >= 0
-			&& c->x <= p->map.map_w * p->map.c_s
+			&& c->x <= p->map.map_w * C_S
 			&& c->y >= 0
-			&& c->y <= p->map.map_h * p->map.c_s)
-			if (p->map.map[(int)c->y/p->map.c_s][(int)c->x/p->map.c_s] == '1')
+			&& c->y <= p->map.map_h * C_S)
+			if (p->map.map[(int)c->y/C_S][(int)c->x/C_S] == '1')
 				return (1);
 		c->x+=xo;
 		c->y+=yo;
@@ -42,16 +42,16 @@ static int check_hori_lines(t_params *p, double ra, t_coords *c)
 		return (0);
 	if (ra > PI)
 	{
-		c->y = floor(p->player.pos_y / p->map.c_s ) * (p->map.c_s ) - 0.0005;
+		c->y = floor(p->player.pos_y / C_S ) * (C_S ) - 0.0005;
 		c->x = (p->player.pos_y - c->y) * itan + p->player.pos_x ;
-		yo = -p->map.c_s ;
+		yo = -C_S ;
 		xo = -yo * itan;
 	}
 	if (ra < PI)
 	{
-		c->y = floor(p->player.pos_y / p->map.c_s ) * (p->map.c_s ) + p->map.c_s;
+		c->y = floor(p->player.pos_y / C_S ) * (C_S ) + C_S;
 		c->x = (p->player.pos_y - c->y) * itan + p->player.pos_x ;
-		yo = p->map.c_s ;
+		yo = C_S ;
 		xo = -yo * itan;
 	}
 	if (check_wall(c, p, xo, yo))
@@ -70,16 +70,16 @@ static int	check_vert_lines(t_params *p, double ra, t_coords *c)
 		return (0);
 	if (ra > (PI / 2) && ra < (3 * PI / 2))
 	{
-		c->x = floor(p->player.pos_x / p->map.c_s) * (p->map.c_s) - 0.0005;
+		c->x = floor(p->player.pos_x / C_S) * (C_S) - 0.0005;
 		c->y = (p->player.pos_x - c->x) * ntan + p->player.pos_y ;
-		xo = -p->map.c_s;
+		xo = -C_S;
 		yo = -xo * ntan;
 	}
 	if (ra < (PI / 2) || ra > (3 * PI / 2))
 	{
-		c->x = floor(p->player.pos_x / p->map.c_s) * (p->map.c_s) + p->map.c_s;
+		c->x = floor(p->player.pos_x / C_S) * (C_S) + C_S;
 		c->y = (p->player.pos_x - c->x) * ntan + p->player.pos_y ;
-		xo = p->map.c_s;
+		xo = C_S;
 		yo = -xo * ntan;
 	}
 	if (check_wall(c, p, xo, yo))
@@ -115,9 +115,9 @@ int find_wall(t_params *p)
 		check_vert_lines(p, ra, &v);
 		if (sqrt(pow(h.x - p->player.pos_x, 2) + pow(h.y - p->player.pos_y, 2))
 			<= sqrt(pow(v.x - p->player.pos_x, 2) + pow(v.y - p->player.pos_y, 2)))
-			draw_line_h(i, ra, h.x - 1, h.y - 1, p, 0x00F17600);
+			draw_line_h(i, ra, h.x - 1, h.y - 1, p);
 		else
-			draw_line_v(i, ra, v.x, v.y, p, 0x00954900);
+			draw_line_v(i, ra, v.x, v.y, p);
 		ra += ((60 * PI / 180) / p->win_w);
 	}
 //	mlx_sync(1, p->imgv.img);
