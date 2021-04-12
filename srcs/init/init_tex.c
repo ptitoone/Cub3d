@@ -13,6 +13,22 @@
 #include "cub.h"
 #include "errors.h"
 
+static void tex_to_array(t_img *img, unsigned int tex[TEX_S][TEX_S])
+{
+	int x;
+	int y;
+
+	y = -1;
+	while (++y < TEX_S)
+	{
+		x = -1;
+		while (++x < TEX_S)
+		{
+			tex[y][x] = get_pixel_color(img, x, y);
+		}
+	}
+}
+
 int	init_tex_img(t_params *p)
 {
 	int	w;
@@ -38,5 +54,9 @@ int	init_tex_img(t_params *p)
 		return (throw_error(ERR_TEX_EA_OF));
 	p->tex.ea.addr = mlx_get_data_addr(p->tex.ea.img, &p->tex.ea.bpp,
 			&p->tex.ea.line_len, &p->tex.ea.endian);
+	tex_to_array(&p->tex.no, p->tex.t_no);
+	tex_to_array(&p->tex.so, p->tex.t_so);
+	tex_to_array(&p->tex.we, p->tex.t_we);
+	tex_to_array(&p->tex.ea, p->tex.t_ea);
 	return (1);
 }

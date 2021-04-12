@@ -49,6 +49,7 @@ int main()
 		return (free_params(&p));
 	if (!(init_tex_img(&p)))
 		return (free_params(&p));
+	init_sprites(&p);
 //	if (!(check_map_validity(p.map.map, p.map.map_h)))
 //		return (0);
 	if (!(init_params(&p)))

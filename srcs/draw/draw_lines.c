@@ -48,11 +48,11 @@ void	draw_line_h(int rc, double ra, double x, double y, t_params *p)
 	while (i++ < data.wall_h * 2)
 	{
 		if (ra > 0 && ra < PI)
-			draw_tex_col(&p->tex.no, data.tex_x,
-				(int)data.tex_y, rc, j++, &p->imgv);
+			put_pixel(&p->imgv, rc, j++,
+				(int)p->tex.t_no[(int)data.tex_y][(int)data.tex_x]);
 		else if (ra > PI && ra < 2 * PI)
-			draw_tex_col(&p->tex.so, data.tex_x,
-				(int)data.tex_y, rc, j++, &p->imgv);
+			put_pixel(&p->imgv, rc, j++,
+				(int)p->tex.t_so[(int)data.tex_y][(int)data.tex_x]);
 		data.tex_y += data.ratio_y;
 	}
 	i = 0;
@@ -77,11 +77,11 @@ void	draw_line_v(int rc, double ra, double x, double y, t_params *p)
 	while (i++ < data.wall_h * 2)
 	{
 		if (ra > PI / 2 && ra < 3 * PI / 2)
-			draw_tex_col(&p->tex.we, data.tex_x,
-				(int)data.tex_y, rc, j++, &p->imgv);
+			put_pixel(&p->imgv, rc, j++,
+				(int)p->tex.t_we[(int)data.tex_y][(int)data.tex_x]);
 		else if (ra > 3 * PI / 2 || ra < PI / 2)
-			draw_tex_col(&p->tex.ea, data.tex_x,
-				(int)data.tex_y, rc, j++, &p->imgv);
+			put_pixel(&p->imgv, rc, j++,
+				(int)p->tex.t_ea[(int)data.tex_y][(int)data.tex_x]);
 		data.tex_y += data.ratio_y;
 	}
 	i = 0;

@@ -52,38 +52,38 @@
 
 # define PI		M_PI	
 # define C_S	64
+# define TEX_S	64
 
 enum			e_dir
 {NO, SO, WE, EA};
 
 typedef struct	s_img
 {
-
 	void	*img;
 	char	*addr;
 	int		bpp;
 	int		line_len;
 	int		endian;
-
 }				t_img;
 
 typedef struct	s_tex
 {
-
 	char	*dir[4];
 	char	*sp;
 	char	*f;
 	char	*c;
 	t_img	no;
+	unsigned int	t_no[TEX_S][TEX_S];
 	t_img	so;
+	unsigned int	t_so[TEX_S][TEX_S];
 	t_img	we;
+	unsigned int	t_we[TEX_S][TEX_S];
 	t_img	ea;
-
+	unsigned int	t_ea[TEX_S][TEX_S];
 }				t_tex;
 
 typedef struct	s_play
 {
-
 	double	pos_x;
 	double	pos_y;
 	int		pos_block_x;
@@ -95,48 +95,49 @@ typedef struct	s_play
 	double	strafe_del_x;
 	double	strafe_del_y;
 	int		start_dir;
-
 }				t_play;
 
 typedef struct	s_map
 {
-
 	int		map_w;
 	int		map_h;
 	char	**map;
-
 }				t_map;
 
 typedef struct	s_coords
 {
-
 	double	x;
 	double	y;
-
 }				t_coords;
 
 typedef struct	s_keys
 {
-
 	int	w;
 	int	a;
 	int	s;
 	int	d;
 	int	l;
 	int	r;
-
 }				t_keys;
+
+typedef struct 	s_sprite
+{
+	double 	x;
+	double 	y;
+	double 	dist;
+	int 	tex;
+}				t_sprite;
 
 typedef struct	s_sprite_data
 {
-
-	double	*line_dist;
-
+	double		*line_dist;
+	t_sprite	*sprites;
+	t_sprite	*sotred;
+	int			count;
 }				t_sprite_data;
 
 typedef struct	s_params
 {
-
 	void	*mlx;
 	void	*win;
 	void	*win2;
@@ -149,23 +150,21 @@ typedef struct	s_params
 	t_img	imgv;
 	t_keys	keys;
 	t_sprite_data s_data;
-
 }				t_params;
 
 typedef struct	s_draw_l
 {
-
 	int		wall_h;
 	double	dist;
 	double	ratio_y;
 	int		tex_x;
 	double	tex_y;
 	double	ra;
-
 }				t_draw_l;
 
 int				init_params(t_params *p);
 int				init_tex_img(t_params*p);
+void			init_sprites(t_params *p);
 void			put_pixel(t_img *img, int x, int y, int color);
 unsigned int 	get_pixel_color(t_img *img, int x, int y);
 void			draw_player(int x, int y, t_params *p);

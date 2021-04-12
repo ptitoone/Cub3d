@@ -17,5 +17,8 @@
 
 void	free_line(char **line);
 int 	free_params(t_params *p);
+void	sort_sprites(t_sprite *sprites, int count);
+void	lst_swap(t_list **lst_head, t_list_swap *n);
+void	calculate_sprite_dist(t_params *p);
 
 #endif

@@ -27,6 +27,14 @@ struct		s_list
 	struct s_list	*next;
 };
 
+typedef struct		s_list_swap
+{
+	t_list	*x;
+	t_list	*prev_x;
+	t_list	*y;
+	t_list	*prev_y;
+}					t_list_swap;
+
 void		*ft_memset(void *str, int c, size_t n);
 void		ft_bzero(void *str, size_t n);
 void		*ft_memcpy(void *dst, const void *src, size_t n);

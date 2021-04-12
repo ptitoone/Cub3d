@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <utils.h>
 #include "cub.h"
 
 static int	check_wall(t_coords *c, t_params *p, double xo, double yo)
@@ -105,6 +106,8 @@ int	find_wall(t_params *p)
 	t_coords	v;
 
 	init_coords(&h, &v, p);
+	calculate_sprite_dist(p);
+	sort_sprites(p->s_data.sprites, p->s_data.count);
 	i = -1;
 	ra = p->player.orient - (30 * PI / 180);
 	while (i++ < p->win_w - 1)
