@@ -14,11 +14,12 @@
 #include "errors.h"
 #include "libft.h"
 
-static void	new_sprite(t_sprite *sprite, int x, int y, int tex)
+static void	init_new_sprite(t_sprite *sprite, int x, int y, int tex)
 {
 		sprite->x = x /** (double)C_S*/;
 		sprite->y = y /** (double)C_S*/;
 		sprite->dist = 0.0;
+		sprite->visible = 0;
 		sprite->tex = tex;
 }
 
@@ -58,7 +59,7 @@ void	init_sprites(t_params *p)
 		while (++x < p->map.map_w)
 		{
 			if (p->map.map[y][x] == '2')
- 				 new_sprite(&p->s_data.sprites[i++], x, y, 2);
+ 				 init_new_sprite(&p->s_data.sprites[i++], x, y, 2);
 		}
 	}
 }

@@ -30,6 +30,7 @@ void	calculate_sprite_dist(t_params *p)
 		x = pow((p->player.pos_x - p->s_data.sprites[i].x), 2);
 		y = pow((p->player.pos_y - p->s_data.sprites[i].x), 2);
 		p->s_data.sprites[i].dist = x + y;
+		p->s_data.sprites[i].visible = 0;
 		i++;
 	}
 }

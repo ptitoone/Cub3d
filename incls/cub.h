@@ -126,13 +126,13 @@ typedef struct 	s_sprite
 	double 	y;
 	double 	dist;
 	int 	tex;
+	int		visible;
 }				t_sprite;
 
 typedef struct	s_sprite_data
 {
 	double		*line_dist;
 	t_sprite	*sprites;
-	t_sprite	*sotred;
 	int			count;
 }				t_sprite_data;
 

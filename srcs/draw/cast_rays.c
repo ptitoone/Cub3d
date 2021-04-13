@@ -13,6 +13,21 @@
 #include <utils.h>
 #include "cub.h"
 
+static void set_sprite_visible(t_sprite_data *s, int x, int y)
+{
+	int i;
+
+	i = -1;
+	while (i++ < s->count)
+	{
+		if (x == s->sprites[i].x && y == s->sprites[i].y)
+		{
+			s->sprites[i].visible = 1;
+			break;
+		}
+	}
+}
+
 static int	check_wall(t_coords *c, t_params *p, double xo, double yo)
 {
 	int	dof;
@@ -26,8 +41,12 @@ static int	check_wall(t_coords *c, t_params *p, double xo, double yo)
 			&& c->x <= p->map.map_w * C_S
 			&& c->y >= 0
 			&& c->y <= p->map.map_h * C_S)
+		{
+			if (p->map.map[(int)c->y / C_S][(int)c->x / C_S] == '2')
+				set_sprite_visible(&p->s_data, (int)c->x / C_S, (int)c->y / C_S);
 			if (p->map.map[(int)c->y / C_S][(int)c->x / C_S] == '1')
 				return (1);
+		}
 		c->x += xo;
 		c->y += yo;
 	}
