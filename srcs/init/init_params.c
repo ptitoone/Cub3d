@@ -52,8 +52,8 @@ static void	init_player(t_params *p)
 		p->player.orient = PI;
 		p->player.strafe_orient = PI / 2;
 	}
-	p->player.pos_x = ((p->player.pos_block_x + 1) * C_S) - (double)C_S / 2;
-	p->player.pos_y = ((p->player.pos_block_y + 1) * C_S) - (double)C_S / 2;
+	p->player.pos_x = ((p->player.pos_block_x) * C_S) + (double)C_S / 2;
+	p->player.pos_y = ((p->player.pos_block_y) * C_S) + (double)C_S / 2;
 }
 
 int	init_params(t_params *p)

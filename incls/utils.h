@@ -19,5 +19,7 @@ void	free_line(char **line);
 int 	free_params(t_params *p);
 void	sort_sprites(t_sprite *sprites, int count);
 void	calculate_sprite_dist(t_params *p);
+void	calculate_sprite_screen(t_params *p);
+
 
 #endif

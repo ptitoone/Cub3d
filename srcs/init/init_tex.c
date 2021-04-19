@@ -54,9 +54,15 @@ int	init_tex_img(t_params *p)
 		return (throw_error(ERR_TEX_EA_OF));
 	p->tex.ea.addr = mlx_get_data_addr(p->tex.ea.img, &p->tex.ea.bpp,
 			&p->tex.ea.line_len, &p->tex.ea.endian);
+	p->tex.sprite.img = mlx_xpm_file_to_image(p->mlx, p->tex.sp, &w, &h);
+	if (p->tex.sprite.img == NULL)
+		return (throw_error(ERR_TEX_EA_OF));
+	p->tex.sprite.addr = mlx_get_data_addr(p->tex.sprite.img, &p->tex.sprite.bpp,
+									   &p->tex.sprite.line_len, &p->tex.sprite.endian);
 	tex_to_array(&p->tex.no, p->tex.t_no);
 	tex_to_array(&p->tex.so, p->tex.t_so);
 	tex_to_array(&p->tex.we, p->tex.t_we);
 	tex_to_array(&p->tex.ea, p->tex.t_ea);
+	tex_to_array(&p->tex.sprite, p->tex.t_sprite);
 	return (1);
 }

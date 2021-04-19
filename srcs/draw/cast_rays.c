@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cast_rays.c                                     :+:      :+:    :+:   */
+/*   cast_rays.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -20,7 +20,7 @@ static void set_sprite_visible(t_sprite_data *s, int x, int y)
 	i = -1;
 	while (i++ < s->count)
 	{
-		if (x == s->sprites[i].x && y == s->sprites[i].y)
+		if (x == (int)(s->sprites[i].x / C_S) && y == (int)(s->sprites[i].y / C_S))
 		{
 			s->sprites[i].visible = 1;
 			break;
@@ -125,10 +125,9 @@ int	find_wall(t_params *p)
 	t_coords	v;
 
 	init_coords(&h, &v, p);
-	calculate_sprite_dist(p);
-	sort_sprites(p->s_data.sprites, p->s_data.count);
 	i = -1;
 	ra = p->player.orient - (30 * PI / 180);
+	calculate_sprite_dist(p);
 	while (i++ < p->win_w - 1)
 	{
 		if (ra < 0)
@@ -146,6 +145,11 @@ int	find_wall(t_params *p)
 			draw_line_v(i, ra, v.x, v.y, p);
 		ra += ((60 * PI / 180) / p->win_w);
 	}
+	sort_sprites(p->s_data.sprites, p->s_data.count);
+	calculate_sprite_screen(p);
+	draw_sprites(p);
+	mlx_sync(1, p->imgv.img);
 	mlx_put_image_to_window(p->mlx, p->win2, p->imgv.img, 0, 0);
+	mlx_sync(3, p->win2);
 	return (0);
 }

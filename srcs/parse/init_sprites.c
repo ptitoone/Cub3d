@@ -16,8 +16,9 @@
 
 static void	init_new_sprite(t_sprite *sprite, int x, int y, int tex)
 {
-		sprite->x = x /** (double)C_S*/;
-		sprite->y = y /** (double)C_S*/;
+		sprite->x = (x * C_S) + (double)C_S / 2;
+		sprite->y = (y * C_S) + (double)C_S / 2;
+		sprite->screen_x = 0;
 		sprite->dist = 0.0;
 		sprite->visible = 0;
 		sprite->tex = tex;

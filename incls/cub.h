@@ -80,6 +80,8 @@ typedef struct	s_tex
 	unsigned int	t_we[TEX_S][TEX_S];
 	t_img	ea;
 	unsigned int	t_ea[TEX_S][TEX_S];
+	t_img	sprite;
+	unsigned int	t_sprite[TEX_S][TEX_S];
 }				t_tex;
 
 typedef struct	s_play
@@ -124,9 +126,10 @@ typedef struct 	s_sprite
 {
 	double 	x;
 	double 	y;
+	int		screen_x;
 	double 	dist;
-	int 	tex;
 	int		visible;
+	int 	tex;
 }				t_sprite;
 
 typedef struct	s_sprite_data
@@ -156,7 +159,7 @@ typedef struct	s_draw_l
 {
 	int		wall_h;
 	double	dist;
-	double	ratio_y;
+	double	step_y;
 	int		tex_x;
 	double	tex_y;
 	double	ra;
@@ -177,4 +180,5 @@ void			upscale_img(int w, int h, int scale, char *img, char *img2);
 void			draw_tex_col(t_img *tex, int tex_x, int tex_y, int rc, int j, t_img *img);
 void			draw_line_h(int rc, double ra, double x, double y, t_params *p);
 void			draw_line_v(int rc, double ra, double x, double y, t_params *p);
+void			draw_sprites(t_params *p);
 #endif
