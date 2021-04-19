@@ -60,7 +60,7 @@ static void draw_single_sprite(t_params *p, int sprite_index)
 				tex_y = 63;
 			if ((p->s_data.line_dist[x] > p->s_data.sprites[sprite_index].dist) && p->s_data.sprites[sprite_index].visible)
 				if ((x >= 0 && x < p->win_w) && (y >= 0 && y < p->win_h))
-					if ((int)p->tex.t_sprite[(int)tex_x][(int)tex_y] != 0)
+					if ((int)p->tex.t_sprite[(int)tex_x][(int)tex_y] != 0 && ((p->player.pos_x / C_S) != p->s_data.sprites[sprite_index].x / C_S))
 		 				put_pixel(&p->imgv, x, y, (int)p->tex.t_sprite[(int)tex_x][(int)tex_y]);
 			y++;
 			tex_x += ratio;
