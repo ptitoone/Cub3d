@@ -68,7 +68,7 @@ int	init_params(t_params *p)
 		p->win_w = screen_w;
 	if (p->win_h > screen_h)
 		p->win_h = screen_h;
-	p->s_data.line_dist = (double *)malloc(sizeof(double) * p->win_w);
+	p->s_data.col_dist = (double *)malloc(sizeof(double) * p->win_w);
 	if (!(init_images(p)))
 		return (0);
 	if (!(init_map(p)))

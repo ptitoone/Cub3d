@@ -22,8 +22,8 @@ void	calculate_sprite_screen(t_params *p)
 {
 	double	h_x;
 	double	h_y;
-	double 	aTan;
-	double 	angle;
+	double	aTan;
+	double	angle;
 	int		i;
 
 	i = 0;
@@ -36,23 +36,21 @@ void	calculate_sprite_screen(t_params *p)
 		aTan = -aTan;
 		if (aTan < 0)
 			aTan += 360;
-		if (aTan > 360)
-			aTan -= 360;
 		angle = (p->player.orient * 180 / PI) + 30 - aTan;
 		if ((angle > 360))
 			angle -= 360;
 		if ((angle < 0))
 			angle += 360;
-		p->s_data.sprites[i].screen_x = (int)(angle * (double)p->win_w / 60.0);
-		p->s_data.sprites[i].screen_x = p->win_w - p->s_data.sprites[i].screen_x;
+		p->s_data.sprites[i].scrn_x = (int)(angle * (double)p->win_w / 60.0);
+		p->s_data.sprites[i].scrn_x = p->win_w - p->s_data.sprites[i].scrn_x;
 		i++;
 	}
 }
 
 void	calculate_sprite_dist(t_params *p)
 {
-	double 	x;
-	double 	y;
+	double	x;
+	double	y;
 	int		i;
 
 	i = 0;

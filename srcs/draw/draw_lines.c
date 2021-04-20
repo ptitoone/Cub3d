@@ -30,64 +30,7 @@ static void	calculate_data(t_params *p, double x, double y, double i, t_draw_l *
 		data->wall_h = p->win_h / 2;
 	}
 }
-///////////////// SPRITES //////////
 
-static void draw_single_sprite(t_params *p, int sprite_index)
-{
-	int	x;
-	int y;
-	int i;
-	int j;
-	double ratio;
-	int sprite_h;
-
-	sprite_h = (int)floor(((C_S * p->win_h) / p->s_data.sprites[sprite_index].dist));
-	x = p->s_data.sprites[sprite_index].screen_x - sprite_h;
-	y = (p->win_h / 2) - sprite_h;
-	i = 0;
-	j = 0;
-	ratio = 64.0 / (double)(sprite_h * 2);
-	double tex_x = 0;
-	double tex_y = 0;
-
-	while (i < sprite_h * 2)
-	{
-		while (j < sprite_h * 2)
-		{
-			if (tex_x >= 64)
-				tex_x = 63;
-			if (tex_y >= 64)
-				tex_y = 63;
-			if ((p->s_data.line_dist[x] > p->s_data.sprites[sprite_index].dist) && p->s_data.sprites[sprite_index].visible)
-				if ((x >= 0 && x < p->win_w) && (y >= 0 && y < p->win_h))
-					if ((int)p->tex.t_sprite[(int)tex_x][(int)tex_y] != 0 && ((p->player.pos_x / C_S) != p->s_data.sprites[sprite_index].x / C_S))
-		 				put_pixel(&p->imgv, x, y, (int)p->tex.t_sprite[(int)tex_x][(int)tex_y]);
-			y++;
-			tex_x += ratio;
-			j++;
-		}
-		tex_x = 0;
-		tex_y += ratio;
-		y = (p->win_h / 2) - sprite_h;
-		j = 0;
-		x++;
-		i++;
-	}
-}
-
-void draw_sprites(t_params *p)
-{
-	int 	i;
-
-	i = 0;
-	while (i < p->s_data.count)
-	{
-		draw_single_sprite(p, i);
-		i++;
-	}
-}
-
-////////////////////////////////////
 void	draw_line_h(int rc, double ra, double x, double y, t_params *p)
 {
 	int			i;
@@ -98,9 +41,9 @@ void	draw_line_h(int rc, double ra, double x, double y, t_params *p)
 	j = 0;
 	data.ra = ra;
 	calculate_data(p, x, y, x, &data);
-	p->s_data.line_dist[rc] = data.dist / cos(p->player.orient - data.ra);
+	p->s_data.col_dist[rc] = data.dist / cos(p->player.orient - data.ra);
 	while (i++ < (p->win_h / 2) - data.wall_h)
-		put_pixel(&p->imgv, rc, j++, 0x002E4172);
+		put_pixel(&p->imgv, rc, j++, p->tex.c_color);
 	i = 0;
 	while (i++ < data.wall_h * 2)
 	{
@@ -114,7 +57,7 @@ void	draw_line_h(int rc, double ra, double x, double y, t_params *p)
 	}
 	i = 0;
 	while (i++ < ((p->win_h / 2) - data.wall_h))
-		put_pixel(&p->imgv, rc, j++, 0x00353D4E);
+		put_pixel(&p->imgv, rc, j++, p->tex.f_color);
 }
 
 void	draw_line_v(int rc, double ra, double x, double y, t_params *p)
@@ -127,9 +70,9 @@ void	draw_line_v(int rc, double ra, double x, double y, t_params *p)
 	j = 0;
 	data.ra = ra;
 	calculate_data(p, x, y, y, &data);
-	p->s_data.line_dist[rc] = data.dist / cos(p->player.orient - data.ra);
+	p->s_data.col_dist[rc] = data.dist / cos(p->player.orient - data.ra);
 	while (i++ < (p->win_h / 2) - data.wall_h)
-		put_pixel(&p->imgv, rc, j++, 0x002E4172);
+		put_pixel(&p->imgv, rc, j++, p->tex.c_color);
 	i = 0;
 	while (i++ < data.wall_h * 2)
 	{
@@ -143,5 +86,5 @@ void	draw_line_v(int rc, double ra, double x, double y, t_params *p)
 	}
 	i = 0;
 	while (i++ < ((p->win_h / 2) - data.wall_h))
-		put_pixel(&p->imgv, rc, j++, 0x00353D4E);
+		put_pixel(&p->imgv, rc, j++, p->tex.f_color);
 }

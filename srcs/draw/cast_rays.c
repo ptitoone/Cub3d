@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cast_rays.c                                          :+:      :+:    :+:   */
+/*   cast_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,17 +13,18 @@
 #include <utils.h>
 #include "cub.h"
 
-static void set_sprite_visible(t_sprite_data *s, int x, int y)
+static void	set_sprite_visible(t_sprite_data *s, int x, int y)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (i++ < s->count)
 	{
-		if (x == (int)(s->sprites[i].x / C_S) && y == (int)(s->sprites[i].y / C_S))
+		if (x == (int)(s->sprites[i].x / C_S)
+			&& y == (int)(s->sprites[i].y / C_S))
 		{
 			s->sprites[i].visible = 1;
-			break;
+			break ;
 		}
 	}
 }
@@ -42,7 +43,8 @@ static int	check_wall(t_coords *c, t_params *p, double xo, double yo)
 			&& c->y >= 0
 			&& c->y <= p->map.map_h * C_S)
 		{
-			if (p->map.map[(int)c->y / C_S][(int)c->x / C_S] == '2')
+			if (p->map.map[(int)c->y / C_S][(int)c->x / C_S] == '2'
+				&& (int)(p->player.pos_x / C_S) != (int)(c->x + 1 / C_S))
 				set_sprite_visible(&p->s_data, (int)c->x / C_S, (int)c->y / C_S);
 			if (p->map.map[(int)c->y / C_S][(int)c->x / C_S] == '1')
 				return (1);
@@ -148,8 +150,6 @@ int	find_wall(t_params *p)
 	sort_sprites(p->s_data.sprites, p->s_data.count);
 	calculate_sprite_screen(p);
 	draw_sprites(p);
-	mlx_sync(1, p->imgv.img);
 	mlx_put_image_to_window(p->mlx, p->win2, p->imgv.img, 0, 0);
-	mlx_sync(3, p->win2);
 	return (0);
 }

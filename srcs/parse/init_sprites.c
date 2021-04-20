@@ -16,19 +16,19 @@
 
 static void	init_new_sprite(t_sprite *sprite, int x, int y, int tex)
 {
-		sprite->x = (x * C_S) + (double)C_S / 2;
-		sprite->y = (y * C_S) + (double)C_S / 2;
-		sprite->screen_x = 0;
-		sprite->dist = 0.0;
-		sprite->visible = 0;
-		sprite->tex = tex;
+	sprite->x = (x * C_S) + (double)C_S / 2;
+	sprite->y = (y * C_S) + (double)C_S / 2;
+	sprite->scrn_x = 0;
+	sprite->dist = 0.0;
+	sprite->visible = 0;
+	sprite->tex = tex;
 }
 
 static int	count_sprites(t_map *map)
 {
-	int count;
+	int	count;
 	int	x;
-	int y;
+	int	y;
 
 	count = 0;
 	y = -1;
@@ -46,9 +46,9 @@ static int	count_sprites(t_map *map)
 
 void	init_sprites(t_params *p)
 {
-	int 	x;
-	int 	y;
-	int		i;
+	int	x;
+	int	y;
+	int	i;
 
 	y = -1;
 	i = 0;
@@ -60,7 +60,7 @@ void	init_sprites(t_params *p)
 		while (++x < p->map.map_w)
 		{
 			if (p->map.map[y][x] == '2')
- 				 init_new_sprite(&p->s_data.sprites[i++], x, y, 2);
+				init_new_sprite(&p->s_data.sprites[i++], x, y, 2);
 		}
 	}
 }

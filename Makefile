@@ -27,8 +27,8 @@ INCLS		=	incls
 
 .PHONY : all  alll clean fclean re rel debug
 
-debug : $(NAME)
-	$(CC) $(SRCS) -g -L . -lft -lmlx -framework OpenGl -framework AppKit -I$(INCLS)
+debug : $(NAMEL)
+	$(CC) $(SRCS) -g -L . -lft -lmlx_linux -lXext -lX11 -lm -I$(INCLS)
 
 all : $(NAME)
 

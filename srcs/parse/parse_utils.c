@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "parse.h"
+#include "errors.h"
 
 int	is_pos(char c)
 {
@@ -26,22 +27,57 @@ int	is_tex_specifier(char c)
 	return (0);
 }
 
-int extract_rgb_value(char *str)
+static int convert_rgb_to_color(char **rgb)
 {
-	int	i;
-	int	j;
+	return (ft_atoi(rgb[0]) << 16 | ft_atoi(rgb[1]) << 8 | ft_atoi(rgb[2]));
+}
+
+static int	split_rgb(char *str)
+{
+	char			**rgb;
+	int 			i;
+	int	color;
+
+	rgb = ft_split(str, ',');
+	i = 0;
+	color = 0;
+	if (rgb == NULL)
+		return (throw_error(ERR_MALLOC_FAIL));
+	while (rgb[i] != NULL && ft_strlen(rgb[i]) <= 3)
+		i++;
+	if (i == 3)
+		color = convert_rgb_to_color(rgb);
+	else
+		color = -1;
+	i = -1;
+	while (rgb[i++] != NULL)
+		free(rgb[i]);
+	free(rgb[i]);
+	free(rgb);
+	return (color);
+}
+
+int	extract_rgb_value(char *str)
+{
+	int				i;
+	int				j;
+	int				comma_count;
 
 	i = 0;
 	j = 0;
+	comma_count = 0;
 	while (str[i] == ' ')
 		i++;
-	if (str[i++] == 'F' || str[i] == 'C')
+	while (ft_isdigit(str[i + j]) || str[i + j] == ',')
+		if (str[i + j++] == ',')
+			comma_count++;
+	while (str[i + j] == ' ')
+		i++;
+	if (comma_count == 2 && !str[i + j])
 	{
-		while (str[i] == ' ')
-			i++;
-		if (str[i] >= '1' && str[i] <= '9')
-			j++;
-
+		i = split_rgb(&str[i]);
+		if (i != -1 )
+			return (i);
 	}
-
+	return (throw_error(ERR_RGB_INV));
 }

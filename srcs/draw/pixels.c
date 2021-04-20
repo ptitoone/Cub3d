@@ -23,10 +23,6 @@ void	put_pixel(t_img *img, int x, int y, int color)
 unsigned int	get_pixel_color(t_img *img, int x, int y)
 {
 	char	*dst;
-/*	if (x < 0)
-		x = 0;
-	if (y < 0)
-		y = 0;*/
 
 	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	return (*(unsigned int *)dst);

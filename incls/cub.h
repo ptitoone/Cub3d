@@ -71,7 +71,9 @@ typedef struct	s_tex
 	char	*dir[4];
 	char	*sp;
 	char	*f;
+	unsigned int f_color;
 	char	*c;
+	unsigned int c_color;
 	t_img	no;
 	unsigned int	t_no[TEX_S][TEX_S];
 	t_img	so;
@@ -126,7 +128,7 @@ typedef struct 	s_sprite
 {
 	double 	x;
 	double 	y;
-	int		screen_x;
+	int		scrn_x;
 	double 	dist;
 	int		visible;
 	int 	tex;
@@ -134,7 +136,7 @@ typedef struct 	s_sprite
 
 typedef struct	s_sprite_data
 {
-	double		*line_dist;
+	double		*col_dist;
 	t_sprite	*sprites;
 	int			count;
 }				t_sprite_data;
@@ -164,6 +166,18 @@ typedef struct	s_draw_l
 	double	tex_y;
 	double	ra;
 }				t_draw_l;
+
+typedef struct	s_draw_s
+{
+	int		sprite_h;
+	int		x;
+	int		y;
+	double	step;
+	double	tex_x;
+	double	tex_y;
+	int		i;
+	int		j;
+}				t_draw_s;
 
 int				init_params(t_params *p);
 int				init_tex_img(t_params*p);

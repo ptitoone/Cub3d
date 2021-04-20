@@ -53,6 +53,7 @@ static int	add_res(char *l, t_params *p)
 			p->win_h = push_res(l, i, j + 1);
 		i += (j + 1);
 	}
+	i--;
 	while (l[i] == ' ')
 		i++;
 	if (!l[i])

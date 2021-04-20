@@ -27,6 +27,7 @@
 # define ERR_TEX_NULL		"No texture file path"
 # define ERR_TEX_S_NF		"Sprite not found"
 # define ERR_TEX_DUP		"Duplicate texture parameter"
+# define ERR_RGB_INV		"Floor/Ceiling RGB value incorrect"
 
 # define ERR_MAP_NF			"Map not found"
 # define ERR_MAP_DUP_POS	"Duplicate player position"
