@@ -119,6 +119,37 @@ static void	init_coords(t_coords *h, t_coords *v, t_params *p)
 	v->y = p->player.pos_y;
 }
 
+static void hands(t_params *p)
+{
+	int x = 400 - 175;
+	int y = 800 - 350;
+	int i = 0;
+	int j = 0;
+	double tex_x = 0;
+	double tex_y = 0;
+	int color;
+	double step = 128.0/350.0;
+
+	while (j < 350)
+	{
+		while (i < 350)
+		{
+			color = (int)get_pixel_color(&p->tex.hands,(int)tex_x, (int)tex_y);
+			if (color != 0)
+				put_pixel(&p->imgv, x, y, color);
+			tex_x+=step;
+			i++;
+			x++;
+		}
+		x = 400 - 175;
+		i = 0;
+		j++;
+		tex_x=0;
+		tex_y+=step;
+		y++;
+	}
+}
+
 int	find_wall(t_params *p)
 {
 	int			i;
@@ -150,6 +181,7 @@ int	find_wall(t_params *p)
 	sort_sprites(p->s_data.sprites, p->s_data.count);
 	calculate_sprite_screen(p);
 	draw_sprites(p);
+	hands(p);
 	mlx_put_image_to_window(p->mlx, p->win2, p->imgv.img, 0, 0);
 	return (0);
 }

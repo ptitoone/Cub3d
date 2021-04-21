@@ -67,19 +67,12 @@ int main()
 
 //////// TEST UPSCALE IMG /////////////////////////////////////////////////////
 
-//	int img_w = 0;
-//	int img_h = 0;
-//	t_img img_x;
-//	t_img img_up;
-//
-//	img_x.img	=	mlx_xpm_file_to_image(p.mlx, "./hud.xpm", &img_w, &img_h);
-//	img_x.addr	=	mlx_get_data_addr(img_x.img, &img_x.bpp,
-//					&img_x.line_len, &img_x.endian);
-//	img_up.img	=	mlx_new_image(p.mlx, (img_w * 11), (img_h * 11));
-//	img_up.addr	=	mlx_get_data_addr(img_up.img, &img_up.bpp,
-//					&img_up.line_len, &img_up.endian);
-//	upscale_img(img_w, img_h, 11, img_x.addr, img_up.addr);
-//	mlx_put_image_to_window(p.mlx, p.win2, img_up.img, 0, 0);
+	int img_w = 0;
+	int img_h = 0;
+
+	p.tex.hands.img		=	mlx_xpm_file_to_image(p.mlx, "./hands.xpm", &img_w, &img_h);
+	p.tex.hands.addr	=	mlx_get_data_addr(p.tex.hands.img, &p.tex.hands.bpp,
+					&p.tex.hands.line_len, &p.tex.hands.endian);
 
 ///////// DRAW AND PUT IMAGES TO WINDIOWS //////////////////////////////////////
 

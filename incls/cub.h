@@ -9,6 +9,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <time.h>
 
 # ifdef  __unix__
 
@@ -84,6 +85,7 @@ typedef struct	s_tex
 	unsigned int	t_ea[TEX_S][TEX_S];
 	t_img	sprite;
 	unsigned int	t_sprite[TEX_S][TEX_S];
+	t_img	hands;
 }				t_tex;
 
 typedef struct	s_play
@@ -113,6 +115,13 @@ typedef struct	s_coords
 	double	x;
 	double	y;
 }				t_coords;
+
+typedef struct	s_counter
+{
+	int	i;
+	int	j;
+	int	count;
+}				t_counter;
 
 typedef struct	s_keys
 {

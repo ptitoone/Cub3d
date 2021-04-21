@@ -31,32 +31,29 @@ static int	push_res(char *l, int i, int j)
 
 static int	add_res(char *l, t_params *p)
 {
-	int	i;
-	int	j;
-	int	x;
+	t_counter	c;
 
-	i = 0;
-	x = -1;
-	while (++x < 2)
+	c.i = 0;
+	c.count = -1;
+	while (++c.count < 2)
 	{
-		j = 0;
-		while (l[i] == ' ')
-			if (!l[i++] || !(l[i] >= '1' && l[i] <= '9'))
+		c.j = 0;
+		while (l[c.i] == ' ')
+			if (!l[c.i++] || !(l[c.i] >= '1' && l[c.i] <= '9'))
 				return (0);
-		if (l[i] >= '1' && l[i] <= '9')
-			j++;
-		while (l[i + j] >= '0' && l[i + j] <= '9')
-			j++;
-		if (!(x % 2))
-			p->win_w = push_res(l, i, j + 1);
+		if (l[c.i] >= '1' && l[c.i] <= '9')
+			c.j++;
+		while (l[c.i + c.j] >= '0' && l[c.i + c.j] <= '9')
+			c.j++;
+		if (!(c.count % 2))
+			p->win_w = push_res(l, c.i, c.j + 1);
 		else
-			p->win_h = push_res(l, i, j + 1);
-		i += (j + 1);
+			p->win_h = push_res(l, c.i, c.j-- + 1);
+		c.i += (c.j + 1);
 	}
-	i--;
-	while (l[i] == ' ')
-		i++;
-	if (!l[i])
+	while (l[c.i] == ' ')
+		c.i++;
+	if (!l[c.i])
 		return (1);
 	return (0);
 }
