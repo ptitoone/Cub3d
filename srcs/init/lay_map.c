@@ -24,7 +24,7 @@ static int	lay_map_line(char *l, int i, t_params *p)
 	if (p->map.map[i] == NULL)
 		return (0);
 	while (l[j] == ' ' || l[j] == '0'
-		|| l[j] == '1' || is_sprite_specifier(l[j])
+		|| l[j] == '1' || is_sprite_spec(l[j])
 		|| is_pos(l[j]))
 	{
 		if (l[j] == ' ')

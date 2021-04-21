@@ -30,7 +30,7 @@ static int	add_parameter(char *line, t_params *p)
 			else
 				return (0);
 		}
-		else if (is_tex_specifier(line[i]))
+		else if (is_tex_spec(line[i]))
 		{
 			if (parse_tex(line, p))
 				return (1);

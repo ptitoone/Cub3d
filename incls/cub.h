@@ -56,7 +56,7 @@
 # define TEX_S	64
 
 enum			e_dir
-{NO, SO, WE, EA, S1, S2, S3, CART, DOOR, WINDOW};
+{NO, SO, WE, EA, S1, S2, S3};
 
 typedef struct	s_img
 {
@@ -72,7 +72,7 @@ typedef struct	s_tex_type
 {
 	char			*path;
 	t_img			img;
-	unsigned int	t_color_map[TEX_S][TEX_S];
+	unsigned int	clr[TEX_S][TEX_S];
 }				t_tex_type;
 
 typedef struct	s_tex
@@ -183,6 +183,7 @@ typedef struct	s_draw_s
 	double	tex_y;
 	int		i;
 	int		j;
+	int		texno;
 }				t_draw_s;
 
 int				init_params(t_params *p);
@@ -190,15 +191,11 @@ int				init_tex_img(t_params*p);
 void			init_sprites(t_params *p);
 void			put_pixel(t_img *img, int x, int y, int color);
 unsigned int 	get_pixel_color(t_img *img, int x, int y);
-void			draw_player(int x, int y, t_params *p);
-void			draw_player_ori(t_params *p);
 
 int				mouse(int x, int y, void *pr);
-void    		plot_line(int x0, int y0, int x1, int y1, int color, t_params *p);
-int				find_wall(t_params *p);
-void			upscale_img(int w, int h, int scale, char *img, char *img2);
-void			draw_tex_col(t_img *tex, int tex_x, int tex_y, int rc, int j, t_img *img);
-void			draw_line_h(int rc, double ra, double x, double y, t_params *p);
-void			draw_line_v(int rc, double ra, double x, double y, t_params *p);
+int				render_frame(t_params *p);
+void			draw_line_h(int rc, double ra, t_coords *c, t_params *p);
+void			draw_line_v(int rc, double ra, t_coords *c, t_params *p);
 void			draw_sprites(t_params *p);
+void			draw_hands(t_params *p);
 #endif

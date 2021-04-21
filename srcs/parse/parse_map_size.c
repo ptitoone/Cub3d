@@ -28,7 +28,7 @@ static int	is_map_line(char const *l, t_params *p)
 	while (l[i] == ' '
 		|| l[i] == '0'
 		|| l[i] == '1'
-		|| is_sprite_specifier(l[i])
+		|| is_sprite_spec(l[i])
 		|| is_pos(l[i]))
 		i++;
 	if (l[i] == 0)

@@ -12,6 +12,15 @@
 
 #include "get_next_line.h"
 
+static int	empty_and_return(int rd, char **str)
+{
+	ft_empty_line(str);
+	if (rd > 0)
+		return (1);
+	else
+		return (0);
+}
+
 int	get_next_line(int fd, char **line)
 {
 	static t_data	logs;
@@ -22,10 +31,7 @@ int	get_next_line(int fd, char **line)
 	{
 		logs.rd = read(fd, logs.buffer, BUFFER_SIZE);
 		if (logs.rd == 0 || logs.buffer[0] == '\n')
-		{
-			ft_empty_line(line);
-			return (logs.rd ? 1 : 0);
-		}
+			return (empty_and_return(logs.rd, line));
 	}
 	if (logs.buffer[logs.pos] == '\n' && logs.pos < BUFFER_SIZE)
 		logs.pos++;

@@ -31,7 +31,7 @@ static int	render(void *pr)
 		key_a_l(p);
 	if (p->keys.r == 1)
 		key_a_r(p);
-	find_wall(p);
+	render_frame(p);
 	return (0);
 }
 

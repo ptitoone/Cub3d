@@ -12,10 +12,15 @@
 
 #include "cub.h"
 
-static void	calculate_data(t_params *p, double x, double y, double i, t_draw_l *data)
+static void	calc_data(t_params *p, t_coords *c, double i, t_draw_l *data)
 {
-	data->dist = sqrt(pow(p->player.pos_x - x, 2)
-			+ pow(p->player.pos_y - y, 2));
+	if (i == c->x)
+	{
+		c->x--;
+		c->y--;
+	}
+	data->dist = sqrt(pow(p->player.pos_x - c->x, 2)
+			+ pow(p->player.pos_y - c->y, 2));
 	data->dist = data->dist * cos(p->player.orient - data->ra);
 	data->wall_h = (int)floor(((C_S * p->win_h) / data->dist));
 	data->step_y = 64.0 / (double)(data->wall_h * 2);
@@ -31,7 +36,7 @@ static void	calculate_data(t_params *p, double x, double y, double i, t_draw_l *
 	}
 }
 
-void	draw_line_h(int rc, double ra, double x, double y, t_params *p)
+void	draw_line_h(int rc, double ra, t_coords *c, t_params *p)
 {
 	int			i;
 	int			j;
@@ -40,7 +45,7 @@ void	draw_line_h(int rc, double ra, double x, double y, t_params *p)
 	i = 0;
 	j = 0;
 	data.ra = ra;
-	calculate_data(p, x, y, x, &data);
+	calc_data(p, c, c->x, &data);
 	p->s_data.col_dist[rc] = data.dist / cos(p->player.orient - data.ra);
 	while (i++ < (p->win_h / 2) - data.wall_h)
 		put_pixel(&p->imgv, rc, j++, p->tex.c_color);
@@ -49,10 +54,10 @@ void	draw_line_h(int rc, double ra, double x, double y, t_params *p)
 	{
 		if (ra > 0 && ra < PI)
 			put_pixel(&p->imgv, rc, j++,
-				(int)p->tex.type[NO].t_color_map[(int)data.tex_y][(int)data.tex_x]);
+				(int)p->tex.type[NO].clr[(int)data.tex_y][(int)data.tex_x]);
 		else if (ra > PI && ra < 2 * PI)
 			put_pixel(&p->imgv, rc, j++,
-				(int)p->tex.type[SO].t_color_map[(int)data.tex_y][(int)data.tex_x]);
+				(int)p->tex.type[SO].clr[(int)data.tex_y][(int)data.tex_x]);
 		data.tex_y += data.step_y;
 	}
 	i = 0;
@@ -60,7 +65,7 @@ void	draw_line_h(int rc, double ra, double x, double y, t_params *p)
 		put_pixel(&p->imgv, rc, j++, p->tex.f_color);
 }
 
-void	draw_line_v(int rc, double ra, double x, double y, t_params *p)
+void	draw_line_v(int rc, double ra, t_coords *c, t_params *p)
 {
 	int			i;
 	int			j;
@@ -69,7 +74,7 @@ void	draw_line_v(int rc, double ra, double x, double y, t_params *p)
 	i = 0;
 	j = 0;
 	data.ra = ra;
-	calculate_data(p, x, y, y, &data);
+	calc_data(p, c, c->y, &data);
 	p->s_data.col_dist[rc] = data.dist / cos(p->player.orient - data.ra);
 	while (i++ < (p->win_h / 2) - data.wall_h)
 		put_pixel(&p->imgv, rc, j++, p->tex.c_color);
@@ -78,10 +83,10 @@ void	draw_line_v(int rc, double ra, double x, double y, t_params *p)
 	{
 		if (ra > PI / 2 && ra < 3 * PI / 2)
 			put_pixel(&p->imgv, rc, j++,
-				(int)p->tex.type[WE].t_color_map[(int)data.tex_y][(int)data.tex_x]);
+				(int)p->tex.type[WE].clr[(int)data.tex_y][(int)data.tex_x]);
 		else if (ra > 3 * PI / 2 || ra < PI / 2)
 			put_pixel(&p->imgv, rc, j++,
-				(int)p->tex.type[EA].t_color_map[(int)data.tex_y][(int)data.tex_x]);
+				(int)p->tex.type[EA].clr[(int)data.tex_y][(int)data.tex_x]);
 		data.tex_y += data.step_y;
 	}
 	i = 0;

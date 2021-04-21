@@ -15,13 +15,13 @@ CFLAGS		=	-Wall -Werror -Wextra -L . -lft -lmlx -framework OpenGl -framework App
 CFLAGSL		=	-Wall -Werror -Wextra -L . -lft -lmlx_linux -lXext -lX11 -lm
 
 SRCS		:=	$(shell echo srcs/*.c && echo srcs/parse/*.c && echo srcs/draw/*.c && echo srcs/controls/*.c && \
- 						echo srcs/init/*.c)
+ 						echo srcs/init/*.c && echo srcs/engine/*.c)
 
 OBJS		=	$(SRCS:.c=.o)
 
 LIBFTOBJS	:=	$(wildcard libft/*.o)
 
-LIBMLXOBJSL	:=	$(wildcard minilibx-linux/*.o)
+LIBMLx_offsetBJSL	:=	$(wildcard minilibx-linux/*.o)
 
 INCLS		=	incls
 
@@ -54,7 +54,7 @@ $(LIBMLXL) :
 	$(CC) -I$(INCLS) -c $< -o $@
 
 clean :
-	rm -rf $(OBJS) $(LIBFT) $(LIBFTOBJS) $(LIBMLXL) $(LIBMLXOBJSL)
+	rm -rf $(OBJS) $(LIBFT) $(LIBFTOBJS) $(LIBMLXL) $(LIBMLx_offsetBJSL)
 
 fclean : clean
 	rm -rf $(NAME) $(NAMEL)

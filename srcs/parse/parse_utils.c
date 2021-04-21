@@ -20,14 +20,14 @@ int	is_pos(char c)
 	return (0);
 }
 
-int	is_tex_specifier(char c)
+int	is_tex_spec(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == 'F' || c == 'C')
 		return (1);
 	return (0);
 }
 
-int	is_sprite_specifier(char c)
+int	is_sprite_spec(char c)
 {
 	if (c == '2' || c == '3' || c == '4')
 		return (1);
