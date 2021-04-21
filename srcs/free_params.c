@@ -17,26 +17,18 @@ static void	free_tex(t_params *p)
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < 10)
 	{
-		if (p->tex.dir[i] != NULL)
-			free(p->tex.dir[i]);
+		if (p->tex.type[i].path != NULL)
+			free(p->tex.type[i].path);
+		if (p->tex.type[i].img.img != NULL)
+			mlx_destroy_image(p->mlx, p->tex.type[i].img.img);
 		i++;
 	}
-	if (p->tex.sp != NULL)
-		free(p->tex.sp);
 	if (p->tex.f != NULL)
 		free(p->tex.f);
 	if (p->tex.c != NULL)
 		free(p->tex.c);
-	if (p->tex.no.img != NULL)
-		mlx_destroy_image(p->mlx, p->tex.no.img);
-	if (p->tex.so.img != NULL)
-		mlx_destroy_image(p->mlx, p->tex.so.img);
-	if (p->tex.we.img != NULL)
-		mlx_destroy_image(p->mlx, p->tex.we.img);
-	if (p->tex.ea.img != NULL)
-		mlx_destroy_image(p->mlx, p->tex.ea.img);
 }
 
 static void	free_map(t_params *p)
@@ -58,9 +50,9 @@ static void	free_map(t_params *p)
 int	free_params(t_params *p)
 {
 	if (p->win != NULL)
-		mlx_clear_window(p->mlx, p->win);
+		mlx_destroy_window(p->mlx, p->win);
 	if (p->win2 != NULL)
-		mlx_clear_window(p->mlx, p->win2);
+		mlx_destroy_window(p->mlx, p->win2);
 	if (p->img.img != NULL)
 		mlx_destroy_image(p->mlx, p->img.img);
 	if (p->imgv.img != NULL)

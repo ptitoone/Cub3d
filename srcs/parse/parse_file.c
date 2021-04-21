@@ -32,7 +32,7 @@ static int	add_parameter(char *line, t_params *p)
 		}
 		else if (is_tex_specifier(line[i]))
 		{
-			if (parse_tex(line, &p->tex))
+			if (parse_tex(line, p))
 				return (1);
 		}
 		i++;
@@ -60,7 +60,7 @@ int	parse_file(char *map_file, t_params *p)
 	free_line(&line);
 	close(map_fd);
 	map_fd = open(map_file, O_RDONLY);
-	if (i == 8 && parse_map_size(map_fd, p))
+	if (/*i == 8 &&*/ parse_map_size(map_fd, p))
 	{
 		close(map_fd);
 		return (1);

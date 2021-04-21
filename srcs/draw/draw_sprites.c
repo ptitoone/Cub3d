@@ -40,10 +40,9 @@ static void	draw_single_sprite(t_params *p, int sprite_i)
 				d.tex_y = 63;
 			if (p->s_data.sprites[sprite_i].visible
 				&& (p->s_data.col_dist[d.x] > p->s_data.sprites[sprite_i].dist)
-				&& (d.x >= 0 && d.x < p->win_w)
-				&& (d.y >= 0 && d.y < p->win_h)
-				&& (int)p->tex.t_sprite[(int)d.tex_x][(int)d.tex_y] != 0)
-				put_pixel(&p->imgv, d.x, d.y, (int)p->tex.t_sprite[(int)d.tex_x][(int)d.tex_y]);
+				&& (d.x >= 0 && d.x < p->win_w) && (d.y >= 0 && d.y < p->win_h)
+				&& (int)p->tex.type[p->s_data.sprites[sprite_i].tex].t_color_map[(int)d.tex_x][(int)d.tex_y] != 0)
+				put_pixel(&p->imgv, d.x, d.y, (int)p->tex.type[p->s_data.sprites[sprite_i].tex].t_color_map[(int)d.tex_x][(int)d.tex_y]);
 			d.y++;
 			d.tex_x += d.step;
 		}

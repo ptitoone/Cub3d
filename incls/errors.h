@@ -19,13 +19,9 @@
 # define ERR_RES_DUP		"Duplicate resolution parameter"
 # define ERR_RES_ZERO		"Resolution can't start or be zero"
 
-# define ERR_TEX_NO_OF		"Failed to open NORTH texture"
-# define ERR_TEX_SO_OF		"Failed to open SOUTH texture"
-# define ERR_TEX_WE_OF		"Failed to open WEST texture"
-# define ERR_TEX_EA_OF		"Failed to open EAST texture"
-# define ERR_TEX_INV		"Invalid texture format"
+# define ERR_TEX_NO_OF		"Failed to open texture/sprite file"
+# define ERR_TEX_INV_SIZE	"Invalid texture size"
 # define ERR_TEX_NULL		"No texture file path"
-# define ERR_TEX_S_NF		"Sprite not found"
 # define ERR_TEX_DUP		"Duplicate texture parameter"
 # define ERR_RGB_INV		"Floor/Ceiling RGB value incorrect"
 

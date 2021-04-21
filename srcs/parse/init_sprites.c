@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "errors.h"
 #include "libft.h"
 
 static void	init_new_sprite(t_sprite *sprite, int x, int y, int tex)
@@ -37,7 +36,9 @@ static int	count_sprites(t_map *map)
 		x = -1;
 		while (++x < map->map_w)
 		{
-			if (map->map[y][x] == '2')
+			if (map->map[y][x] == '2'
+				|| map->map[y][x] == '3'
+				|| map->map[y][x] == '4')
 				count++;
 		}
 	}
@@ -60,7 +61,11 @@ void	init_sprites(t_params *p)
 		while (++x < p->map.map_w)
 		{
 			if (p->map.map[y][x] == '2')
-				init_new_sprite(&p->s_data.sprites[i++], x, y, 2);
+				init_new_sprite(&p->s_data.sprites[i++], x, y, S1);
+			if (p->map.map[y][x] == '3')
+				init_new_sprite(&p->s_data.sprites[i++], x, y, S2);
+			if (p->map.map[y][x] == '4')
+				init_new_sprite(&p->s_data.sprites[i++], x, y, S3);
 		}
 	}
 }

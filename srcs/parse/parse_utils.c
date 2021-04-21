@@ -27,6 +27,13 @@ int	is_tex_specifier(char c)
 	return (0);
 }
 
+int	is_sprite_specifier(char c)
+{
+	if (c == '2' || c == '3' || c == '4')
+		return (1);
+	return (0);
+}
+
 static int convert_rgb_to_color(char **rgb)
 {
 	return (ft_atoi(rgb[0]) << 16 | ft_atoi(rgb[1]) << 8 | ft_atoi(rgb[2]));
@@ -49,9 +56,9 @@ static int	split_rgb(char *str)
 		color = convert_rgb_to_color(rgb);
 	else
 		color = -1;
-	i = -1;
-	while (rgb[i++] != NULL)
-		free(rgb[i]);
+	i = 0;
+	while (rgb[i] != NULL)
+		free(rgb[i++]);
 	free(rgb[i]);
 	free(rgb);
 	return (color);

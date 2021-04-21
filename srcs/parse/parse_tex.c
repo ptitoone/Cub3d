@@ -35,7 +35,7 @@ static int	add_tex(char *l, char **dst)
 	return (throw_error(ERR_TEX_DUP));
 }
 
-int	parse_tex(char *l, t_tex *t)
+int	parse_tex(char *l, t_params *p)
 {
 	int	i;
 
@@ -43,19 +43,23 @@ int	parse_tex(char *l, t_tex *t)
 	while (l[i] == ' ')
 		i++;
 	if (l[i] == 'N' && l[i + 1] == 'O' && l[i + 2] == ' ')
-		return (add_tex(&l[i + 2], &t->dir[NO]));
+		return (add_tex(&l[i + 2], &p->tex.type[NO].path));
 	else if (l[i] == 'S' && l[i + 1] == 'O' && l[i + 2] == ' ')
-		return (add_tex(&l[i + 2], &t->dir[SO]));
+		return (add_tex(&l[i + 2], &p->tex.type[SO].path));
 	else if (l[i] == 'W' && l[i + 1] == 'E' && l[i + 2] == ' ')
-		return (add_tex(&l[i + 2], &t->dir[WE]));
+		return (add_tex(&l[i + 2], &p->tex.type[WE].path));
 	else if (l[i] == 'E' && l[i + 1] == 'A' && l[i + 2] == ' ')
-		return (add_tex(&l[i + 2], &t->dir[EA]));
+		return (add_tex(&l[i + 2], &p->tex.type[EA].path));
 	else if (l[i] == 'S' && l[i + 1] == ' ')
-		return (add_tex(&l[i + 1], &t->sp));
+		return (add_tex(&l[i + 1], &p->tex.type[S1].path));
+	else if (l[i] == 'S' && l[i + 1] == '1' && l[i + 2] == ' ')
+		return (add_tex(&l[i + 2], &p->tex.type[S2].path));
+	else if (l[i] == 'S' && l[i + 1] == '2' && l[i + 2] == ' ')
+		return (add_tex(&l[i + 2], &p->tex.type[S3].path));
 	else if (l[i] == 'F' && l[i + 1] == ' ')
-		return (add_tex(&l[i + 1], &t->f));
+		return (add_tex(&l[i + 1], &p->tex.f));
 	else if (l[i] == 'C' && l[i + 1] == ' ')
-		return (add_tex(&l[i + 1], &t->c));
+		return (add_tex(&l[i + 1], &p->tex.c));
 	else
 		return (0);
 }

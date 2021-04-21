@@ -56,7 +56,7 @@
 # define TEX_S	64
 
 enum			e_dir
-{NO, SO, WE, EA};
+{NO, SO, WE, EA, S1, S2, S3, CART, DOOR, WINDOW};
 
 typedef struct	s_img
 {
@@ -67,24 +67,21 @@ typedef struct	s_img
 	int		endian;
 }				t_img;
 
+
+typedef struct	s_tex_type
+{
+	char			*path;
+	t_img			img;
+	unsigned int	t_color_map[TEX_S][TEX_S];
+}				t_tex_type;
+
 typedef struct	s_tex
 {
-	char	*dir[4];
-	char	*sp;
+	t_tex_type type[10];
 	char	*f;
 	unsigned int f_color;
 	char	*c;
 	unsigned int c_color;
-	t_img	no;
-	unsigned int	t_no[TEX_S][TEX_S];
-	t_img	so;
-	unsigned int	t_so[TEX_S][TEX_S];
-	t_img	we;
-	unsigned int	t_we[TEX_S][TEX_S];
-	t_img	ea;
-	unsigned int	t_ea[TEX_S][TEX_S];
-	t_img	sprite;
-	unsigned int	t_sprite[TEX_S][TEX_S];
 	t_img	hands;
 }				t_tex;
 

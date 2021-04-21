@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "utils.h"
 
 int	key_press(int keycode, void *pr)
 {
@@ -31,7 +32,7 @@ int	key_press(int keycode, void *pr)
 		p->keys.r = 1;
 	if (keycode == K_esc)
 	{
-		mlx_destroy_window(p->mlx, p->win2);
+		free_params(p);
 		exit(EXIT_SUCCESS);
 	}
 	return (0);
@@ -54,10 +55,5 @@ int	key_release(int keycode, void *pr)
 		p->keys.l = 0;
 	if (keycode == K_a_r)
 		p->keys.r = 0;
-	if (keycode == K_esc)
-	{
-		mlx_destroy_window(p->mlx, p->win2);
-		exit(EXIT_SUCCESS);
-	}
 	return (0);
 }

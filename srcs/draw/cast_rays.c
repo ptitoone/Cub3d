@@ -12,6 +12,7 @@
 
 #include <utils.h>
 #include "cub.h"
+#include "parse.h"
 
 static void	set_sprite_visible(t_sprite_data *s, int x, int y)
 {
@@ -43,8 +44,7 @@ static int	check_wall(t_coords *c, t_params *p, double xo, double yo)
 			&& c->y >= 0
 			&& c->y <= p->map.map_h * C_S)
 		{
-			if (p->map.map[(int)c->y / C_S][(int)c->x / C_S] == '2'
-				&& (int)(p->player.pos_x / C_S) != (int)(c->x + 1 / C_S))
+			if (is_sprite_specifier(p->map.map[(int)c->y / C_S][(int)c->x / C_S]))
 				set_sprite_visible(&p->s_data, (int)c->x / C_S, (int)c->y / C_S);
 			if (p->map.map[(int)c->y / C_S][(int)c->x / C_S] == '1')
 				return (1);
@@ -182,6 +182,7 @@ int	find_wall(t_params *p)
 	calculate_sprite_screen(p);
 	draw_sprites(p);
 	hands(p);
+	mlx_do_sync(p->mlx);
 	mlx_put_image_to_window(p->mlx, p->win2, p->imgv.img, 0, 0);
 	return (0);
 }

@@ -49,10 +49,10 @@ void	draw_line_h(int rc, double ra, double x, double y, t_params *p)
 	{
 		if (ra > 0 && ra < PI)
 			put_pixel(&p->imgv, rc, j++,
-				(int)p->tex.t_no[(int)data.tex_y][(int)data.tex_x]);
+				(int)p->tex.type[NO].t_color_map[(int)data.tex_y][(int)data.tex_x]);
 		else if (ra > PI && ra < 2 * PI)
 			put_pixel(&p->imgv, rc, j++,
-				(int)p->tex.t_so[(int)data.tex_y][(int)data.tex_x]);
+				(int)p->tex.type[SO].t_color_map[(int)data.tex_y][(int)data.tex_x]);
 		data.tex_y += data.step_y;
 	}
 	i = 0;
@@ -78,10 +78,10 @@ void	draw_line_v(int rc, double ra, double x, double y, t_params *p)
 	{
 		if (ra > PI / 2 && ra < 3 * PI / 2)
 			put_pixel(&p->imgv, rc, j++,
-				(int)p->tex.t_we[(int)data.tex_y][(int)data.tex_x]);
+				(int)p->tex.type[WE].t_color_map[(int)data.tex_y][(int)data.tex_x]);
 		else if (ra > 3 * PI / 2 || ra < PI / 2)
 			put_pixel(&p->imgv, rc, j++,
-				(int)p->tex.t_ea[(int)data.tex_y][(int)data.tex_x]);
+				(int)p->tex.type[EA].t_color_map[(int)data.tex_y][(int)data.tex_x]);
 		data.tex_y += data.step_y;
 	}
 	i = 0;
