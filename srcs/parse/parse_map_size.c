@@ -54,14 +54,13 @@ int	parse_map_size(int map_fd, t_params *p)
 		while (get_next_line(map_fd, &line) == 1)
 		{
 			if (!(is_map_line(line, p)))
-				return (throw_error(ERR_MAP_INV));
+			{
+				free_line(&line);
+				return (1);
+			}
 			free_line(&line);
 		}
-		if (!(is_map_line(line, p)))
-		{
-			free_line(&line);
-			return (throw_error(ERR_MAP_INV));
-		}
+		is_map_line(line, p);
 		free_line(&line);
 		return (1);
 	}

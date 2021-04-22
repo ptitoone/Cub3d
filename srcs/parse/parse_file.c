@@ -34,6 +34,8 @@ static int	add_parameter(char *line, t_params *p)
 		{
 			if (parse_tex(line, p))
 				return (1);
+			else
+				return (0);
 		}
 		i++;
 	}
@@ -60,11 +62,11 @@ int	parse_file(char *map_file, t_params *p)
 	free_line(&line);
 	close(map_fd);
 	map_fd = open(map_file, O_RDONLY);
-	if (/*i == 8 &&*/ parse_map_size(map_fd, p))
+	if (i == 8 && parse_map_size(map_fd, p))
 	{
 		close(map_fd);
 		return (1);
 	}
 	close(map_fd);
-	return (0);
+	return (throw_error(ERR_MISSING_PARAM));
 }

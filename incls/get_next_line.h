@@ -6,7 +6,7 @@
 /*   By: akotzky <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 15:52:00 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/10 08:01:04 by akotzky          ###   ########.fr       */
+/*   Updated: 2021/02/11 15:55:52 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <limits.h>
 
-# define BUFFER_SIZE 128
+#define BUFFER_SIZE 128
 
 typedef struct s_data		t_data;
 
@@ -33,7 +33,6 @@ void		ft_set_null_buff(char *buffer, int len);
 int			get_next_line(int fd, char **line);
 size_t		ft_strlen(const char *s);
 int			ft_append_buff(int fd, char **line, t_data *logs);
-char		*ft_strdup_len(const char *str, int len);
 int			ft_empty_line(char **line);
 
 #endif

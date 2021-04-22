@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   check_file_extention.c								:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/06 15:30:28 by akotzky           #+#    #+#             */
-/*   Updated: 2021/04/07 15:26:31 by akotzky          ###   ########.fr       */
+/*   Created: 2021/03/08 17:37:11 by akotzky           #+#    #+#             */
+/*   Updated: 2021/04/07 15:00:58 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "errors.h"
 
-int	free_line(char **line)
+int	check_file_extention(const char *file_name)
 {
-	free(*line);
-	*line = NULL;
-	return (1);
-}
+	int	i;
 
-double	calc_dist(double x0, double x1, double y0, double y1)
-{
-	double	dist;
-
-	dist = sqrt(pow(x0 - x1, 2) + pow(y0 - y1, 2));
-	return (dist);
+	while (file_name[i])
+		i++;
+	if (file_name[--i] == 'b')
+		if (file_name[--i] == 'u')
+			if (file_name[--i] == 'c')
+				if (file_name[--i] == '.')
+					return (1);
+	return (throw_error(ERR_FILE_EXT_INV));
 }

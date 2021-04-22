@@ -29,62 +29,46 @@ int	is_tex_spec(char c)
 
 int	is_sprite_spec(char c)
 {
-	if (c == '2' || c == '3' || c == '4')
+	if (c == '2')
 		return (1);
 	return (0);
 }
 
-static int convert_rgb_to_color(char **rgb)
+int	is_map_vert_end_line(char const *l)
 {
-	return (ft_atoi(rgb[0]) << 16 | ft_atoi(rgb[1]) << 8 | ft_atoi(rgb[2]));
-}
-
-static int	split_rgb(char *str)
-{
-	char			**rgb;
-	int 			i;
-	int	color;
-
-	rgb = ft_split(str, ',');
-	i = 0;
-	color = 0;
-	if (rgb == NULL)
-		return (throw_error(ERR_MALLOC_FAIL));
-	while (rgb[i] != NULL && ft_strlen(rgb[i]) <= 3)
-		i++;
-	if (i == 3)
-		color = convert_rgb_to_color(rgb);
-	else
-		color = -1;
-	i = 0;
-	while (rgb[i] != NULL)
-		free(rgb[i++]);
-	free(rgb[i]);
-	free(rgb);
-	return (color);
-}
-
-int	extract_rgb_value(char *str)
-{
-	int				i;
-	int				j;
-	int				comma_count;
+	int	i;
 
 	i = 0;
-	j = 0;
-	comma_count = 0;
-	while (str[i] == ' ')
+	while (l[i] == ' ' || l[i] == '0')
 		i++;
-	while (ft_isdigit(str[i + j]) || str[i + j] == ',')
-		if (str[i + j++] == ',')
-			comma_count++;
-	while (str[i + j] == ' ')
-		i++;
-	if (comma_count == 2 && !str[i + j])
+	if (l[i] == '1')
 	{
-		i = split_rgb(&str[i]);
-		if (i != -1 )
-			return (i);
+		while (((l[i] == ' '
+				 || l[i] == '0'
+				 || l[i] == '1') && l[i] != 0))
+			i++;
+		if (l[i] == 0)
+			return (1);
 	}
-	return (throw_error(ERR_RGB_INV));
+	return (0);
+}
+
+int	is_valid_map_line(char const *l)
+{
+	int	i;
+
+	i = 0;
+	while (l[i] == ' ')
+		i++;
+	if (l[i] == 0)
+		return (0);
+	while (l[i] == ' '
+		   || l[i] == '0'
+		   || l[i] == '1'
+		   || is_sprite_spec(l[i])
+		   || is_pos(l[i]))
+		i++;
+	if (l[i] == 0)
+		return (1);
+	return (0);
 }

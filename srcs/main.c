@@ -18,7 +18,9 @@
 
 static int	render(void *pr)
 {
-	t_params *p = (t_params *)pr;
+	t_params	*p;
+
+	p = (t_params *)pr;
 	if (p->keys.w == 1)
 		key_w(p);
 	if (p->keys.a == 1)
@@ -35,17 +37,19 @@ static int	render(void *pr)
 	return (0);
 }
 
-int main()
+int	main(int argc, char **argv)
 {
 	static t_params	p;
-//////// PARAMS SETUP /////////////////////////////////////////////////////////
+
 	p.player.start_dir = -1;
 	p.mlx = mlx_init();
 	if (p.mlx == NULL)
 		return (throw_error(ERR_MLX_FAIL));
-	if(!(parse_file("map.cub", &p)))
+	if (!check_errors(argv[1]))
 		return (free_params(&p));
-	if (!(lay_map("map.cub", &p)))
+	if (!(parse_file(argv[1], &p)))
+		return (free_params(&p));
+	if (!(lay_map(argv[1], &p)))
 		return (free_params(&p));
 	if (!(init_tex_img(&p)))
 		return (free_params(&p));
@@ -54,37 +58,9 @@ int main()
 //		return (0);
 	if (!(init_params(&p)))
 		return (free_params(&p));
-
-///////// CREATE IMAGES ///////////////////////////////////////////////////////
-
-//	p.img.img	= 	mlx_new_image(p.mlx, (p.win_w), (p.win_h));
-//	p.img.addr	= 	mlx_get_data_addr(p.img.img, &p.img.bpp, 
-//					&p.img.line_len, &p.img.endian);
-
-///////// CREATE WINDOWS //////////////////////////////////////////////////////
-
-//	p.win		=	mlx_new_window(p.mlx, (p.win_w), (p.win_h), "Map");
-
-//////// TEST UPSCALE IMG /////////////////////////////////////////////////////
-
-	int img_w = 0;
-	int img_h = 0;
-
-	p.tex.hands.img		=	mlx_xpm_file_to_image(p.mlx, "./hands.xpm", &img_w, &img_h);
-	p.tex.hands.addr	=	mlx_get_data_addr(p.tex.hands.img, &p.tex.hands.bpp,
-					&p.tex.hands.line_len, &p.tex.hands.endian);
-
-///////// DRAW AND PUT IMAGES TO WINDIOWS //////////////////////////////////////
-
-//	draw_map(&p);
-//	draw_player(p.player.pos_x, p.player.pos_y, &p);
-//	mlx_put_image_to_window(p.mlx, p.win, p.img.img, 0, 0);
-
-///////// HOOKS AND LOOP //////////////////////////////////////////////////////
-	mlx_hook(p.win2, 2, 1L<<0, &key_press, (void *)&p);
-	mlx_hook(p.win2, 3, 1L<<1, &key_release, (void *)&p);
-//	mlx_hook(p.win2, 6, 1L<<6, &mouse, (void *)&p);
+	mlx_hook(p.win, 2, 1L << 0, &key_press, (void *)&p);
+	mlx_hook(p.win, 3, 1L << 1, &key_release, (void *)&p);
 	mlx_loop_hook(p.mlx, &render, (void *)&p);
 	mlx_loop(p.mlx);
- 	return (0);
+	return (0);
 }

@@ -24,9 +24,7 @@ static void	tex_to_array(t_img *img, unsigned int tex[TEX_S][TEX_S])
 	{
 		x = -1;
 		while (++x < TEX_S)
-		{
 			tex[y][x] = get_pixel_color(img, x, y);
-		}
 	}
 }
 
@@ -36,8 +34,8 @@ int	init_tex_img(t_params *p)
 	int	h;
 	int	i;
 
-	i = 0;
-	while (i < 10)
+	i = -1;
+	while (++i < 5)
 	{
 		if (p->tex.type[i].path)
 		{
@@ -52,9 +50,10 @@ int	init_tex_img(t_params *p)
 					&p->tex.type[i].img.line_len, &p->tex.type[i].img.endian);
 			tex_to_array(&p->tex.type[i].img, p->tex.type[i].clr);
 		}
-		i++;
 	}
 	p->tex.f_color = extract_rgb_value(p->tex.f);
 	p->tex.c_color = extract_rgb_value(p->tex.c);
-	return (1);
+	if (p->tex.f_color && p->tex.c_color)
+		return (1);
+	return (0);
 }

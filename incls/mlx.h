@@ -30,7 +30,7 @@
 ** types.
 **
 ** Only the dynamic library is available. It must be placed in an appropriate path.
-** ./ is one of them. y_offsetu can also use DYLD_LIBRARY_PATH
+** ./ is one of them. you can also use DYLD_LIBRARY_PATH
 **
 */
 

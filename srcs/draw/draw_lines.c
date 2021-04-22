@@ -48,21 +48,21 @@ void	draw_line_h(int rc, double ra, t_coords *c, t_params *p)
 	calc_data(p, c, c->x, &data);
 	p->s_data.col_dist[rc] = data.dist / cos(p->player.orient - data.ra);
 	while (i++ < (p->win_h / 2) - data.wall_h)
-		put_pixel(&p->imgv, rc, j++, p->tex.c_color);
+		put_pixel(&p->frame, rc, j++, p->tex.c_color);
 	i = 0;
 	while (i++ < data.wall_h * 2)
 	{
 		if (ra > 0 && ra < PI)
-			put_pixel(&p->imgv, rc, j++,
+			put_pixel(&p->frame, rc, j++,
 				(int)p->tex.type[NO].clr[(int)data.tex_y][(int)data.tex_x]);
 		else if (ra > PI && ra < 2 * PI)
-			put_pixel(&p->imgv, rc, j++,
+			put_pixel(&p->frame, rc, j++,
 				(int)p->tex.type[SO].clr[(int)data.tex_y][(int)data.tex_x]);
 		data.tex_y += data.step_y;
 	}
 	i = 0;
 	while (i++ < ((p->win_h / 2) - data.wall_h))
-		put_pixel(&p->imgv, rc, j++, p->tex.f_color);
+		put_pixel(&p->frame, rc, j++, p->tex.f_color);
 }
 
 void	draw_line_v(int rc, double ra, t_coords *c, t_params *p)
@@ -77,19 +77,19 @@ void	draw_line_v(int rc, double ra, t_coords *c, t_params *p)
 	calc_data(p, c, c->y, &data);
 	p->s_data.col_dist[rc] = data.dist / cos(p->player.orient - data.ra);
 	while (i++ < (p->win_h / 2) - data.wall_h)
-		put_pixel(&p->imgv, rc, j++, p->tex.c_color);
+		put_pixel(&p->frame, rc, j++, p->tex.c_color);
 	i = 0;
 	while (i++ < data.wall_h * 2)
 	{
 		if (ra > PI / 2 && ra < 3 * PI / 2)
-			put_pixel(&p->imgv, rc, j++,
+			put_pixel(&p->frame, rc, j++,
 				(int)p->tex.type[WE].clr[(int)data.tex_y][(int)data.tex_x]);
 		else if (ra > 3 * PI / 2 || ra < PI / 2)
-			put_pixel(&p->imgv, rc, j++,
+			put_pixel(&p->frame, rc, j++,
 				(int)p->tex.type[EA].clr[(int)data.tex_y][(int)data.tex_x]);
 		data.tex_y += data.step_y;
 	}
 	i = 0;
 	while (i++ < ((p->win_h / 2) - data.wall_h))
-		put_pixel(&p->imgv, rc, j++, p->tex.f_color);
+		put_pixel(&p->frame, rc, j++, p->tex.f_color);
 }

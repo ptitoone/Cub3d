@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: akotzky <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 11:23:47 by akotzky           #+#    #+#             */
-/*   Updated: 2021/03/16 11:26:50 by akotzky          ###   ########.fr       */
+/*   Created: 2021/02/11 15:54:23 by akotzky           #+#    #+#             */
+/*   Updated: 2021/02/11 15:56:21 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "libft.h"
 
 void	ft_set_null_buff(char *buffer, int len)
 {
@@ -31,7 +30,22 @@ int	ft_empty_line(char **line)
 	return (0);
 }
 
-char	*ft_strdup_len(const char *str, int len)
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	if (s == NULL)
+		return (0);
+	while (*s != '\0')
+	{
+		len++;
+		s++;
+	}
+	return (len);
+}
+
+char	*ft_strdup(const char *str, int len)
 {
 	char	*sdup;
 	int		i;
@@ -50,13 +64,6 @@ char	*ft_strdup_len(const char *str, int len)
 	return (sdup);
 }
 
-static int	free_and_return(char **str, int ret)
-{
-	free(*str);
-	*str = NULL;
-	return (ret);
-}
-
 int	ft_append_buff(int fd, char **line, t_data *logs)
 {
 	char				*tmp;
@@ -65,21 +72,22 @@ int	ft_append_buff(int fd, char **line, t_data *logs)
 	line_len = ft_strlen(*line);
 	tmp = NULL;
 	if (!logs->buffer[0])
-	{
-		logs->rd = read(fd, logs->buffer, BUFFER_SIZE);
-		if (logs->rd == 0)
+		if ((logs->rd = read(fd, logs->buffer, BUFFER_SIZE)) == 0)
 			return (0);
-	}
-	tmp = ft_strdup_len(*line, 0);
+	tmp = ft_strdup(*line, 0);
 	free(*line);
-	*line = ft_strdup_len(tmp, logs->rd);
+	*line = ft_strdup(tmp, logs->rd);
 	while (logs->pos < logs->rd)
 	{
 		if (logs->buffer[logs->pos] == '\n')
-			return (free_and_return(&tmp, 1));
+		{
+			free(tmp);
+			return (1);
+		}
 		(*line)[line_len] = logs->buffer[logs->pos];
 		logs->pos++;
 		line_len++;
 	}
-	return (free_and_return(&tmp, 0));
+	free(tmp);
+	return (0);
 }

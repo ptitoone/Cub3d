@@ -13,7 +13,7 @@
 #ifndef CONTROLS_H
 # define CONTROLS_H
 
-#include "cub.h"
+# include "cub.h"
 
 int		key_w(t_params *p);
 int		key_a(t_params *p);
@@ -24,6 +24,5 @@ int		key_a_r(t_params *p);
 
 int		key_press(int keycode, void *pr);
 int		key_release(int keycode, void *pr);
-
 
 #endif

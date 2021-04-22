@@ -18,19 +18,19 @@ int	key_press(int keycode, void *pr)
 	t_params	*p;
 
 	p = (t_params *)pr;
-	if (keycode == K_w)
+	if (keycode == K_W)
 		p->keys.w = 1;
-	if (keycode == K_a)
+	if (keycode == K_A)
 		p->keys.a = 1;
-	if (keycode == K_s)
+	if (keycode == K_S)
 		p->keys.s = 1;
-	if (keycode == K_d)
+	if (keycode == K_D)
 		p->keys.d = 1;
-	if (keycode == K_a_l)
+	if (keycode == K_A_L)
 		p->keys.l = 1;
-	if (keycode == K_a_r)
+	if (keycode == K_A_R)
 		p->keys.r = 1;
-	if (keycode == K_esc)
+	if (keycode == K_ESC)
 	{
 		free_params(p);
 		exit(EXIT_SUCCESS);
@@ -43,17 +43,17 @@ int	key_release(int keycode, void *pr)
 	t_params	*p;
 
 	p = (t_params *)pr;
-	if (keycode == K_w)
+	if (keycode == K_W)
 		p->keys.w = 0;
-	if (keycode == K_a)
+	if (keycode == K_A)
 		p->keys.a = 0;
-	if (keycode == K_s)
+	if (keycode == K_S)
 		p->keys.s = 0;
-	if (keycode == K_d)
+	if (keycode == K_D)
 		p->keys.d = 0;
-	if (keycode == K_a_l)
+	if (keycode == K_A_L)
 		p->keys.l = 0;
-	if (keycode == K_a_r)
+	if (keycode == K_A_R)
 		p->keys.r = 0;
 	return (0);
 }

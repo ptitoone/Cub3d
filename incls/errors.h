@@ -15,6 +15,13 @@
 
 # include "cub.h"
 
+# define ERR_FILE_EXT_INV	"Invalid file extension"
+# define ERR_NO_MAP_FILE	"No map file specified"
+# define ERR_TOO_MANY_ARGS	"Too many arguments"
+
+# define ERR_MISSING_PARAM	"Missing parameter"
+# define ERR_INVALID_PARAM	"Invalid parameter line"
+
 # define ERR_RES_INV		"Invalid resolution format"
 # define ERR_RES_DUP		"Duplicate resolution parameter"
 # define ERR_RES_ZERO		"Resolution can't start or be zero"
@@ -26,6 +33,8 @@
 # define ERR_RGB_INV		"Floor/Ceiling RGB value incorrect"
 
 # define ERR_MAP_NF			"Map not found"
+# define ERR_INV_LINE_A_MAP	"Invalid line after map."
+
 # define ERR_MAP_DUP_POS	"Duplicate player position"
 # define ERR_MAP_NO_POS		"No player position found"
 # define ERR_MAP_INV		"Invalid map character"
@@ -39,7 +48,12 @@
 # define ERR_MLX_FAIL		"MinilibX failed to init"
 
 int							throw_error(char *error);
+int							check_errors(char *file_name);
 int							check_map_validity(char **map, int height);
+int							check_file_validity(char *map_file_name);
 int							check_player_pos(t_params *p);
+int							check_file_extention(const char *file_name);
+int							check_args(int argc, const char *argv_1,
+								const char *argv_2, int *save_bmp);
 
 #endif

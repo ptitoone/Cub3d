@@ -96,3 +96,10 @@ void	calc_sprite_screen_x_pos(t_params *p)
 		i++;
 	}
 }
+
+void	treat_sprites(t_params *p)
+{
+	calc_sprite_dist(p);
+	sort_sprites(p->s_data.sprites, p->s_data.count);
+	calc_sprite_screen_x_pos(p);
+}

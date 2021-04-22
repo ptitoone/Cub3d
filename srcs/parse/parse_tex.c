@@ -52,10 +52,6 @@ int	parse_tex(char *l, t_params *p)
 		return (add_tex(&l[i + 2], &p->tex.type[EA].path));
 	else if (l[i] == 'S' && l[i + 1] == ' ')
 		return (add_tex(&l[i + 1], &p->tex.type[S1].path));
-	else if (l[i] == 'S' && l[i + 1] == '1' && l[i + 2] == ' ')
-		return (add_tex(&l[i + 2], &p->tex.type[S2].path));
-	else if (l[i] == 'S' && l[i + 1] == '2' && l[i + 2] == ' ')
-		return (add_tex(&l[i + 2], &p->tex.type[S3].path));
 	else if (l[i] == 'F' && l[i + 1] == ' ')
 		return (add_tex(&l[i + 1], &p->tex.f));
 	else if (l[i] == 'C' && l[i + 1] == ' ')

@@ -17,7 +17,7 @@ static void	free_tex(t_params *p)
 	int	i;
 
 	i = 0;
-	while (i < 10)
+	while (i < 5)
 	{
 		if (p->tex.type[i].path != NULL)
 			free(p->tex.type[i].path);
@@ -51,12 +51,8 @@ int	free_params(t_params *p)
 {
 	if (p->win != NULL)
 		mlx_destroy_window(p->mlx, p->win);
-	if (p->win2 != NULL)
-		mlx_destroy_window(p->mlx, p->win2);
-	if (p->img.img != NULL)
-		mlx_destroy_image(p->mlx, p->img.img);
-	if (p->imgv.img != NULL)
-		mlx_destroy_image(p->mlx, p->imgv.img);
+	if (p->frame.img != NULL)
+		mlx_destroy_image(p->mlx, p->frame.img);
 	free_map(p);
 	free_tex(p);
 	return (0);

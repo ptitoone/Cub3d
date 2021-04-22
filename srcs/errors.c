@@ -15,8 +15,15 @@
 
 int	throw_error(char *error)
 {
-	ft_putstr_fd("Error: ", 2);
+	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(error, 2);
+	return (0);
+}
+
+int check_errors(char *file_name)
+{
+	if (check_file_validity(file_name))
+		return (1);
 	return (0);
 }
 

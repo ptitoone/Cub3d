@@ -39,25 +39,6 @@ static int	lay_map_line(char *l, int i, t_params *p)
 	return (1);
 }
 
-static int	is_map_vert_end_line(char const *l)
-{
-	int	i;
-
-	i = 0;
-	while (l[i] == ' ' || l[i] == '0')
-		i++;
-	if (l[i] == '1')
-	{
-		while (((l[i] == ' '
-					 || l[i] == '0'
-					 || l[i] == '1') && l[i] != 0))
-			i++;
-		if (l[i] == 0)
-			return (1);
-	}
-	return (0);
-}
-
 int	lay_map(char *map_file, t_params *p)
 {
 	int		i;

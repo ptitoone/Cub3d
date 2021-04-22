@@ -48,7 +48,7 @@ static void	draw_single_sprite(t_params *p, int sprite_i)
 				&& (p->s_data.col_dist[d.x] > p->s_data.sprites[sprite_i].dist)
 				&& (d.x >= 0 && d.x < p->win_w) && (d.y >= 0 && d.y < p->win_h)
 				&& p->tex.type[d.texno].clr[(int)d.tex_x][(int)d.tex_y])
-				put_pixel(&p->imgv, d.x, d.y,
+				put_pixel(&p->frame, d.x, d.y,
 					(int)p->tex.type[d.texno].clr[(int)d.tex_x][(int)d.tex_y]);
 			d.y++;
 			d.tex_x += d.step;
