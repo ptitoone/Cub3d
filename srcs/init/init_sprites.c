@@ -12,6 +12,7 @@
 
 #include "cub.h"
 #include "libft.h"
+#include "throw_error.h"
 
 static void	init_new_sprite(t_sprite *sprite, int x, int y, int tex)
 {
@@ -41,7 +42,7 @@ static int	count_sprites(t_map *map)
 	return (count);
 }
 
-void	init_sprites(t_params *p)
+int	init_sprites(t_params *p)
 {
 	int	x;
 	int	y;
@@ -51,6 +52,8 @@ void	init_sprites(t_params *p)
 	i = 0;
 	p->s_data.count = count_sprites(&p->map);
 	p->s_data.sprites = (t_sprite *)malloc(p->s_data.count * sizeof(t_sprite));
+	if (p->s_data.sprites == NULL)
+		return (throw_error(ERR_MALLOC_FAIL));
 	while (++y < p->map.map_h)
 	{
 		x = -1;
@@ -58,4 +61,5 @@ void	init_sprites(t_params *p)
 			if (p->map.map[y][x] == '2')
 				init_new_sprite(&p->s_data.sprites[i++], x, y, S1);
 	}
+	return (1);
 }

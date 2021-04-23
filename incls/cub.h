@@ -191,14 +191,4 @@ typedef struct s_draw_s
 	int		texno;
 }				t_draw_s;
 
-int				init_params(t_params *p);
-int				init_tex_img(t_params*p);
-void			init_sprites(t_params *p);
-void			put_pixel(t_img *img, int x, int y, int color);
-unsigned int	get_pixel_color(t_img *img, int x, int y);
-
-int				render_frame(t_params *p);
-void			draw_line_h(int rc, double ra, t_coords *c, t_params *p);
-void			draw_line_v(int rc, double ra, t_coords *c, t_params *p);
-void			draw_sprites(t_params *p);
 #endif

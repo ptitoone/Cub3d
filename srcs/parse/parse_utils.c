@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "errors.h"
+#include "throw_error.h"
 
 int	is_pos(char c)
 {

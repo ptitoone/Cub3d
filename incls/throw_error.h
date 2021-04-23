@@ -48,8 +48,7 @@
 # define ERR_MLX_FAIL		"MinilibX failed to init"
 
 int							throw_error(char *error);
-int							check_errors(char *file_name);
-int							check_map_validity(char **map, int height);
+int							check_map_validity(t_params *p);
 int							check_file_validity(char *map_file_name);
 int							check_player_pos(t_params *p);
 int							check_file_extention(const char *file_name);

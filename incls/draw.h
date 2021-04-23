@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file_extention.c								:+:      :+:    :+:   */
+/*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/08 17:37:11 by akotzky           #+#    #+#             */
-/*   Updated: 2021/04/07 15:00:58 by akotzky          ###   ########.fr       */
+/*   Created: 2021/03/16 11:23:59 by akotzky           #+#    #+#             */
+/*   Updated: 2021/04/07 15:37:28 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "throw_error.h"
+#ifndef DRAW_H
+# define DRAW_H
 
-int	check_file_extention(const char *file_name)
-{
-	int	i;
+void			put_pixel(t_img *img, int x, int y, int color);
+unsigned int	get_pixel_color(t_img *img, int x, int y);
 
-	while (file_name[i])
-		i++;
-	if (file_name[--i] == 'b')
-		if (file_name[--i] == 'u')
-			if (file_name[--i] == 'c')
-				if (file_name[--i] == '.')
-					return (1);
-	return (throw_error(ERR_FILE_EXT_INV));
-}
+void			draw_line_h(int rc, double ra, t_coords *c, t_params *p);
+void			draw_line_v(int rc, double ra, t_coords *c, t_params *p);
+void			draw_sprites(t_params *p);
+
+#endif

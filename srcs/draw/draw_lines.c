@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "draw.h"
 
 static void	calc_data(t_params *p, t_coords *c, double i, t_draw_l *data)
 {

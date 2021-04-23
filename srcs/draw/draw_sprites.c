@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "draw.h"
 
 static void	calc_sprite_data(t_params *p, int sprite_i, t_draw_s *data)
 {

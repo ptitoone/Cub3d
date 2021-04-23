@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args.c										:+:      :+:    :+:   */
+/*   throw_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/08 17:37:11 by akotzky           #+#    #+#             */
-/*   Updated: 2021/04/07 15:00:58 by akotzky          ###   ########.fr       */
+/*   Created: 2021/04/07 14:47:06 by akotzky           #+#    #+#             */
+/*   Updated: 2021/04/07 15:17:41 by akotzky          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub.h"
 #include "throw_error.h"
 
-int	check_args(int argc, const char *argv_1, const char *argv_2, int *save_bmp)
+int	throw_error(char *error)
 {
-	if (argc < 2)
-		return (throw_error(ERR_NO_MAP_FILE));
-	else if (argc >= 2 && argc <= 3)
-	{
-		if (argc == 2 && check_file_extention(argv_1))
-			return (1);
-		else if (argc == 3
-			&& check_file_extention(argv_1)
-			&& !ft_strncmp(argv_2, "--save-bmp", 10))
-		{
-			*save_bmp = 1;
-			return (1);
-		}
-	}
-	return (throw_error(ERR_TOO_MANY_ARGS));
+	ft_putstr_fd("Error\n", 1);
+	ft_putstr_fd(error, 2);
+	return (0);
 }
+
+

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "errors.h"
+#include "throw_error.h"
 #include "cub.h"
 #include "parse.h"
 #include "utils.h"

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "errors.h"
+#include "throw_error.h"
 
 static int	init_image(t_params *p)
 {

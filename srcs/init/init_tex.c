@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "errors.h"
+#include "throw_error.h"
+#include "draw.h"
 #include "parse.h"
 
 static void	tex_to_array(t_img *img, unsigned int tex[TEX_S][TEX_S])

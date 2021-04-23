@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lay_map.c                                          :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,7 +15,7 @@
 #include "utils.h"
 #include "get_next_line.h"
 
-static int	lay_map_line(char *l, int i, t_params *p)
+static int	init_map_line(char *l, int i, t_params *p)
 {
 	int	j;
 
@@ -27,10 +27,7 @@ static int	lay_map_line(char *l, int i, t_params *p)
 		|| l[j] == '1' || is_sprite_spec(l[j])
 		|| is_pos(l[j]))
 	{
-		if (l[j] == ' ')
-			p->map.map[i][j] = '0';
-		else
-			p->map.map[i][j] = l[j];
+		p->map.map[i][j] = l[j];
 		j++;
 	}
 	while (j < p->map.map_w)
@@ -39,7 +36,7 @@ static int	lay_map_line(char *l, int i, t_params *p)
 	return (1);
 }
 
-int	lay_map(char *map_file, t_params *p)
+int	init_map(char *map_file, t_params *p)
 {
 	int		i;
 	int		map_fd;
@@ -55,12 +52,12 @@ int	lay_map(char *map_file, t_params *p)
 		return (0);
 	while (get_next_line(map_fd, &line) == 1 && !(is_map_vert_end_line(line)))
 		free_line(&line);
-	lay_map_line(line, i++, p);
+	init_map_line(line, i++, p);
 	free_line(&line);
 	while (i < p->map.map_h)
 	{
 		get_next_line(map_fd, &line);
-		lay_map_line(line, i++, p);
+		init_map_line(line, i++, p);
 		free_line(&line);
 	}
 	close(map_fd);

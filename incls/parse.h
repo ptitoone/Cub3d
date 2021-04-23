@@ -12,7 +12,7 @@ int		is_valid_map_line(char const *l);
 int		is_pos(char c);
 int		is_tex_spec(char c);
 int		is_sprite_spec(char c);
-int		lay_map(char *map_file, t_params *p);
+int		init_map(char *map_file, t_params *p);
 int		extract_rgb_value(char *str);
 
 #endif

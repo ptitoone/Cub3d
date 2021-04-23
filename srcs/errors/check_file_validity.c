@@ -12,7 +12,7 @@
 
 #include "cub.h"
 #include "get_next_line.h"
-#include "errors.h"
+#include "throw_error.h"
 #include "utils.h"
 #include "parse.h"
 
@@ -75,8 +75,8 @@ static int	check_params(const char *map_file_name)
 			free_line(&line);
 			continue ;
 		}
-		else if (is_map_vert_end_line(line))
-				break ;
+	//	else if (is_map_vert_end_line(line))
+	//			break ;
 	}
 	free_line(&line);
 	close(fd);
@@ -85,7 +85,7 @@ static int	check_params(const char *map_file_name)
 	return (throw_error(ERR_INVALID_PARAM));
 }
 
-static int is_empty_line(char *l)
+static int is_empty_line(const char *l)
 {
 	int	i;
 
@@ -104,7 +104,7 @@ static int	check_map_presence(char *map_file_name)
 
 	fd = open(map_file_name, O_RDONLY);
 	line = NULL;
-	while (get_next_line(fd, &line) == 1 && !is_map_vert_end_line(line))
+	while (get_next_line(fd, &line) == 1 && !is_valid_map_line(line))
 		free_line(&line);
 	if (!is_map_vert_end_line(line) && !close(fd))
 		return (throw_error(ERR_MAP_NF));

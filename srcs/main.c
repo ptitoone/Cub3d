@@ -13,8 +13,10 @@
 #include "cub.h"
 #include "parse.h"
 #include "utils.h"
-#include "errors.h"
+#include "throw_error.h"
 #include "controls.h"
+#include "engine.h"
+#include "init.h"
 
 static int	render(void *pr)
 {
@@ -33,7 +35,7 @@ static int	render(void *pr)
 		key_a_l(p);
 	if (p->keys.r == 1)
 		key_a_r(p);
-	render_frame(p);
+	cast_and_render(p);
 	return (0);
 }
 
@@ -45,18 +47,14 @@ int	main(int argc, char **argv)
 	p.mlx = mlx_init();
 	if (p.mlx == NULL)
 		return (throw_error(ERR_MLX_FAIL));
-	if (!check_errors(argv[1]))
-		return (free_params(&p));
-	if (!(parse_file(argv[1], &p)))
-		return (free_params(&p));
-	if (!(lay_map(argv[1], &p)))
-		return (free_params(&p));
-	if (!(init_tex_img(&p)))
-		return (free_params(&p));
-	init_sprites(&p);
-//	if (!(check_map_validity(p.map.map, p.map.map_h)))
-//		return (0);
-	if (!(init_params(&p)))
+	if (!(check_args(argc, argv[1], argv[2], &p.save_bmp))
+		|| !(check_file_validity(argv[1]))
+		|| !(parse_file(argv[1], &p))
+		|| !(init_map(argv[1], &p))
+		|| !(check_map_validity(&p))
+		|| !(init_tex_img(&p))
+		|| !(init_sprites(&p))
+		|| !(init_params(&p)))
 		return (free_params(&p));
 	mlx_hook(p.win, 2, 1L << 0, &key_press, (void *)&p);
 	mlx_hook(p.win, 3, 1L << 1, &key_release, (void *)&p);

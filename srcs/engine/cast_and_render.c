@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cast_rays.c                                        :+:      :+:    :+:   */
+/*   cast_and_render.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,6 +13,7 @@
 #include "cub.h"
 #include "engine.h"
 #include "utils.h"
+#include "draw.h"
 
 static void	init_coords(t_coords *h, t_coords *v, t_params *p)
 {
@@ -30,7 +31,7 @@ static void	handle_radian_overflow(double *ra)
 		*ra -= 2 * PI;
 }
 
-int	render_frame(t_params *p)
+int	cast_and_render(t_params *p)
 {
 	int			i;
 	double		ra;
@@ -53,7 +54,6 @@ int	render_frame(t_params *p)
 		ra += ((60 * PI / 180) / p->win_w);
 	}
 	draw_sprites(p);
-	mlx_do_sync(p->mlx);
 	mlx_put_image_to_window(p->mlx, p->win, p->frame.img, 0, 0);
 	return (0);
 }

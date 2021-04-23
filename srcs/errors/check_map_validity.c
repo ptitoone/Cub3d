@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   check_map_validity.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akotzky <akotzky@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,41 +11,70 @@
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "errors.h"
+#include "throw_error.h"
 
-int	throw_error(char *error)
+static int check_walls_x(t_params *p, int x, int y)
 {
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(error, 2);
+	int	hori;
+
+	hori = x;
+	while (hori < p->map.map_w)
+	{
+		if (p->map.map[y][hori++] == '1')
+		{
+			hori = x;
+			while (hori >= 0)
+			{
+				if (p->map.map[y][hori--] == '1')
+					return (1);
+			}
+			break ;
+		}
+	}
 	return (0);
 }
 
-int check_errors(char *file_name)
+static int check_walls_y(t_params *p, int x, int y)
 {
-	if (check_file_validity(file_name))
-		return (1);
+	int	vert;
+
+	vert = y;
+	while (vert < p->map.map_h)
+	{
+		if (p->map.map[vert++][x] == '1')
+		{
+			vert = y;
+			while (vert >= 0)
+			{
+				if (p->map.map[vert--][x] == '1')
+					return (1);
+			}
+			break ;
+		}
+	}
 	return (0);
 }
 
-int	check_map_validity(char **map, int height)
+int	check_map_validity(t_params *p)
 {
 	int	x;
 	int	y;
-	int	len;
 
 	x = 0;
 	y = 0;
-	len = 0;
-	while (map[y][x++] != 0)
-		len++;
-	x = 0;
-	while (y < height)
+	while (y < p->map.map_h)
 	{
-		while (map[y][x] != 0)
+		while (x < p->map.map_w)
+		{
+			if (p->map.map[y][x] == '0')
+			{
+				if (!check_walls_x(p, x, y))
+					return (0);
+				if (!check_walls_y(p, x, y))
+					return (0);
+			}
 			x++;
-		if ((x - len) >= 2 || (len - x) >= 2)
-			return (throw_error(ERR_MAP_INV_WALL));
-		len = x;
+		}
 		x = 0;
 		y++;
 	}
