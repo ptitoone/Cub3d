@@ -1,8 +1,8 @@
-NAME		=	a.out
-NAMEL		=	linux_a.out
+NAME		=	cub3D
+NAMEL		=	linux_cub3D
 CC			=	gcc
 LIBFT		=	libft.a
-LIBMLX		=	libmlx.a
+LIBMLX		=	libmlx
 LIBMLXL		=	libmlx_linux.a
 CFLAGS		=	-Wall -Werror -Wextra -L . -lft -lmlx -framework OpenGl -framework AppKit
 CFLAGSL		=	-Wall -Werror -Wextra -L . -lft -lmlx_linux -lXext -lX11 -lm
