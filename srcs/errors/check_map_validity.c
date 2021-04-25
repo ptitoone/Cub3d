@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "parse.h"
 #include "errors.h"
 
 static int	check_walls_x(t_params *p, int x, int y)
@@ -66,12 +67,14 @@ int	check_map_validity(t_params *p)
 	{
 		while (x < p->map.map_w)
 		{
-			if (p->map.map[y][x] == '0')
+			if (p->map.map[y][x] == '0'
+				|| is_sprite_spec(p->map.map[y][x])
+				|| is_pos(p->map.map[y][x]))
 			{
 				if (!check_walls_x(p, x, y))
-					return (0);
+					return (throw_error(ERR_MAP_NOT_CLOSED));
 				if (!check_walls_y(p, x, y))
-					return (0);
+					return (throw_error(ERR_MAP_NOT_CLOSED));
 			}
 			x++;
 		}

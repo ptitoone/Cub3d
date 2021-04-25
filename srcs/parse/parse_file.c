@@ -68,5 +68,5 @@ int	parse_file(char *map_file, t_params *p)
 		return (1);
 	}
 	close(map_fd);
-	return (throw_error(ERR_MISSING_PARAM));
+	return (0);
 }

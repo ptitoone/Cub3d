@@ -29,6 +29,10 @@ static int	add_tex(char *l, char **dst)
 		while (l[i + j] != ' ' && l[i + j] != 0)
 			j++;
 		*dst = ft_substr(l, i, j);
+		while (l[i + j] == ' ')
+			j++;
+		if (l[i + j])
+			return (throw_error(ERR_TEX_INV_PATH));
 		if (*dst)
 			return (1);
 	}

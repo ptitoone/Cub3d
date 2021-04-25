@@ -63,11 +63,11 @@ int	init_params(t_params *p)
 
 	screen_w = 0;
 	screen_h = 0;
-	//mlx_get_screen_size(p->mlx, &screen_w, &screen_h);
-	if (p->win_w > 1920/*screen_w*/)
-		p->win_w = 1920;
-	if (p->win_h > 1080/*screen_h*/)
-		p->win_h = 1080;
+	mlx_get_screen_size(p->mlx, &screen_w, &screen_h);
+	if (p->win_w > screen_w)
+		p->win_w = screen_w;
+	if (p->win_h > screen_h)
+		p->win_h = screen_h;
 	p->s_data.col_dist = (double *)malloc(sizeof(double) * p->win_w);
 	if (!(init_image(p)))
 		return (0);
