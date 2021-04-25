@@ -49,6 +49,12 @@ char	*ft_strdup(const char *str, int len)
 	return (sdup);
 }
 
+static int	free_and_return(char **line, int ret)
+{
+	free(*line);
+	return (ret);
+}
+
 int	ft_append_buff(int fd, char **line, t_data *logs)
 {
 	char				*tmp;
@@ -57,22 +63,21 @@ int	ft_append_buff(int fd, char **line, t_data *logs)
 	line_len = ft_strlen(*line);
 	tmp = NULL;
 	if (!logs->buffer[0])
-		if ((logs->rd = read(fd, logs->buffer, BUFFER_SIZE)) == 0)
+	{
+		logs->rd = read(fd, logs->buffer, BUFFER_SIZE);
+		if (logs->rd == 0)
 			return (0);
+	}
 	tmp = ft_strdup(*line, 0);
 	free(*line);
 	*line = ft_strdup(tmp, logs->rd);
 	while (logs->pos < logs->rd)
 	{
 		if (logs->buffer[logs->pos] == '\n')
-		{
-			free(tmp);
-			return (1);
-		}
+			return (free_and_return(&tmp, 1));
 		(*line)[line_len] = logs->buffer[logs->pos];
 		logs->pos++;
 		line_len++;
 	}
-	free(tmp);
-	return (0);
+	return (free_and_return(&tmp, 0));
 }

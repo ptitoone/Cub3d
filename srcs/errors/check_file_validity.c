@@ -67,11 +67,8 @@ int	check_params(const char *map_file_name)
 	line = NULL;
 	while (get_next_line(fd, &line) == 1)
 	{
-		if (check_line(line, &p_count, 0))
-		{
-			free_line(&line);
-			continue ;
-		}
+		check_line(line, &p_count, 0);
+		free_line(&line);
 	}
 	free_line(&line);
 	close(fd);
