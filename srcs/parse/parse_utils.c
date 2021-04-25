@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "throw_error.h"
+#include "errors.h"
 
 int	is_pos(char c)
 {
@@ -44,8 +44,8 @@ int	is_map_vert_end_line(char const *l)
 	if (l[i] == '1')
 	{
 		while (((l[i] == ' '
-				 || l[i] == '0'
-				 || l[i] == '1') && l[i] != 0))
+					|| l[i] == '0'
+					|| l[i] == '1') && l[i] != 0))
 			i++;
 		if (l[i] == 0)
 			return (1);

@@ -141,14 +141,14 @@ typedef struct s_sprite_data
 
 typedef struct s_param_count
 {
-	int resolution;
-	int north_tex;
-	int south_tex;
-	int west_tex;
-	int east_tex;
-	int sprite_tex;
-	int floor_rgb;
-	int ceiling_rgb;
+	int	resolution;
+	int	north_tex;
+	int	south_tex;
+	int	west_tex;
+	int	east_tex;
+	int	sprite_tex;
+	int	floor_rgb;
+	int	ceiling_rgb;
 
 }				t_param_count;
 
@@ -158,11 +158,10 @@ typedef struct s_params
 	void			*win;
 	int				win_w;
 	int				win_h;
-	int 			save_bmp;
+	int				save_bmp;
 	t_tex			tex;
 	t_play			player;
 	t_map			map;
-	t_img			img;
 	t_img			frame;
 	t_keys			keys;
 	t_sprite_data	s_data;

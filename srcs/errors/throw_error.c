@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "throw_error.h"
+#include "errors.h"
 
 int	throw_error(char *error)
 {
@@ -19,5 +19,3 @@ int	throw_error(char *error)
 	ft_putstr_fd(error, 2);
 	return (0);
 }
-
-

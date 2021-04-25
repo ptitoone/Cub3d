@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "throw_error.h"
+#include "errors.h"
 #include "parse.h"
 
 static int	push_res(char *l, int i, int j)

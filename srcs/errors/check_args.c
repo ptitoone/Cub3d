@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "throw_error.h"
+#include "errors.h"
 
 int	check_args(int argc, const char *argv_1, const char *argv_2, int *save_bmp)
 {

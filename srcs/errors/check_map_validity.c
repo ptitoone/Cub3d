@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "throw_error.h"
+#include "errors.h"
 
-static int check_walls_x(t_params *p, int x, int y)
+static int	check_walls_x(t_params *p, int x, int y)
 {
 	int	hori;
 
@@ -34,7 +34,7 @@ static int check_walls_x(t_params *p, int x, int y)
 	return (0);
 }
 
-static int check_walls_y(t_params *p, int x, int y)
+static int	check_walls_y(t_params *p, int x, int y)
 {
 	int	vert;
 

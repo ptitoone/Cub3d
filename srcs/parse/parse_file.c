@@ -13,8 +13,8 @@
 #include "cub.h"
 #include "parse.h"
 #include "utils.h"
-#include "throw_error.h"
-#include "get_next_line.h"
+#include "errors.h"
+#include "../../libft/incls/get_next_line.h"
 
 static int	add_parameter(char *line, t_params *p)
 {

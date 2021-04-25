@@ -12,15 +12,12 @@
 
 #include "cub.h"
 #include "get_next_line.h"
-#include "throw_error.h"
+#include "errors.h"
 #include "utils.h"
 #include "parse.h"
 
-static int	check_line(const char *l, t_param_count	*p_count)
+static int	check_line(const char *l, t_param_count	*p_count, int i)
 {
-	int	i;
-
-	i = 0;
 	while (l[i] == ' ')
 		i++;
 	if (!l[i])
@@ -60,7 +57,7 @@ static int	count_params(t_param_count *p_count)
 	return (1);
 }
 
-static int	check_params(const char *map_file_name)
+int	check_params(const char *map_file_name)
 {
 	int						fd;
 	char					*line;
@@ -70,13 +67,11 @@ static int	check_params(const char *map_file_name)
 	line = NULL;
 	while (get_next_line(fd, &line) == 1)
 	{
-		if (check_line(line, &p_count))
+		if (check_line(line, &p_count, 0))
 		{
 			free_line(&line);
 			continue ;
 		}
-	//	else if (is_map_vert_end_line(line))
-	//			break ;
 	}
 	free_line(&line);
 	close(fd);
@@ -85,7 +80,7 @@ static int	check_params(const char *map_file_name)
 	return (throw_error(ERR_INVALID_PARAM));
 }
 
-static int is_empty_line(const char *l)
+static int	is_empty_line(const char *l)
 {
 	int	i;
 
@@ -97,7 +92,7 @@ static int is_empty_line(const char *l)
 	return (0);
 }
 
-static int	check_map_presence(char *map_file_name)
+int	check_map_presence(char *map_file_name)
 {
 	int		fd;
 	char	*line;
@@ -122,12 +117,3 @@ static int	check_map_presence(char *map_file_name)
 	close(fd);
 	return (throw_error(ERR_INV_LINE_A_MAP));
 }
-
-int	check_file_validity(char *map_file_name)
-{
-	if (check_params(map_file_name))
-		if (check_map_presence(map_file_name))
-			return (1);
-	return (0);
-}
-

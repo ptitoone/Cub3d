@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "utils.h"
 
 void	set_sprite_visible(t_sprite_data *s, int x, int y)
 {
@@ -30,16 +31,14 @@ void	set_sprite_visible(t_sprite_data *s, int x, int y)
 
 void	calc_sprite_dist(t_params *p)
 {
-	double	x;
-	double	y;
 	int		i;
 
 	i = 0;
 	while (i < p->s_data.count)
 	{
-		x = pow((p->player.pos_x - p->s_data.sprites[i].x), 2);
-		y = pow((p->player.pos_y - p->s_data.sprites[i].y), 2);
-		p->s_data.sprites[i].dist = sqrt(x + y);
+		p->s_data.sprites[i].dist
+			= calc_dist(p->player.pos_x, p->s_data.sprites[i].x,
+				p->player.pos_y, p->s_data.sprites[i].y);
 		p->s_data.sprites[i].visible = 0;
 		i++;
 	}

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "throw_error.h"
+#include "errors.h"
 
 int	check_file_extention(const char *file_name)
 {

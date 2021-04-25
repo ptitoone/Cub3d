@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "throw_error.h"
+#include "errors.h"
 
 static int	convert_rgb_to_color(char **rgb)
 {

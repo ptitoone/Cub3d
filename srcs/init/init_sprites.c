@@ -12,7 +12,7 @@
 
 #include "cub.h"
 #include "libft.h"
-#include "throw_error.h"
+#include "errors.h"
 
 static void	init_new_sprite(t_sprite *sprite, int x, int y, int tex)
 {

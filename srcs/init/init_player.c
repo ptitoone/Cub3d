@@ -12,7 +12,7 @@
 
 #include "cub.h"
 #include "parse.h"
-#include "throw_error.h"
+#include "errors.h"
 
 static void	set_player_pos(t_params *p, char pos, t_coords *c, int *pos_found)
 {

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "throw_error.h"
+#include "errors.h"
 #include "draw.h"
 #include "parse.h"
 
@@ -29,11 +29,10 @@ static void	tex_to_array(t_img *img, unsigned int tex[TEX_S][TEX_S])
 	}
 }
 
-int	init_tex_img(t_params *p)
+int	init_tex_img(t_params *p, int i)
 {
 	int	w;
 	int	h;
-	int	i;
 
 	i = -1;
 	while (++i < 5)
@@ -44,7 +43,7 @@ int	init_tex_img(t_params *p)
 					p->tex.type[i].path, &w, &h);
 			if (p->tex.type[i].img.img == NULL)
 				return (throw_error(ERR_TEX_NO_OF));
-			if (w != C_S && w != C_S)
+			if (w != C_S && h != C_S)
 				return (throw_error(ERR_TEX_INV_SIZE));
 			p->tex.type[i].img.addr = mlx_get_data_addr(p->tex.type[i].img.img,
 					&p->tex.type[i].img.bpp,
