@@ -13,7 +13,7 @@
 #include "cub.h"
 #include "parse.h"
 #include "utils.h"
-#include "../../libft/incls/get_next_line.h"
+#include "get_next_line.h"
 
 static int	init_map_line(char *l, int i, t_params *p)
 {

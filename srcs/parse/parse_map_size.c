@@ -14,7 +14,7 @@
 #include "cub.h"
 #include "parse.h"
 #include "utils.h"
-#include "../../libft/incls/get_next_line.h"
+#include "get_next_line.h"
 
 static int	is_map_line(char const *l, t_params *p)
 {
