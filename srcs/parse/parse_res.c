@@ -29,31 +29,36 @@ static int	push_res(char *l, int i, int j)
 	return (throw_error(ERR_MALLOC_FAIL));
 }
 
-static int check_invalid_chars(char *l)
+static int	check_invalid_chars(char *l)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (l[i] == ' ')
 		i++;
-	while (ft_isdigit(l[i]))
+	if (l[i] == 'R')
+	{
 		i++;
-	while (l[i] == ' ')
-		i++;
-	while (ft_isdigit(l[i]))
-		i++;
-	while (l[i] == ' ')
-		i++;
-	if (!l[i])
-		return (1);
+		while (l[i] == ' ')
+			i++;
+		while (ft_isdigit(l[i]))
+			i++;
+		while (l[i] == ' ')
+			i++;
+		while (ft_isdigit(l[i]))
+			i++;
+		while (l[i] == ' ')
+			i++;
+		if (!l[i])
+			return (1);
+	}
 	return (0);
 }
 
 static int	add_res(char *l, t_params *p)
 {
-	t_counter	c;
+	static t_counter	c;
 
-	c.i = 0;
 	c.count = -1;
 	while (++c.count < 2)
 	{
@@ -61,8 +66,7 @@ static int	add_res(char *l, t_params *p)
 		if (!l[c.i])
 			return (0);
 		while (l[c.i] == ' ')
-			if (!l[c.i++] || !(l[c.i] >= '1' && l[c.i] <= '9'))
-				return (0);
+			c.i++;
 		if (l[c.i] >= '1' && l[c.i] <= '9')
 			c.j++;
 		while (l[c.i + c.j] >= '0' && l[c.i + c.j] <= '9')

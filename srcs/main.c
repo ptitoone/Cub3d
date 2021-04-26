@@ -16,7 +16,6 @@
 #include "errors.h"
 #include "controls.h"
 #include "engine.h"
-#include "errors.h"
 #include "init.h"
 
 static int	render(void *pr)
@@ -69,6 +68,7 @@ int	main(int argc, char **argv)
 		return (screen_shot(&p));
 	mlx_hook(p.win, 2, 1L << 0, &key_press, (void *)&p);
 	mlx_hook(p.win, 3, 1L << 1, &key_release, (void *)&p);
+	mlx_hook(p.win, 17, 0, &destroy, (void *)&p);
 	mlx_loop_hook(p.mlx, &render, (void *)&p);
 	mlx_loop(p.mlx);
 	return (0);

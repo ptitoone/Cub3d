@@ -27,6 +27,7 @@ int	check_args(int argc, const char *argv_1, const char *argv_2, int *save_bmp)
 			*save_bmp = 1;
 			return (1);
 		}
+		return (throw_error(ERR_INV_ARG));
 	}
 	return (throw_error(ERR_TOO_MANY_ARGS));
 }

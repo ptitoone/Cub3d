@@ -31,7 +31,7 @@ static int	init_map_line(char *l, int i, t_params *p)
 		j++;
 	}
 	while (j < p->map.map_w)
-		p->map.map[i][j++] = '0';
+		p->map.map[i][j++] = ' ';
 	p->map.map[i][j] = 0;
 	return (1);
 }

@@ -53,7 +53,7 @@ int	parse_file(char *map_file, t_params *p)
 	line = NULL;
 	if (map_fd < 0)
 		return (throw_error(strerror(errno)));
-	while (get_next_line(map_fd, &line) == 1)
+	while (get_next_line(map_fd, &line) == 1 && !is_map_vert_end_line(line))
 	{
 		if (add_parameter(line, p))
 			i++;
@@ -68,5 +68,5 @@ int	parse_file(char *map_file, t_params *p)
 		return (1);
 	}
 	close(map_fd);
-	return (0);
+	return (throw_error(ERR_INVALID_PARAM));
 }

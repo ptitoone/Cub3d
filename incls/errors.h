@@ -17,6 +17,7 @@
 
 # define ERR_FILE_EXT_INV	"Invalid file extension"
 # define ERR_NO_MAP_FILE	"No map file specified"
+# define ERR_INV_ARG		"Invalid argument"
 # define ERR_TOO_MANY_ARGS	"Too many arguments"
 
 # define ERR_INVALID_PARAM	"Invalid parameter line"
