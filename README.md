@@ -1,12 +1,10 @@
-# cub3d
+# Cub3d
 
 ### Simple raycasting program
 
 <p align="center">
   <img src="https://i.imgur.com/8G6G875.png" alt="Program preview" />
 </p>
-
-https://i.imgur.com/8G6G875.png
 
 This is a simple raycasting program made with Minilibx graphical library. A map file `.cub` is given as argument, parsed and rendered. Textures and sprites are implemented. 
 
