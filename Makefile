@@ -57,7 +57,7 @@ $(LIBMLXL) :
 clean :
 	@rm -rf $(OBJS) $(LIBFT) $(LIBFTOBJS) $(LIBMLX) $(LIBMLXOBJS) $(LIBMLXL) $(LIBMLXOBJSL) incls/libft.h \
 	incls/get_next_line.h incls/mlx.h \
-	&& echo "Clean done! \\n- Object and library files removed."
+	&& echo "- Object and library files removed."
 
 fclean : clean
 	@rm -rf $(NAME) $(NAMEL) \
